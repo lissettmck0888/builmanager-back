@@ -1,17 +1,33 @@
 package com.gi.builmanager.dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
-
+@Table(name = "persona")
+@Entity
 public class Persona {
-    String nombres;
-    String apellidoPaterno;
-    String apellidoMaterno;
-    String run;
-    LocalDate fechaNacimiento;
-    String nacionalidad;
-    String telefono;
-    String correo;
-    String direccion;
+    @Id  @Column(name = "idpersona")
+    private int idPersona;
+    @Column(name =  "nombres")
+    private String nombres;
+    @Column(name = "apellido_paterno")
+    private String apellidoPaterno;
+    @Column(name = "apellido_materni")
+    private String apellidoMaterno;
+    @Column(name = "run")
+    private String run;
+    @Column(name = "fecha_nacimiento")
+    private LocalDate fechaNacimiento;
+    @Column(name = "nacionalidad")
+    private String nacionalidad;
+    @Column(name = "telefono")
+    private String telefono;
+    @Column(name = "correo")
+    private String correo;
+    @Column(name = "direccion")
+    private String direccion;
 
     public Persona() {
     }
@@ -98,5 +114,13 @@ public class Persona {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
 }

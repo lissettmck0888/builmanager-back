@@ -9,11 +9,11 @@ import javax.persistence.Table;
 @Entity
 public class ItemGastoComun {
     @Id @Column(name = "iditemgastocomun")
-    int idItemGastoComun;
+    private int idItemGastoComun;
     @Column
-    String nombre;
+    private String nombre;
     @Column
-    String descripcion;
+    private String descripcion;
 
     public ItemGastoComun() {
     }

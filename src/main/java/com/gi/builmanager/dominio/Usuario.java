@@ -6,13 +6,13 @@ import javax.persistence.*;
 @Entity
 public class Usuario {
     @Id @Column(name = "idusuario")
-    int idUsuario;
+    private int idUsuario;
     @ManyToOne @JoinColumn(name = "idrol")
-    Rol rol;
+    private Rol rol;
     @Column
-    String nombreUsuario;
+    private String nombreUsuario;
     @Column
-    String contrasena;
+    private String contrasena;
 
     public Usuario() {
     }
@@ -53,4 +53,5 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
 }

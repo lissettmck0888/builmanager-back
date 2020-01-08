@@ -9,14 +9,15 @@ import javax.persistence.Table;
 @Entity
 public class TipoUnidad {
     @Id @Column(name = "idtipounidad")
-    int idTipoUnidad;
+    private int idTipoUnidad;
     @Column
-    String nombre;
+    private String nombre;
 
     public TipoUnidad() {
     }
 
-    public TipoUnidad(String nombre) {
+    public TipoUnidad(int idTipoUnidad, String nombre) {
+        this.idTipoUnidad = idTipoUnidad;
         this.nombre = nombre;
     }
 

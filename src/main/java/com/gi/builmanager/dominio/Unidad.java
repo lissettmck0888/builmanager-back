@@ -6,19 +6,19 @@ import javax.persistence.*;
 @Entity
 public class Unidad {
     @Id @Column(name ="idunidad")
-    int idUnidad;
+    private int idUnidad;
     @ManyToOne @JoinColumn(name = "idtipounidad")
-    TipoUnidad tipoUnidad;
+    private TipoUnidad tipoUnidad;
     @Column
-    String descripcion;
+    private String descripcion;
     @Column
-    int piso;
+    private int piso;
     @Column
-    int numero;
+    private int numero;
     @Column
-    String sector;
+    private String sector;
     @Column
-    float prorrateo;
+    private float prorrateo;
 
     public Unidad() {
     }
