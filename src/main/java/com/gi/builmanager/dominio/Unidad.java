@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Table(name = "unidad")
 @Entity
 public class Unidad {
-    @Id @Column(name ="idunidad")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="idunidad")
     private int idUnidad;
     @ManyToOne @JoinColumn(name = "idtipounidad")
     private TipoUnidad tipoUnidad;
@@ -14,7 +15,7 @@ public class Unidad {
     @Column
     private int piso;
     @Column
-    private int numero;
+    private String numero;
     @Column
     private String sector;
     @Column
@@ -23,7 +24,7 @@ public class Unidad {
     public Unidad() {
     }
 
-    public Unidad(String descripcion, int piso, int numero, String sector, float prorrateo) {
+    public Unidad(String descripcion, int piso, String numero, String sector, float prorrateo) {
         this.descripcion = descripcion;
         this.piso = piso;
         this.numero = numero;
@@ -47,11 +48,11 @@ public class Unidad {
         this.piso = piso;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

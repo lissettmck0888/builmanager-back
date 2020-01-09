@@ -8,7 +8,8 @@ import java.util.Set;
 @Table(name = "permiso")
 @Entity
 public class Permiso {
-    @Id @Column(name = "idpermiso")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idpermiso")
     private int idPermiso;
     @Column
     private String codigo;

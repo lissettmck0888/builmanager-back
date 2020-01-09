@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Table(name = "usuario")
 @Entity
 public class Usuario {
-    @Id @Column(name = "idusuario")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idusuario")
     private int idUsuario;
     @ManyToOne @JoinColumn(name = "idrol")
     private Rol rol;

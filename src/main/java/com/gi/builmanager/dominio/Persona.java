@@ -1,14 +1,12 @@
 package com.gi.builmanager.dominio;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 @Table(name = "persona")
 @Entity
 public class Persona {
-    @Id  @Column(name = "idpersona")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idpersona")
     private int idPersona;
     @Column(name =  "nombres")
     private String nombres;

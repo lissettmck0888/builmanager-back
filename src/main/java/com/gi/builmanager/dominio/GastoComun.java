@@ -7,7 +7,8 @@ import java.util.List;
 @Table(name = "gasto_comun")
 @Entity
 public class GastoComun {
-    @Id @Column(name = "idgastocomun")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idgastocomun")
     int idGastoComun;
     @Column
     String estado;

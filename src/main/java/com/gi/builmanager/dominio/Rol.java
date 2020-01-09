@@ -8,7 +8,8 @@ import java.util.Set;
 @Table(name = "rol")
 @Entity
 public class Rol {
-    @Id @Column(name = "idrol")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idrol")
     private int idRol;
     @Column
     private String nombre;

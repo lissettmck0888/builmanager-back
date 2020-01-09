@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=BuildManager
+    username: sa
+    password: sa
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate-dialect: org.hibernate.dialect.SQLServer2012Dialect
