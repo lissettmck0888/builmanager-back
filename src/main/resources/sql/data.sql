@@ -24,9 +24,9 @@ insert into relacion_rol_permiso (idrol,idpermiso) values (3,4);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,5);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,6);
 
-insert into usuario (nombre_usuario, contrasena, idrol) values ('juanito', '123', 1);
-insert into usuario (nombre_usuario, contrasena, idrol) values ('dio', '123', 2);
-insert into usuario (nombre_usuario, contrasena, idrol) values ('pepe', '123', 3);
+insert into usuario (nombre_usuario, contrasena, idrol) values ('juanito', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 1);
+insert into usuario (nombre_usuario, contrasena, idrol) values ('dio', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 2);
+insert into usuario (nombre_usuario, contrasena, idrol) values ('pepe', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 3);
 
 insert into tipo_unidad (nombre) values ('Departamento');
 insert into tipo_unidad (nombre) values ('Estacionamiento');

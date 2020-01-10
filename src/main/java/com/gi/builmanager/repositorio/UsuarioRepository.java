@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 
+    Usuario findByNombreUsuario(String nombreUsuario);
+    Usuario findByNombreUsuarioAndContrasena(String nombreUsuario, String contrasena);
     List<UsuarioView> findAllProjectedBy();
 
 }
