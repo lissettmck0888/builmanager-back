@@ -8,4 +8,5 @@ import java.util.List;
 public interface PermisoService {
     List<PermisoView> getPermiso(int idUsuario);
     List<PermisoView> getPermisosRol(int idRol);
+    List<PermisoView> getPermisos();
 }

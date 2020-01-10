@@ -12,6 +12,7 @@ import java.util.List;
 public class PermisoServiceImpl implements PermisoService {
     @Autowired
     private PermisoRepository permisoRepository;
+
     @Override
     public List<PermisoView> getPermiso(int idUsuario) {
         return null;
@@ -20,5 +21,10 @@ public class PermisoServiceImpl implements PermisoService {
     @Override
     public List<PermisoView> getPermisosRol(int idRol) {
         return permisoRepository.findByRoles_idRol(idRol);
+    }
+
+    @Override
+    public List<PermisoView> getPermisos() {
+        return permisoRepository.findAllProjectedBy();
     }
 }

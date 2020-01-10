@@ -4,14 +4,12 @@ import com.gi.builmanager.dominio.Permiso;
 import com.gi.builmanager.repositorio.projection.PermisoView;
 import com.gi.builmanager.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
 @RequestMapping("/permisos")
+@CrossOrigin(origins = {"*"})
 public class PermisoController {
     @Autowired
     private PermisoService permisoService;
@@ -26,4 +24,8 @@ public class PermisoController {
         return permisoService.getPermisosRol(idRol);
     }
 
+    @GetMapping("/")
+    public List<PermisoView> getPermisos(){
+        return permisoService.getPermisos();
+    }
 }
