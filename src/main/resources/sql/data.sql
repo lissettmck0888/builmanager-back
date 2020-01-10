@@ -1,6 +1,8 @@
 insert into rol (nombre) values ('Administrador');
 insert into rol (nombre) values ('Conserje');
 insert into rol (nombre) values ('Presidente');
+insert into rol (nombre) values ('Tesorero');
+insert into rol (nombre) values ('Secretrario');
 
 insert into permiso (codigo,nombre,descripcion) values ('P01','Listar usuarios', '');
 insert into permiso (codigo,nombre,descripcion) values ('P02','Crear usuario', '');
