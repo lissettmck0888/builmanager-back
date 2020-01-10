@@ -2,6 +2,7 @@ package com.gi.builmanager.service.impl;
 
 import com.gi.builmanager.dominio.Usuario;
 import com.gi.builmanager.repositorio.UsuarioRepository;
+import com.gi.builmanager.repositorio.projection.UsuarioView;
 import com.gi.builmanager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public List<Usuario> getUsuarios() {
-        return usuarioRepository.findAll();
+    public List<UsuarioView> getUsuarios() {
+        return usuarioRepository.findAllProjectedBy();
     }
 }

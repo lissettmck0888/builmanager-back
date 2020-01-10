@@ -1,6 +1,7 @@
 package com.gi.builmanager.controller;
 
 import com.gi.builmanager.dominio.Usuario;
+import com.gi.builmanager.repositorio.projection.UsuarioView;
 import com.gi.builmanager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +19,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/")
-    public List<Usuario> getUsuario(){
+    public List<UsuarioView> getUsuario(){
         return usuarioService.getUsuarios();
     }
 }
