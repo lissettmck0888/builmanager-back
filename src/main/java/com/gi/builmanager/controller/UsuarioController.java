@@ -1,13 +1,11 @@
 package com.gi.builmanager.controller;
 
 import com.gi.builmanager.dominio.Usuario;
+import com.gi.builmanager.dto.UsuarioDto;
 import com.gi.builmanager.repositorio.projection.UsuarioView;
 import com.gi.builmanager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +17,13 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/")
-    public List<UsuarioView> getUsuario(){
+    public List<UsuarioView> getUsuarios(){
         return usuarioService.getUsuarios();
+    }
+
+    @PostMapping("/")
+    public Boolean crearUsuario(@RequestBody UsuarioDto usuarioDto){
+        Usuario created = usuarioService.crearUsuario(usuarioDto);
+        return created != null;
     }
 }
