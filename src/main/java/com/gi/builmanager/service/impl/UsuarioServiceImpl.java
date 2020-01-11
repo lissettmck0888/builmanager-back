@@ -29,6 +29,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario crearUsuario(UsuarioDto usuarioDto) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioDto.getIdUsuario());
         if(optionalUsuario.isPresent()) {
+            usuarioDto.setContrasena(optionalUsuario.get().getContrasena());
+        }else {
             usuarioDto.setContrasena(passwordEncoder.encode(optionalUsuario.get().getContrasena()));
         }
         return usuarioRepository.save(conversionService.convert(usuarioDto, Usuario.class));

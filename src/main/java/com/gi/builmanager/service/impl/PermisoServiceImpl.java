@@ -19,8 +19,8 @@ public class PermisoServiceImpl implements PermisoService {
     }
 
     @Override
-    public List<PermisoView> getPermisosRol(int idRol) {
-        return permisoRepository.findByRoles_idRol(idRol);
+    public List<PermisoView> getPermisosRol(String nombre) {
+        return permisoRepository.findByRoles_nombreIgnoreCase(nombre);
     }
 
     @Override

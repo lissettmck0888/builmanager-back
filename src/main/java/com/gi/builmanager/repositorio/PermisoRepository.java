@@ -11,5 +11,6 @@ import java.util.List;
 public interface PermisoRepository extends JpaRepository<Permiso,Integer> {
 
     List<PermisoView> findByRoles_idRol(int idRol);
+    List<PermisoView> findByRoles_nombreIgnoreCase(String nombre);
     List<PermisoView> findAllProjectedBy();
 }

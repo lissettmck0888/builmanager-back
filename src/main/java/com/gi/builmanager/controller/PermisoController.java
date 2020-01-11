@@ -19,9 +19,9 @@ public class PermisoController {
         return permisoService.getPermiso(idUsuario);
     }
 */
-    @GetMapping("/rol/{idRol}")
-    public List<PermisoView> getPermisosRol(@PathVariable int idRol){
-        return permisoService.getPermisosRol(idRol);
+    @GetMapping("/rol/{nombreRol}")
+    public List<PermisoView> getPermisosRol(@PathVariable String nombreRol){
+        return permisoService.getPermisosRol(nombreRol);
     }
 
     @GetMapping("/")
