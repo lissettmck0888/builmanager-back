@@ -11,6 +11,6 @@ public interface UsuarioService {
 
     Usuario crearUsuario(UsuarioDto usuarioDto);
     List<UsuarioView> getUsuarios();
-
+    void eliminarUsuario(int idUsuario);
 
 }

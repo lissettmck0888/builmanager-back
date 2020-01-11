@@ -26,4 +26,9 @@ public class UsuarioController {
         Usuario created = usuarioService.crearUsuario(usuarioDto);
         return created != null;
     }
+
+    @DeleteMapping("/{idUsuario}")
+    public  void eliminarUsuario(@PathVariable int idUsuario){
+        usuarioService.eliminarUsuario(idUsuario);
+    }
 }

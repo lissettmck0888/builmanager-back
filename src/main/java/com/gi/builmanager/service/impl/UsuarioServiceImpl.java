@@ -40,4 +40,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<UsuarioView> getUsuarios() {
         return usuarioRepository.findAllProjectedBy();
     }
+
+    @Override
+    public void eliminarUsuario(int idUsuario) {
+        usuarioRepository.deleteById(idUsuario);
+    }
 }
