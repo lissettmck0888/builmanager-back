@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -26,7 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario crearUsuario(UsuarioDto usuarioDto) {
-        usuarioDto.setContrasena(passwordEncoder.encode(usuarioDto.getContrasena()));
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioDto.getIdUsuario());
+        if(optionalUsuario.isPresent()) {
+            usuarioDto.setContrasena(passwordEncoder.encode(optionalUsuario.get().getContrasena()));
+        }
         return usuarioRepository.save(conversionService.convert(usuarioDto, Usuario.class));
     }
 
