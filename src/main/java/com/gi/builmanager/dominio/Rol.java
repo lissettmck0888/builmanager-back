@@ -1,6 +1,7 @@
 package com.gi.builmanager.dominio;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Rol {
             name = "relacion_rol_permiso",
             joinColumns={@JoinColumn(name="idrol")},
             inverseJoinColumns={@JoinColumn(name="idpermiso")})
-    private Set<Permiso> permisos = new HashSet<>();
+    private List<Permiso> permisos = new ArrayList<>();
 
     public Rol() {
     }
@@ -44,11 +45,11 @@ public class Rol {
         this.idRol = idRol;
     }
 
-    public Set<Permiso> getPermisos() {
+    public List<Permiso> getPermisos() {
         return permisos;
     }
 
-    public void setPermisos(Set<Permiso> permisos) {
+    public void setPermisos(List<Permiso> permisos) {
         this.permisos = permisos;
     }
 }
