@@ -32,9 +32,14 @@ insert into relacion_rol_permiso (idrol,idpermiso) values (1,12);
 insert into relacion_rol_permiso (idrol,idpermiso) values (2,4);
 insert into relacion_rol_permiso (idrol,idpermiso) values (2,5);
 insert into relacion_rol_permiso (idrol,idpermiso) values (2,6);
+insert into relacion_rol_permiso (idrol,idpermiso) values (2,9);
+insert into relacion_rol_permiso (idrol,idpermiso) values (2,10);
+insert into relacion_rol_permiso (idrol,idpermiso) values (2,11);
+insert into relacion_rol_permiso (idrol,idpermiso) values (2,12);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,4);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,5);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,6);
+insert into relacion_rol_permiso (idrol,idpermiso) values (3,12);
 
 insert into usuario (nombre_usuario, contrasena, idrol) values ('admin', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 1);
 insert into usuario (nombre_usuario, contrasena, idrol) values ('conser', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 2);
