@@ -10,6 +10,12 @@ insert into permiso (codigo,nombre,descripcion) values ('P03','Eliminar usuario'
 insert into permiso (codigo,nombre,descripcion) values ('P04','Listar Unidades', '');
 insert into permiso (codigo,nombre,descripcion) values ('P05','Listar detalle gasto comun', '');
 insert into permiso (codigo,nombre,descripcion) values ('P06','Listar gasto comun periodo', '');
+insert into permiso (codigo,nombre,descripcion) values ('P07','Modulo Usuarios', '');
+insert into permiso (codigo,nombre,descripcion) values ('P08','Modulo Roles', '');
+insert into permiso (codigo,nombre,descripcion) values ('P09','Modulo Gastos Comunes', '');
+insert into permiso (codigo,nombre,descripcion) values ('P10','Modulo Zonas Comunes', '');
+insert into permiso (codigo,nombre,descripcion) values ('P11','Modulo Mantenciones', '');
+insert into permiso (codigo,nombre,descripcion) values ('P12','Modulo Gestion comunitaria', '');
 
 insert into relacion_rol_permiso (idrol,idpermiso) values (1,1);
 insert into relacion_rol_permiso (idrol,idpermiso) values (1,2);
@@ -17,6 +23,12 @@ insert into relacion_rol_permiso (idrol,idpermiso) values (1,3);
 insert into relacion_rol_permiso (idrol,idpermiso) values (1,4);
 insert into relacion_rol_permiso (idrol,idpermiso) values (1,5);
 insert into relacion_rol_permiso (idrol,idpermiso) values (1,6);
+insert into relacion_rol_permiso (idrol,idpermiso) values (1,7);
+insert into relacion_rol_permiso (idrol,idpermiso) values (1,8);
+insert into relacion_rol_permiso (idrol,idpermiso) values (1,9);
+insert into relacion_rol_permiso (idrol,idpermiso) values (1,10);
+insert into relacion_rol_permiso (idrol,idpermiso) values (1,11);
+insert into relacion_rol_permiso (idrol,idpermiso) values (1,12);
 insert into relacion_rol_permiso (idrol,idpermiso) values (2,4);
 insert into relacion_rol_permiso (idrol,idpermiso) values (2,5);
 insert into relacion_rol_permiso (idrol,idpermiso) values (2,6);
@@ -24,9 +36,9 @@ insert into relacion_rol_permiso (idrol,idpermiso) values (3,4);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,5);
 insert into relacion_rol_permiso (idrol,idpermiso) values (3,6);
 
-insert into usuario (nombre_usuario, contrasena, idrol) values ('juanito', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 1);
-insert into usuario (nombre_usuario, contrasena, idrol) values ('dio', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 2);
-insert into usuario (nombre_usuario, contrasena, idrol) values ('pepe', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 3);
+insert into usuario (nombre_usuario, contrasena, idrol) values ('admin', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 1);
+insert into usuario (nombre_usuario, contrasena, idrol) values ('conser', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 2);
+insert into usuario (nombre_usuario, contrasena, idrol) values ('presi', '$2a$10$XQ2RizMhFwhYutihQ0q98OOS/h6TTjqmrrsc49QN4.3g4TIGSXGsS', 3);
 
 insert into tipo_unidad (nombre) values ('Departamento');
 insert into tipo_unidad (nombre) values ('Estacionamiento');
