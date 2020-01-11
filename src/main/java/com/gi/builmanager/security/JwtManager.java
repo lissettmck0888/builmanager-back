@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Component
 public class JwtManager {
 
-    private static final long EXPIRATION_TIME_SECONDS = 60;
+    private static final long EXPIRATION_TIME_SECONDS = 60 * 60;
 
     @Value("${builmanager.jwt-signing-key}")
     private String signingKey;
@@ -59,7 +59,7 @@ public class JwtManager {
     private static Consumer<Map<String, Object>> setTokenClaimsConsumer(CustomUserDetails usuario) {
         return claims -> {
             claims.put("nombreUsuario", usuario.getUsername());
-            claims.put("rol", ((List<SimpleGrantedAuthority>)usuario.getAuthorities()).get(0));
+            claims.put("rol", usuario.getRol().toUpperCase());
             //claims.put("permisos", usuario.getRol().getPermisos().stream().map(permiso -> permiso.getCodigo()).collect(Collectors.toList()));
         };
     }

@@ -52,4 +52,8 @@ public class CustomUserDetails implements UserDetails {
         return new ArrayList<>(Arrays.asList(new SimpleGrantedAuthority[]{authority}));
     }
 
+    public String getRol(){
+        return usuario.getRol().getNombre();
+    }
+
 }

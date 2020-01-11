@@ -49,10 +49,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .csrf().disable()
+            .headers().frameOptions().sameOrigin()
+            .and()
             .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
             .and()
             .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .antMatchers("/h2-console/**").permitAll()
             .antMatchers("/login").permitAll()
             .anyRequest().authenticated()
             .and()
