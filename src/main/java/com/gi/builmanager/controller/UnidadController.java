@@ -14,7 +14,8 @@ public class UnidadController {
     @Autowired
     private UnidadService unidadService;
     @GetMapping("/")
-    public List<Unidad> getUnidad(){
-        return unidadService.getUnidad();
+    public List<Unidad> getUnidadesDisponibles()
+    {
+        return unidadService.getUnidadesDisponibles();
     }
 }

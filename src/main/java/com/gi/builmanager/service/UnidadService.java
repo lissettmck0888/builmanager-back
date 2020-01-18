@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface UnidadService
 {
-    List<Unidad> getUnidad();
+    List<Unidad> getUnidadesDisponibles();
+
 }

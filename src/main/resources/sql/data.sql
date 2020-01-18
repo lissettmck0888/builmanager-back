@@ -94,4 +94,16 @@ insert into item_gasto_comun (nombre,descripcion) values ('Conserje 2','');
 insert into item_gasto_comun (nombre,descripcion) values ('Mantenimiento Porton','');
 insert into item_gasto_comun (nombre,descripcion) values ('Luz areas comunes','');
 insert into item_gasto_comun (nombre,descripcion) values ('Mantenimiento ascensor','');
+insert into persona(apellido_materni,apellido_paterno,correo,direccion,fecha_nacimiento,nacionalidad,nombres,run,telefono) values
+('Lora','Torres','lora@gmail.com','estado 34','1980-12-31','Chilena','Angel Alfonso','23767623','232323');
+insert into persona(apellido_materni,apellido_paterno,correo,direccion,fecha_nacimiento,nacionalidad,nombres,run,telefono) values
+('Jama','Luka','jalu@gmail.com','bandera 324','1970-11-20','Chilena','Eusebio Do Santos','1213394','1982823');
+insert into asignacion(estado, fecha_asignacion,id_persona,tipo_asignacion) values('ocupado','2019-10-10',1,'arriendo');
+insert into asignacion(estado, fecha_asignacion,id_persona,tipo_asignacion) values('ocupado','2019-04-22',2,'propietario');
+insert into asignacion(estado, fecha_asignacion,id_persona,tipo_asignacion) values('vacio','2019-11-20',1,'arriendo');
+insert into asignacion(estado, fecha_asignacion,id_persona,tipo_asignacion) values('vacio','2019-08-01',2,'propietario');
 
+insert into relacion_asignacion_unidad values(1,1);
+insert into relacion_asignacion_unidad values(2,2);
+insert into relacion_asignacion_unidad values(3,3);
+insert into relacion_asignacion_unidad values(4,4);

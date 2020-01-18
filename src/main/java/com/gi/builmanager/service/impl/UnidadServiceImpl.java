@@ -12,7 +12,7 @@ public class UnidadServiceImpl implements UnidadService {
     @Autowired
     private UnidadRepository unidadRepository;
     @Override
-    public List<Unidad> getUnidad() {
-        return unidadRepository.findAll();
+    public List<Unidad> getUnidadesDisponibles() {
+        return unidadRepository.getUnidadesDisponibles();
     }
 }
