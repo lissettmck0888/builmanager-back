@@ -10,9 +10,9 @@ public class Asignacion {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int idAsignacion;
-    @Column
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idpersona")
-    private int idPersona;
+    private Persona persona;
     @Column
     private String tipoAsignacion;
     @Column
@@ -37,9 +37,9 @@ public class Asignacion {
     public Asignacion() {
     }
 
-    public Asignacion(int idAsignacion, int idPersona,  String tipoAsignacion, String estado, LocalDate fechaAsignacion) {
+    public Asignacion(int idAsignacion, Persona persona,  String tipoAsignacion, String estado, LocalDate fechaAsignacion) {
         this.idAsignacion = idAsignacion;
-        this.idPersona = idPersona;
+        this.persona = persona;
 
         this.tipoAsignacion = tipoAsignacion;
         this.estado = estado;
@@ -54,12 +54,12 @@ public class Asignacion {
         this.idAsignacion = idAsignacion;
     }
 
-    public int getIdPersona() {
-        return idPersona;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
+    public void setIdPersona(Persona persona) {
+        this.persona = persona;
     }
 
 

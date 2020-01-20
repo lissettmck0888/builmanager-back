@@ -12,10 +12,15 @@ import java.util.List;
 public class AsignacionServiceImpl implements AsignacionService {
     @Autowired
     private AsignacionRepository asignacionRepository;
-    //@Override
-    /*public List<Asignacion> getAsignacion(int idAsignacion) {
-        return asignacionRepository.findByAsignacion_IdAsignacion(idAsignacion);
-    }*/
 
+    @Override
+    public Asignacion save(Asignacion asignacion) {
+        return asignacionRepository.save(asignacion);
+    }
+
+    @Override
+    public List<Asignacion> getAll() {
+        return asignacionRepository.findAll();
+    }
 
 }

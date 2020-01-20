@@ -12,7 +12,7 @@ public class Persona {
     private String nombres;
     @Column(name = "apellido_paterno")
     private String apellidoPaterno;
-    @Column(name = "apellido_materni")
+    @Column(name = "apellido_materno")
     private String apellidoMaterno;
     @Column(name = "run")
     private String run;

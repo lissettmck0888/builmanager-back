@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         System.out.println(passwordEncoder.encode("123"));
+        //
     }
 
 }
