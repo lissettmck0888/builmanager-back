@@ -10,14 +10,15 @@ import java.util.List;
 @Repository
 public interface UnidadRepository extends JpaRepository<Unidad,Integer> {
 
-    @Query(value = "select * from\n" +
-            "(\n" +
-            "select u.*,a.estado\n" +
-            "from unidad u left outer join relacion_asignacion_unidad r\n" +
-            "on u.idunidad=r.idunidad \n" +
-            "left outer join asignacion a \n" +
-            "on r.idasignacion = a.id_asignacion\n" +
-            ") result\n" +
-            "where result.estado = 'vacio' or estado is null", nativeQuery = true)
-    List<Unidad> getUnidadesDisponibles();
+    @Query(value =
+            "select * from " +
+            "unidad u where idunidad not in (select idunidad from relacion_asignacion_unidad)", nativeQuery = true)
+    List<Unidad> getUnidadesDisponiblesSinPropietario();
+
+    @Query(value = "select * from " +
+            "asignacion a " +
+            "join relacion_asignacion_unidad rau on a.id_asignacion=rau.idasignacion " +
+            "where a.tipo_asignacion= 'propietario' and estado='vacio'", nativeQuery = true)
+    List<Unidad> getUnidadesDisponiblesParaArriendo();
+
 }
