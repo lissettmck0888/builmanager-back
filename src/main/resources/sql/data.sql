@@ -112,3 +112,5 @@ insert into relacion_asignacion_unidad values(1,1);
 insert into relacion_asignacion_unidad values(2,2);
 insert into relacion_asignacion_unidad values(3,3);
 insert into relacion_asignacion_unidad values(4,4);
+
+insert into gasto_comun (periodo, estado) values('2020-01-01', 'Abierto');

@@ -1,16 +1,14 @@
 package com.gi.builmanager.dto;
 
-import com.gi.builmanager.dominio.DetalleGastoComun;
-
 import java.time.LocalDate;
 import java.util.List;
 
 public class GastoComunDto {
-    private int idGastoComun;
+    private Integer idGastoComun;
     private String estado;
-    private float montoTotal;
+    private Double montoTotal;
     private LocalDate periodo;
-    private float interesMora;
+
     private List<DetalleGastoComunDto> listaDetalleGastoComun;
 
     public int getIdGastoComun() {
@@ -29,14 +27,6 @@ public class GastoComunDto {
         this.estado = estado;
     }
 
-    public float getMontoTotal() {
-        return montoTotal;
-    }
-
-    public void setMontoTotal(float monto) {
-        this.montoTotal = monto;
-    }
-
     public LocalDate getPeriodo() {
         return periodo;
     }
@@ -45,19 +35,31 @@ public class GastoComunDto {
         this.periodo = periodo;
     }
 
-    public float getInteresMora() {
-        return interesMora;
-    }
-
-    public void setInteresMora(float interesMora) {
-        this.interesMora = interesMora;
-    }
-
     public List<DetalleGastoComunDto> getListaDetalleGastoComunDto() {
         return listaDetalleGastoComun;
     }
 
     public void setListaDetalleGastoComunDto(List<DetalleGastoComunDto> listaDetalleGastoComun) {
+        this.listaDetalleGastoComun = listaDetalleGastoComun;
+    }
+
+    public void setIdGastoComun(Integer idGastoComun) {
+        this.idGastoComun = idGastoComun;
+    }
+
+    public Double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(Double montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+
+    public List<DetalleGastoComunDto> getListaDetalleGastoComun() {
+        return listaDetalleGastoComun;
+    }
+
+    public void setListaDetalleGastoComun(List<DetalleGastoComunDto> listaDetalleGastoComun) {
         this.listaDetalleGastoComun = listaDetalleGastoComun;
     }
 }

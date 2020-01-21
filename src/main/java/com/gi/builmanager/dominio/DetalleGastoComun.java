@@ -6,37 +6,27 @@ import javax.persistence.*;
 @Entity
 public class DetalleGastoComun {
     @Id @Column(name = "iddetallegastocomun")
-    private int idDetalleGastoComun;
+    private Integer idDetalleGastoComun;
     @Column
-    private float monto;
+    private Double monto;
     @ManyToOne @JoinColumn(name = "idgastocomun")
     private GastoComun gastoComun;
     @ManyToOne @JoinColumn(name = "iditemgastocomun")
     private ItemGastoComun itemGastoComun;
 
-    public DetalleGastoComun() {
-    }
-
-    public DetalleGastoComun(int idDetalleGastoComun, float monto, GastoComun gastoComun, ItemGastoComun itemGastoComun) {
-        this.idDetalleGastoComun = idDetalleGastoComun;
-        this.monto = monto;
-        this.gastoComun = gastoComun;
-        this.itemGastoComun = itemGastoComun;
-    }
-
-    public int getIdDetalleGastoComun() {
+    public Integer getIdDetalleGastoComun() {
         return idDetalleGastoComun;
     }
 
-    public void setIdDetalleGastoComun(int idDetalleGastoComun) {
+    public void setIdDetalleGastoComun(Integer idDetalleGastoComun) {
         this.idDetalleGastoComun = idDetalleGastoComun;
     }
 
-    public float getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
     }
 
@@ -55,5 +45,4 @@ public class DetalleGastoComun {
     public void setItemGastoComun(ItemGastoComun itemGastoComun) {
         this.itemGastoComun = itemGastoComun;
     }
-
 }

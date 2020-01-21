@@ -7,28 +7,25 @@ import java.util.List;
 @Table(name = "gasto_comun")
 @Entity
 public class GastoComun {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idgastocomun")
-    int idGastoComun;
+    private Integer idGastoComun;
     @Column
-    String estado;
+    private String estado;
     @Column
-    float montoTotal;
+    private Double montoTotal;
     @Column
-    LocalDate periodo;
-    @Column
-    int interesMora;
-    @OneToMany(mappedBy = "gastoComun")
+    private LocalDate periodo;
+    @OneToMany(mappedBy = "gastoComun", cascade = CascadeType.MERGE)
     private List<DetalleGastoComun> listaDetalleGastoComun;
 
-    public GastoComun() {
+    public Integer getIdGastoComun() {
+        return idGastoComun;
     }
 
-    public GastoComun(String estado, float montoTotal, LocalDate periodo, int interesMora) {
-        this.estado = estado;
-        this.montoTotal = montoTotal;
-        this.periodo = periodo;
-        this.interesMora = interesMora;
+    public void setIdGastoComun(Integer idGastoComun) {
+        this.idGastoComun = idGastoComun;
     }
 
     public String getEstado() {
@@ -39,11 +36,11 @@ public class GastoComun {
         this.estado = estado;
     }
 
-    public float getMontoTotal() {
+    public Double getMontoTotal() {
         return montoTotal;
     }
 
-    public void setMontoTotal(float montoTotal) {
+    public void setMontoTotal(Double montoTotal) {
         this.montoTotal = montoTotal;
     }
 
@@ -53,22 +50,6 @@ public class GastoComun {
 
     public void setPeriodo(LocalDate periodo) {
         this.periodo = periodo;
-    }
-
-    public int getInteresMora() {
-        return interesMora;
-    }
-
-    public void setInteresMora(int interesMora) {
-        this.interesMora = interesMora;
-    }
-
-    public int getIdGastoComun() {
-        return idGastoComun;
-    }
-
-    public void setIdGastoComun(int idGastoComun) {
-        this.idGastoComun = idGastoComun;
     }
 
     public List<DetalleGastoComun> getListaDetalleGastoComun() {

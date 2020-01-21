@@ -3,8 +3,8 @@ package com.gi.builmanager.dto;
 import com.gi.builmanager.dominio.ItemGastoComun;
 
 public class DetalleGastoComunDto {
-    private  int idDetalleGastoComun;
-    private float monto;
+    private  Integer idDetalleGastoComun;
+    private Double monto;
     private ItemGastoComunDto itemGastoComunDto;
 
     public int getIdDetalleGastoComun() {
@@ -15,16 +15,20 @@ public class DetalleGastoComunDto {
         this.idDetalleGastoComun = idDetalleGastoComun;
     }
 
-    public float getMonto() {
+    public ItemGastoComunDto getItemGastoComunDto() {
+        return itemGastoComunDto;
+    }
+
+    public void setIdDetalleGastoComun(Integer idDetalleGastoComun) {
+        this.idDetalleGastoComun = idDetalleGastoComun;
+    }
+
+    public Double getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
-    }
-
-    public ItemGastoComunDto getItemGastoComunDto() {
-        return itemGastoComunDto;
     }
 
     public void setItemGastoComunDto(ItemGastoComunDto itemGastoComun) {

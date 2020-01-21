@@ -19,7 +19,6 @@ public class GastoComunDtoConverter implements Converter<GastoComun, GastoComunD
         gastoComunDto.setEstado(gastoComun.getEstado());
         gastoComunDto.setMontoTotal(gastoComun.getMontoTotal());
         gastoComunDto.setPeriodo(gastoComun.getPeriodo());
-        gastoComunDto.setInteresMora(gastoComun.getInteresMora());
         gastoComunDto.setListaDetalleGastoComunDto(listaDetalleGastoDto(gastoComun.getListaDetalleGastoComun()));
         return gastoComunDto;
     }
