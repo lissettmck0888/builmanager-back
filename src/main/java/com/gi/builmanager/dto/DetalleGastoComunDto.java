@@ -1,26 +1,29 @@
 package com.gi.builmanager.dto;
 
-import com.gi.builmanager.dominio.ItemGastoComun;
-
 public class DetalleGastoComunDto {
     private  Integer idDetalleGastoComun;
     private Double monto;
-    private ItemGastoComunDto itemGastoComunDto;
+    private Integer gastoComun;
+    private ItemGastoComunDto itemGastoComun;
 
-    public int getIdDetalleGastoComun() {
+    public Integer getGastoComun() {
+        return gastoComun;
+    }
+
+    public void setGastoComun(Integer gastoComun) {
+        this.gastoComun = gastoComun;
+    }
+
+    public Integer getIdDetalleGastoComun() {
         return idDetalleGastoComun;
-    }
-
-    public void setIdDetalleGastoComun(int idDetalleGastoComun) {
-        this.idDetalleGastoComun = idDetalleGastoComun;
-    }
-
-    public ItemGastoComunDto getItemGastoComunDto() {
-        return itemGastoComunDto;
     }
 
     public void setIdDetalleGastoComun(Integer idDetalleGastoComun) {
         this.idDetalleGastoComun = idDetalleGastoComun;
+    }
+
+    public ItemGastoComunDto getItemGastoComun() {
+        return itemGastoComun;
     }
 
     public Double getMonto() {
@@ -31,7 +34,7 @@ public class DetalleGastoComunDto {
         this.monto = monto;
     }
 
-    public void setItemGastoComunDto(ItemGastoComunDto itemGastoComun) {
-        this.itemGastoComunDto = itemGastoComun;
+    public void setItemGastoComun(ItemGastoComunDto itemGastoComun) {
+        this.itemGastoComun = itemGastoComun;
     }
 }

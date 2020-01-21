@@ -21,7 +21,12 @@ public class GastoComunServiceImpl implements GastoComunService {
     private ItemGastoComunRepository itemGastoComunRepository;
 
     @Override
-    public GastoComunView getGastoComunAbierto() {
+    public GastoComun actualizar(GastoComun gastoComun) {
+        return gastoComunRepository.save(gastoComun);
+    }
+
+    @Override
+    public GastoComun getGastoComunAbierto() {
         return gastoComunRepository.findByEstado(EstadoGastoComunEnum.OPENED.nombre);
     }
 

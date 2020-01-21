@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GastoComunRepository extends JpaRepository<GastoComun,Integer> {
 
-    GastoComunView findByEstado(String estado);
+    GastoComun findByEstado(String estado);
 }

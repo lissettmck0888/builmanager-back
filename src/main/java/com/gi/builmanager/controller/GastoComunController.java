@@ -5,6 +5,8 @@ import com.gi.builmanager.dominio.ItemGastoComun;
 import com.gi.builmanager.dto.GastoComunDto;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 import com.gi.builmanager.service.GastoComunService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
@@ -13,7 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/gasto-comun")
+@CrossOrigin(origins = {"*"})
 public class GastoComunController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GastoComunController.class);
 
     @Autowired
     private ConversionService conversionService;
@@ -22,8 +27,8 @@ public class GastoComunController {
     private GastoComunService gastoComunService;
 
     @GetMapping("/abierto")
-    public GastoComunView obtenerGastoComunAbierto() {
-        return gastoComunService.getGastoComunAbierto();
+    public GastoComunDto obtenerGastoComunAbierto() {
+        return conversionService.convert(gastoComunService.getGastoComunAbierto(), GastoComunDto.class);
     }
 
     @GetMapping("/")
@@ -34,9 +39,11 @@ public class GastoComunController {
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(GastoComunDto.class)));
     }
 
-    @PostMapping("/item/")
-    public ItemGastoComun guardarItem(@RequestBody ItemGastoComun itemGastoComun){
-        return gastoComunService.guardarItem(itemGastoComun);
+    @PostMapping("/")
+    public GastoComunDto actualizarGastoComun(@RequestBody GastoComunDto gastoComun){
+        LOGGER.info("llega aqui...");
+        GastoComun updated = gastoComunService.actualizar(conversionService.convert(gastoComun, GastoComun.class));
+        return conversionService.convert(updated, GastoComunDto.class);
     }
 
     @GetMapping("/item/")

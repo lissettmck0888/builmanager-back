@@ -4,6 +4,6 @@ public interface DetalleGastoComunView {
 
     Integer getIdDetalleGastoComun();
     Float getMonto();
-    GastoComunView getGastoComun();
+    Integer getGastoComun();
     ItemGastoComunView getItemGastoComun();
 }

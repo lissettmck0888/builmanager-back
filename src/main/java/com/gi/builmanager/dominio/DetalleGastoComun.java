@@ -5,7 +5,9 @@ import javax.persistence.*;
 @Table(name = "detalle_gasto_comun")
 @Entity
 public class DetalleGastoComun {
-    @Id @Column(name = "iddetallegastocomun")
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "iddetallegastocomun")
     private Integer idDetalleGastoComun;
     @Column
     private Double monto;

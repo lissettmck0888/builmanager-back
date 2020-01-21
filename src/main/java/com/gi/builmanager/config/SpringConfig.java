@@ -1,5 +1,6 @@
 package com.gi.builmanager.config;
 
+import com.gi.builmanager.converter.GastoComunConverter;
 import com.gi.builmanager.converter.GastoComunDtoConverter;
 import com.gi.builmanager.converter.RolConverter;
 import com.gi.builmanager.converter.UsuarioConverter;
@@ -13,6 +14,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new GastoComunDtoConverter());
+        registry.addConverter(new GastoComunConverter());
         registry.addConverter(new RolConverter());
         registry.addConverter(new UsuarioConverter());
     }

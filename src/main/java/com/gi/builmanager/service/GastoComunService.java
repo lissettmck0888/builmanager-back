@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface GastoComunService {
 
-    GastoComunView getGastoComunAbierto();
+    GastoComun actualizar(GastoComun gastoComun);
+    GastoComun getGastoComunAbierto();
     List<GastoComun> getGastoComun();
 
     ItemGastoComun guardarItem(ItemGastoComun itemGastoComun);

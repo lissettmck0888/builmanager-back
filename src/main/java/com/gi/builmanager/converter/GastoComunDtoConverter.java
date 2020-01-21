@@ -19,7 +19,7 @@ public class GastoComunDtoConverter implements Converter<GastoComun, GastoComunD
         gastoComunDto.setEstado(gastoComun.getEstado());
         gastoComunDto.setMontoTotal(gastoComun.getMontoTotal());
         gastoComunDto.setPeriodo(gastoComun.getPeriodo());
-        gastoComunDto.setListaDetalleGastoComunDto(listaDetalleGastoDto(gastoComun.getListaDetalleGastoComun()));
+        gastoComunDto.setListaDetalleGastoComun(listaDetalleGastoDto(gastoComun.getListaDetalleGastoComun()));
         return gastoComunDto;
     }
 
@@ -29,7 +29,7 @@ public class GastoComunDtoConverter implements Converter<GastoComun, GastoComunD
             DetalleGastoComunDto dto = new DetalleGastoComunDto();
             dto.setIdDetalleGastoComun(gc.getIdDetalleGastoComun());
             dto.setMonto(gc.getMonto());
-            dto.setItemGastoComunDto(toItemGastoComunDto(gc.getItemGastoComun()));
+            dto.setItemGastoComun(toItemGastoComunDto(gc.getItemGastoComun()));
             listaDto.add(dto);
         }
         return listaDto;

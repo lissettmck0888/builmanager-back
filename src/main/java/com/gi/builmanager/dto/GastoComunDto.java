@@ -35,11 +35,11 @@ public class GastoComunDto {
         this.periodo = periodo;
     }
 
-    public List<DetalleGastoComunDto> getListaDetalleGastoComunDto() {
+    public List<DetalleGastoComunDto> getListaDetalleGastoComun() {
         return listaDetalleGastoComun;
     }
 
-    public void setListaDetalleGastoComunDto(List<DetalleGastoComunDto> listaDetalleGastoComun) {
+    public void setListaDetalleGastoComun(List<DetalleGastoComunDto> listaDetalleGastoComun) {
         this.listaDetalleGastoComun = listaDetalleGastoComun;
     }
 
@@ -55,11 +55,10 @@ public class GastoComunDto {
         this.montoTotal = montoTotal;
     }
 
-    public List<DetalleGastoComunDto> getListaDetalleGastoComun() {
-        return listaDetalleGastoComun;
-    }
 
-    public void setListaDetalleGastoComun(List<DetalleGastoComunDto> listaDetalleGastoComun) {
-        this.listaDetalleGastoComun = listaDetalleGastoComun;
-    }
+
+
+
+
+
 }

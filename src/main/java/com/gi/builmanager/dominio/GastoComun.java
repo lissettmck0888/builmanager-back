@@ -17,7 +17,7 @@ public class GastoComun {
     private Double montoTotal;
     @Column
     private LocalDate periodo;
-    @OneToMany(mappedBy = "gastoComun", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "gastoComun", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleGastoComun> listaDetalleGastoComun;
 
     public Integer getIdGastoComun() {

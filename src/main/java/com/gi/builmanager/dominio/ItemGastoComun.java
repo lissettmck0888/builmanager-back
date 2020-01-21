@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Table(name = "item_gasto_comun")
 @Entity
 public class ItemGastoComun {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iditemgastocomun")
     private int idItemGastoComun;

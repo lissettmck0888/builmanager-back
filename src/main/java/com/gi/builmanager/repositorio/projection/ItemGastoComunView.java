@@ -2,7 +2,7 @@ package com.gi.builmanager.repositorio.projection;
 
 public interface ItemGastoComunView {
 
-    int getIdItemGastoComun();
+    Integer getIdItemGastoComun();
     String getNombre();
     String getDescripcion();
 }
