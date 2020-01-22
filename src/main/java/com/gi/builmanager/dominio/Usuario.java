@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
-    private int idUsuario;
+    private Integer idUsuario;
     @ManyToOne @JoinColumn(name = "idrol")
     private Rol rol;
     @Column
@@ -23,11 +23,11 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public int getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 

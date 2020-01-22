@@ -7,9 +7,9 @@ import java.time.LocalDate;
 @Entity
 public class DetalleDeudadUnidad {
     @Id @Column(name = "iddetalledeuda")
-    private int idDetalleDeudaUnidad;
+    private Integer idDetalleDeudaUnidad;
     @Column
-    private float monto;
+    private Double monto;
     @Column
     private String estado;
     @Column
@@ -22,7 +22,7 @@ public class DetalleDeudadUnidad {
     public DetalleDeudadUnidad() {
     }
 
-    public DetalleDeudadUnidad(int idDetalleDeudaUnidad, float monto, String estado, LocalDate fechaPago, Unidad unidad, GastoComun gastoComun) {
+    public DetalleDeudadUnidad(Integer idDetalleDeudaUnidad, Double monto, String estado, LocalDate fechaPago, Unidad unidad, GastoComun gastoComun) {
         this.idDetalleDeudaUnidad = idDetalleDeudaUnidad;
         this.monto = monto;
         this.estado = estado;
@@ -31,19 +31,19 @@ public class DetalleDeudadUnidad {
         this.gastoComun = gastoComun;
     }
 
-    public int getIdDetalleDeudaUnidad() {
+    public Integer getIdDetalleDeudaUnidad() {
         return idDetalleDeudaUnidad;
     }
 
-    public void setIdDetalleDeudaUnidad(int idDetalleDeudaUnidad) {
+    public void setIdDetalleDeudaUnidad(Integer idDetalleDeudaUnidad) {
         this.idDetalleDeudaUnidad = idDetalleDeudaUnidad;
     }
 
-    public float getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
     }
 

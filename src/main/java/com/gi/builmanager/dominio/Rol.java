@@ -11,7 +11,7 @@ import java.util.Set;
 public class Rol {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idrol")
-    private int idRol;
+    private Integer idRol;
     @Column
     private String nombre;
 
@@ -37,11 +37,11 @@ public class Rol {
         this.nombre = nombre;
     }
 
-    public int getIdRol() {
+    public Integer getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(int idRol) {
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
     }
 

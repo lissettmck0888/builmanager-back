@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class Persona {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idpersona")
-    private int idPersona;
+    private Integer idPersona;
     @Column(name =  "nombres")
     private String nombres;
     @Column(name = "apellido_paterno")
@@ -114,11 +114,11 @@ public class Persona {
         this.direccion = direccion;
     }
 
-    public int getIdPersona() {
+    public Integer getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(int idPersona) {
+    public void setIdPersona(Integer idPersona) {
         this.idPersona = idPersona;
     }
 }

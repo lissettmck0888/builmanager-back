@@ -7,14 +7,14 @@ import javax.persistence.*;
 public class TipoUnidad {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idtipounidad")
-    private int idTipoUnidad;
+    private Integer idTipoUnidad;
     @Column
     private String nombre;
 
     public TipoUnidad() {
     }
 
-    public TipoUnidad(int idTipoUnidad, String nombre) {
+    public TipoUnidad(Integer idTipoUnidad, String nombre) {
         this.idTipoUnidad = idTipoUnidad;
         this.nombre = nombre;
     }
@@ -27,11 +27,11 @@ public class TipoUnidad {
         this.nombre = nombre;
     }
 
-    public int getIdTipoUnidad() {
+    public Integer getIdTipoUnidad() {
         return idTipoUnidad;
     }
 
-    public void setIdTipoUnidad(int idTipoUnidad) {
+    public void setIdTipoUnidad(Integer idTipoUnidad) {
         this.idTipoUnidad = idTipoUnidad;
     }
 }

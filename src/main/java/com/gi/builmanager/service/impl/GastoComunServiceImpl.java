@@ -3,8 +3,10 @@ package com.gi.builmanager.service.impl;
 import com.gi.builmanager.constants.EstadoGastoComunEnum;
 import com.gi.builmanager.dominio.GastoComun;
 import com.gi.builmanager.dominio.ItemGastoComun;
+import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
 import com.gi.builmanager.repositorio.GastoComunRepository;
 import com.gi.builmanager.repositorio.ItemGastoComunRepository;
+import com.gi.builmanager.repositorio.PlantillaGastosOrdinariosRepository;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 import com.gi.builmanager.service.GastoComunService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,20 @@ public class GastoComunServiceImpl implements GastoComunService {
 
     @Autowired
     private GastoComunRepository gastoComunRepository;
-
     @Autowired
     private ItemGastoComunRepository itemGastoComunRepository;
+    @Autowired
+    private PlantillaGastosOrdinariosRepository plantillaGastosOrdinariosRepository;
 
     @Override
     public GastoComun actualizar(GastoComun gastoComun) {
+        gastoComun.getListaDetalleGastoComun().stream().forEach(detalleGastoComun -> {
+            if(detalleGastoComun.getItemGastoComun().getIdItemGastoComun() == null ||
+                    detalleGastoComun.getItemGastoComun().getIdItemGastoComun() == 0){
+                ItemGastoComun item = itemGastoComunRepository.save(detalleGastoComun.getItemGastoComun());
+                detalleGastoComun.setItemGastoComun(item);
+            }
+        });
         return gastoComunRepository.save(gastoComun);
     }
 
@@ -36,6 +46,11 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
+    public GastoComun cerrarGastoComunPeriodo() {
+        return null;
+    }
+
+    @Override
     public ItemGastoComun guardarItem(ItemGastoComun itemGastoComun) {
         return itemGastoComunRepository.save(itemGastoComun);
     }
@@ -43,6 +58,11 @@ public class GastoComunServiceImpl implements GastoComunService {
     @Override
     public List<ItemGastoComun> getItems() {
         return itemGastoComunRepository.findAll();
+    }
+
+    @Override
+    public List<PlantillaGastosOrdinarios> getPlantillaGastosOrdinarios() {
+        return plantillaGastosOrdinariosRepository.findByActivoEqualsTrue();
     }
 
 

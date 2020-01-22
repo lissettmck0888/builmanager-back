@@ -9,7 +9,7 @@ import java.util.List;
 public class Asignacion {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int idAsignacion;
+    private Integer idAsignacion;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idpersona")
     private Persona persona;
@@ -37,7 +37,7 @@ public class Asignacion {
     public Asignacion() {
     }
 
-    public Asignacion(int idAsignacion, Persona persona,  String tipoAsignacion, String estado, LocalDate fechaAsignacion) {
+    public Asignacion(Integer idAsignacion, Persona persona,  String tipoAsignacion, String estado, LocalDate fechaAsignacion) {
         this.idAsignacion = idAsignacion;
         this.persona = persona;
 
@@ -46,11 +46,11 @@ public class Asignacion {
         this.fechaAsignacion = fechaAsignacion;
     }
 
-    public int getIdAsignacion() {
+    public Integer getIdAsignacion() {
         return idAsignacion;
     }
 
-    public void setIdAsignacion(int idAsignacion) {
+    public void setIdAsignacion(Integer idAsignacion) {
         this.idAsignacion = idAsignacion;
     }
 

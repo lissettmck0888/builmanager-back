@@ -8,7 +8,7 @@ public class ItemGastoComun {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iditemgastocomun")
-    private int idItemGastoComun;
+    private Integer idItemGastoComun;
     @Column
     private String nombre;
     @Column
@@ -38,11 +38,11 @@ public class ItemGastoComun {
         this.descripcion = descripcion;
     }
 
-    public int getIdItemGastoComun() {
+    public Integer getIdItemGastoComun() {
         return idItemGastoComun;
     }
 
-    public void setIdItemGastoComun(int idItemGastoComun) {
+    public void setIdItemGastoComun(Integer idItemGastoComun) {
         this.idItemGastoComun = idItemGastoComun;
     }
 }

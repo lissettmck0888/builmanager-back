@@ -10,7 +10,7 @@ import java.util.Set;
 public class Permiso {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idpermiso")
-    private int idPermiso;
+    private Integer idPermiso;
     @Column
     private String codigo;
     @Column
@@ -23,18 +23,18 @@ public class Permiso {
     public Permiso() {
     }
 
-    public Permiso(int idPermiso, String codigo, String nombre, String descripcion) {
+    public Permiso(Integer idPermiso, String codigo, String nombre, String descripcion) {
         this.idPermiso = idPermiso;
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
-    public int getIdPermiso() {
+    public Integer getIdPermiso() {
         return idPermiso;
     }
 
-    public void setIdPermiso(int idPermiso) {
+    public void setIdPermiso(Integer idPermiso) {
         this.idPermiso = idPermiso;
     }
 

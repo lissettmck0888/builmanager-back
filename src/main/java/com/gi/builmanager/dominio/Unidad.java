@@ -5,31 +5,32 @@ import javax.persistence.*;
 @Table(name = "unidad")
 @Entity
 public class Unidad {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="idunidad")
-    private int idUnidad;
+    private Integer idUnidad;
     @ManyToOne @JoinColumn(name = "idtipounidad")
     private TipoUnidad tipoUnidad;
     @Column
     private String descripcion;
     @Column
-    private int piso;
+    private Integer piso;
     @Column
     private String numero;
     @Column
     private String sector;
     @Column
-    private float prorrateo;
+    private Double rating;
 
     public Unidad() {
     }
 
-    public Unidad(String descripcion, int piso, String numero, String sector, float prorrateo) {
+    public Unidad(String descripcion, Integer piso, String numero, String sector, Double rating) {
         this.descripcion = descripcion;
         this.piso = piso;
         this.numero = numero;
         this.sector = sector;
-        this.prorrateo = prorrateo;
+        this.rating = rating;
     }
 
     public String getDescripcion() {
@@ -40,11 +41,11 @@ public class Unidad {
         this.descripcion = descripcion;
     }
 
-    public int getPiso() {
+    public Integer getPiso() {
         return piso;
     }
 
-    public void setPiso(int piso) {
+    public void setPiso(Integer piso) {
         this.piso = piso;
     }
 
@@ -64,19 +65,19 @@ public class Unidad {
         this.sector = sector;
     }
 
-    public float getProrrateo() {
-        return prorrateo;
+    public Double getRating() {
+        return rating;
     }
 
-    public void setProrrateo(float prorrateo) {
-        this.prorrateo = prorrateo;
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
-    public int getIdUnidad() {
+    public Integer getIdUnidad() {
         return idUnidad;
     }
 
-    public void setIdUnidad(int idUnidad) {
+    public void setIdUnidad(Integer idUnidad) {
         this.idUnidad = idUnidad;
     }
 

@@ -6,14 +6,14 @@ import javax.persistence.*;
 public class TipoMorador {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idtipomorador")
-    private int idTipoMorador;
+    private Integer idTipoMorador;
     @Column
     private String nombre;
 
     public TipoMorador() {
     }
 
-    public TipoMorador(int idTipoMorador, String nombre) {
+    public TipoMorador(Integer idTipoMorador, String nombre) {
         this.idTipoMorador = idTipoMorador;
         this.nombre = nombre;
     }
@@ -26,11 +26,11 @@ public class TipoMorador {
         this.nombre = nombre;
     }
 
-    public int getIdTipoMorador() {
+    public Integer getIdTipoMorador() {
         return idTipoMorador;
     }
 
-    public void setIdTipoMorador(int idTipoMorador) {
+    public void setIdTipoMorador(Integer idTipoMorador) {
         this.idTipoMorador = idTipoMorador;
     }
 }
