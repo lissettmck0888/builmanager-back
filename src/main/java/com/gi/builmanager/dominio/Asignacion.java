@@ -2,11 +2,13 @@ package com.gi.builmanager.dominio;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "asignacion")
 @Entity
 public class Asignacion {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer idAsignacion;
@@ -19,19 +21,16 @@ public class Asignacion {
     private String estado;
     @Column
     private LocalDate fechaAsignacion;
-    @ManyToMany
-    @JoinTable(
-            name = "relacion_asignacion_unidad",
-            joinColumns={@JoinColumn(name="idasignacion")},
-            inverseJoinColumns={@JoinColumn(name="idunidad")})
-    private List<Unidad> unidades;
 
-    public List<Unidad> getUnidades() {
-        return unidades;
+    @OneToMany(mappedBy = "asignacion", cascade = CascadeType.ALL)
+    private List<AsignacionUnidad> asignacionUnidads = new ArrayList<>();
+
+    public List<AsignacionUnidad> getAsignacionUnidads() {
+        return asignacionUnidads;
     }
 
-    public void setUnidades(List<Unidad> unidades) {
-        this.unidades = unidades;
+    public void setAsignacionUnidads(List<AsignacionUnidad> asignacionUnidads) {
+        this.asignacionUnidads = asignacionUnidads;
     }
 
     public Asignacion() {

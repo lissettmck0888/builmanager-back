@@ -3,8 +3,11 @@ package com.gi.builmanager.repositorio.projection;
 import com.gi.builmanager.dominio.TipoUnidad;
 
 public interface UnidadView {
-    int getIdUnidad();
+    Integer getIdUnidad();
     TipoUnidad getTipoUnidad();
-    int getNumero();
-    float getProrrateo();
+    String getNumero();
+    Integer getPiso();
+    String getSector();
+    Double getMetrosCuadrados();
+    Boolean getAfectoProrrateo();
 }

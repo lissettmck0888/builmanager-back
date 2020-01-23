@@ -1,9 +1,6 @@
 package com.gi.builmanager.config;
 
-import com.gi.builmanager.converter.GastoComunConverter;
-import com.gi.builmanager.converter.GastoComunDtoConverter;
-import com.gi.builmanager.converter.RolConverter;
-import com.gi.builmanager.converter.UsuarioConverter;
+import com.gi.builmanager.converter.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,5 +14,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addConverter(new GastoComunConverter());
         registry.addConverter(new RolConverter());
         registry.addConverter(new UsuarioConverter());
+        registry.addConverter(new AsignacionConverter());
+        registry.addConverter(new UnidadDtoConverter());
     }
 }

@@ -2,6 +2,7 @@ package com.gi.builmanager.service.impl;
 
 import com.gi.builmanager.dominio.Asignacion;
 import com.gi.builmanager.repositorio.AsignacionRepository;
+import com.gi.builmanager.repositorio.projection.AsignacionView;
 import com.gi.builmanager.service.AsignacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,8 +20,8 @@ public class AsignacionServiceImpl implements AsignacionService {
     }
 
     @Override
-    public List<Asignacion> getAll() {
-        return asignacionRepository.findAll();
+    public List<AsignacionView> getAll() {
+        return asignacionRepository.findAllProjectedBy();
     }
 
 }
