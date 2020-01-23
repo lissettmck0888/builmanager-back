@@ -15,7 +15,7 @@ public class AsignacionConverter implements Converter<AsignacionDto, Asignacion>
     public Asignacion convert(AsignacionDto dto) {
         Asignacion asignacion = new Asignacion();
         asignacion.setIdAsignacion(dto.getIdAsignacion());
-        asignacion.setIdPersona(dto.getPersona());
+        asignacion.setPersona(dto.getPersona());
         asignacion.setEstado(dto.getEstado());
         asignacion.setTipoAsignacion(dto.getTipoAsignacion());
         asignacion.setAsignacionUnidads(toAsignacionUnidadList(dto.getAsignacionUnidades(), asignacion));

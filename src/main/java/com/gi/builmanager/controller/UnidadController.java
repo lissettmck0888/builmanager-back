@@ -4,6 +4,7 @@ import com.gi.builmanager.dominio.Unidad;
 import com.gi.builmanager.dto.UnidadDto;
 import com.gi.builmanager.repositorio.projection.UnidadView;
 import com.gi.builmanager.service.UnidadService;
+import com.gi.builmanager.util.BuilManagerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
@@ -23,25 +24,32 @@ public class UnidadController {
 
     @GetMapping("/sin-asignacion/unidad-copropiedad")
     public List<UnidadDto> getUnidadesCopropiedadDisponiblesSinPropietario() {
-        return (List<UnidadDto>) conversionService.convert(
+        return BuilManagerUtils.convertList(
                 unidadService.getUnidadesDisponiblesSinPropietario(true),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Unidad.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UnidadDto.class)));
+                Unidad.class,
+                UnidadDto.class,
+                conversionService
+        );
     }
 
     @GetMapping("/sin-asignacion/")
     public List<UnidadDto> getUnidadesDisponiblesSinPropietario() {
-        return (List<UnidadDto>) conversionService.convert(
+        return BuilManagerUtils.convertList(
                 unidadService.getUnidadesDisponiblesSinPropietario(false),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Unidad.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UnidadDto.class)));
+                Unidad.class,
+                UnidadDto.class,
+                conversionService
+        );
     }
 
     @GetMapping("/disponibles")
     public List<UnidadDto> getUnidadesDisponiblesParaArriendo() {
-        return (List<UnidadDto>) conversionService.convert(
+        return BuilManagerUtils.convertList(
                 unidadService.getUnidadesDisponiblesParaArriendo(),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Unidad.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UnidadDto.class)));
+                Unidad.class,
+                UnidadDto.class,
+                conversionService
+        );
     }
+
 }

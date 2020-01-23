@@ -5,10 +5,10 @@ import com.gi.builmanager.repositorio.AsignacionRepository;
 import com.gi.builmanager.repositorio.projection.AsignacionView;
 import com.gi.builmanager.service.AsignacionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class AsignacionServiceImpl implements AsignacionService {
     @Autowired
@@ -16,6 +16,12 @@ public class AsignacionServiceImpl implements AsignacionService {
 
     @Override
     public Asignacion save(Asignacion asignacion) {
+        asignacion.setTotalMetrosCuadradosProrrateables(0D);
+        asignacion.getAsignacionUnidads().stream().forEach(asignacionUnidad -> {
+            asignacion.setTotalMetrosCuadradosProrrateables(
+                    asignacion.getTotalMetrosCuadradosProrrateables() +
+                            (asignacionUnidad.getUnidad().getAfectoProrrateo() ? asignacionUnidad.getUnidad().getMetrosCuadrados() : 0));
+        });
         return asignacionRepository.save(asignacion);
     }
 

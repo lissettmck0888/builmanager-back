@@ -7,6 +7,7 @@ import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
 import com.gi.builmanager.repositorio.GastoComunRepository;
 import com.gi.builmanager.repositorio.ItemGastoComunRepository;
 import com.gi.builmanager.repositorio.PlantillaGastosOrdinariosRepository;
+import com.gi.builmanager.repositorio.UnidadRepository;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 import com.gi.builmanager.service.GastoComunService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class GastoComunServiceImpl implements GastoComunService {
     private ItemGastoComunRepository itemGastoComunRepository;
     @Autowired
     private PlantillaGastosOrdinariosRepository plantillaGastosOrdinariosRepository;
+    @Autowired
+    private UnidadRepository unidadRepository;
 
     @Override
     public GastoComun actualizar(GastoComun gastoComun) {

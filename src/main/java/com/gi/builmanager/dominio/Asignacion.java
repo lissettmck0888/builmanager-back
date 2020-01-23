@@ -22,6 +22,8 @@ public class Asignacion {
     @Column
     private LocalDate fechaAsignacion;
 
+    private Double totalMetrosCuadradosProrrateables;
+
     @OneToMany(mappedBy = "asignacion", cascade = CascadeType.ALL)
     private List<AsignacionUnidad> asignacionUnidads = new ArrayList<>();
 
@@ -57,10 +59,17 @@ public class Asignacion {
         return persona;
     }
 
-    public void setIdPersona(Persona persona) {
+    public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
+    public Double getTotalMetrosCuadradosProrrateables() {
+        return totalMetrosCuadradosProrrateables;
+    }
+
+    public void setTotalMetrosCuadradosProrrateables(Double totalMetrosCuadradosProrrateables) {
+        this.totalMetrosCuadradosProrrateables = totalMetrosCuadradosProrrateables;
+    }
 
     public String getTipoAsignacion() {
         return tipoAsignacion;

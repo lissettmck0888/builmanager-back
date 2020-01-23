@@ -4,13 +4,12 @@ import com.gi.builmanager.dominio.GastoComun;
 import com.gi.builmanager.dominio.ItemGastoComun;
 import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
 import com.gi.builmanager.dto.GastoComunDto;
-import com.gi.builmanager.repositorio.projection.GastoComunView;
 import com.gi.builmanager.service.GastoComunService;
+import com.gi.builmanager.util.BuilManagerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,10 +38,12 @@ public class GastoComunController {
 
     @GetMapping("/")
     public List<GastoComunDto> getGastoComun(){
-        return (List<GastoComunDto>) conversionService.convert(
+        return BuilManagerUtils.convertList(
                 gastoComunService.getGastoComun(),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(GastoComun.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(GastoComunDto.class)));
+                GastoComun.class,
+                GastoComunDto.class,
+                conversionService
+        );
     }
 
     @PostMapping("/")
