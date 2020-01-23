@@ -25,6 +25,9 @@ public class Unidad {
     private Double metrosCuadrados;
     @Column(name = "afecto_prorrateo")
     private Boolean afectoProrrateo;
+    @Column(name = "es_unidad_copropiedad")
+    private Boolean esUnidadCopropiedad;
+
 
     @OneToMany(mappedBy = "unidad", cascade = CascadeType.ALL)
     private List<AsignacionUnidad> asignacionUnidads = new ArrayList<>();
@@ -110,5 +113,13 @@ public class Unidad {
 
     public void setAsignacionUnidads(List<AsignacionUnidad> asignacionUnidads) {
         this.asignacionUnidads = asignacionUnidads;
+    }
+
+    public Boolean getEsUnidadCopropiedad() {
+        return esUnidadCopropiedad;
+    }
+
+    public void setEsUnidadCopropiedad(Boolean esUnidadCopropiedad) {
+        this.esUnidadCopropiedad = esUnidadCopropiedad;
     }
 }

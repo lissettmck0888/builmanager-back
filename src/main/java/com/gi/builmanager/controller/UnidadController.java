@@ -21,13 +21,20 @@ public class UnidadController {
     @Autowired
     private UnidadService unidadService;
 
-    @GetMapping("/sin-asignacion")
-    public List<UnidadDto> getUnidadesDisponiblesSinPropietario() {
+    @GetMapping("/sin-asignacion/unidad-copropiedad")
+    public List<UnidadDto> getUnidadesCopropiedadDisponiblesSinPropietario() {
         return (List<UnidadDto>) conversionService.convert(
-                unidadService.getUnidadesDisponiblesSinPropietario(),
+                unidadService.getUnidadesDisponiblesSinPropietario(true),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Unidad.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UnidadDto.class)));
+    }
 
+    @GetMapping("/sin-asignacion/")
+    public List<UnidadDto> getUnidadesDisponiblesSinPropietario() {
+        return (List<UnidadDto>) conversionService.convert(
+                unidadService.getUnidadesDisponiblesSinPropietario(false),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Unidad.class)),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UnidadDto.class)));
     }
 
     @GetMapping("/disponibles")

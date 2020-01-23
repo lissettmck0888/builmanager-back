@@ -11,9 +11,10 @@ import java.util.List;
 public class UnidadServiceImpl implements UnidadService {
     @Autowired
     private UnidadRepository unidadRepository;
+
     @Override
-    public List<Unidad> getUnidadesDisponiblesSinPropietario() {
-        return unidadRepository.getUnidadesDisponiblesSinPropietario();
+    public List<Unidad> getUnidadesDisponiblesSinPropietario(Boolean unidadCopropiedad) {
+        return unidadRepository.getUnidadesDisponiblesSinPropietario(unidadCopropiedad);
     }
 
     @Override

@@ -2,8 +2,10 @@ package com.gi.builmanager.repositorio;
 
 import com.gi.builmanager.dominio.Unidad;
 import com.gi.builmanager.repositorio.projection.UnidadView;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,8 +15,8 @@ public interface UnidadRepository extends JpaRepository<Unidad,Integer> {
 
     @Query(value =
             "select u from " +
-            "Unidad u where u not in (select au.unidad from AsignacionUnidad au)")
-    List<Unidad> getUnidadesDisponiblesSinPropietario();
+            "Unidad u where u not in (select au.unidad from AsignacionUnidad au) and u.esUnidadCopropiedad=:unidadCopropiedad")
+    List<Unidad> getUnidadesDisponiblesSinPropietario(@Param("unidadCopropiedad") Boolean unidadCopropiedad);
 
     @Query(value = "select\n" +
             "*\n" +
