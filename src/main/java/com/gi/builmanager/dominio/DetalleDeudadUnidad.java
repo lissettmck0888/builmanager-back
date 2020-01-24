@@ -29,7 +29,7 @@ public class DetalleDeudadUnidad {
     @ManyToOne @JoinColumn(name = "idgastocomun")
     private GastoComun gastoComun;
     @OneToMany(mappedBy = "detalleDeudadUnidad")
-    private List<Abonos> listadosAbonos;
+    private List<Abono> listadosAbonos;
 
     public DetalleDeudadUnidad() {
     }

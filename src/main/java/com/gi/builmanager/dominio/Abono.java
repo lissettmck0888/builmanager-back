@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Table (name = "abono")
 @Entity
-public class Abonos {
+public class Abono {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
@@ -17,7 +17,7 @@ public class Abonos {
     @JoinColumn(name = "iddetalledeuda")
     private DetalleDeudadUnidad detalleDeudadUnidad;
 
-    public Abonos() {
+    public Abono() {
     }
 
     public int getId() {
