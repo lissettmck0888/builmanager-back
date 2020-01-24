@@ -1,21 +1,22 @@
 package com.gi.builmanager.service.impl;
 
 import com.gi.builmanager.constants.EstadoGastoComunEnum;
-import com.gi.builmanager.dominio.GastoComun;
-import com.gi.builmanager.dominio.ItemGastoComun;
-import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
-import com.gi.builmanager.repositorio.GastoComunRepository;
-import com.gi.builmanager.repositorio.ItemGastoComunRepository;
-import com.gi.builmanager.repositorio.PlantillaGastosOrdinariosRepository;
-import com.gi.builmanager.repositorio.UnidadRepository;
+import com.gi.builmanager.dominio.*;
+import com.gi.builmanager.repositorio.*;
+import com.gi.builmanager.repositorio.projection.AsignacionView;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 import com.gi.builmanager.service.GastoComunService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
+
 @Service
 public class GastoComunServiceImpl implements GastoComunService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GastoComunServiceImpl.class);
 
     @Autowired
     private GastoComunRepository gastoComunRepository;
@@ -25,6 +26,10 @@ public class GastoComunServiceImpl implements GastoComunService {
     private PlantillaGastosOrdinariosRepository plantillaGastosOrdinariosRepository;
     @Autowired
     private UnidadRepository unidadRepository;
+    @Autowired
+    private AsignacionRepository asignacionRepository;
+    @Autowired
+    private DetalleDeudaUnidadRepository detalleDeudaUnidadRepository;
 
     @Override
     public GastoComun actualizar(GastoComun gastoComun) {
@@ -49,8 +54,54 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
-    public GastoComun cerrarGastoComunPeriodo() {
-        return null;
+    public List<DetalleDeudadUnidad> prorratearGastosPeriodo() {
+        GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre); // cerrarGastoComun();
+        Double totalM2Prorrateables = unidadRepository.totalMetrosCuadradosProrrateables();
+        //Double totalM2ProrrateablesAsignados = unidadRepository.totalMetrosCuadradosProrrateablesAsignados();
+        Double totalM2ProrrateablesNoAsignados = unidadRepository.totalMetrosCuadradosProrrateablesNoAsignados();
+
+        Asignacion asignacionCondominio = new Asignacion();//TODO crear fake asignacion para unidades sin propietario
+        Map<Asignacion, Double> factorProrrateoMap = new HashMap<>();
+        factorProrrateoMap.put(asignacionCondominio, totalM2ProrrateablesNoAsignados / totalM2Prorrateables);
+
+        List<DetalleDeudadUnidad> detalleDeudadUnidadList = new ArrayList<>();
+        List<Asignacion> asignaciones = asignacionRepository.findAll();
+        asignaciones.stream().forEach(asignacionView -> {
+            Double factorProrrateo = asignacionView.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
+            factorProrrateoMap.put(asignacionView, factorProrrateo) ;
+
+            DetalleDeudadUnidad detalleDeudadUnidad = new DetalleDeudadUnidad();
+            detalleDeudadUnidad.setGastoComun(gastoComunActual);
+            Optional<AsignacionUnidad> opt = asignacionView.getAsignacionUnidads()
+                    .stream().filter(asignacionUnidad -> asignacionUnidad.getUnidadCopropiedad()).findFirst();
+            if(opt.isPresent()){
+                detalleDeudadUnidad.setUnidad(opt.get().getUnidad());
+            }
+            detalleDeudadUnidad.setFactorProrrateo(factorProrrateo);
+            detalleDeudadUnidad.setMonto(gastoComunActual.getMontoTotal() * factorProrrateo);
+            detalleDeudadUnidad.setEstado("Pendiente");
+            detalleDeudadUnidadList.add(detalleDeudaUnidadRepository.save(detalleDeudadUnidad));
+        });
+
+        //todo borrar, solo para verificar factor prorrateo
+        /*Double unidadFactor = 0D;
+        for(Double factor: factorProrrateoMap.values()){
+            unidadFactor += factor;
+        }*/
+
+        return detalleDeudadUnidadList;
+    }
+
+    @Override
+    public GastoComun cerrarGastoComun() {
+        GastoComun gastoComun = gastoComunRepository.findByEstado(EstadoGastoComunEnum.OPENED.nombre);
+        Double total = gastoComun.getListaDetalleGastoComun()
+                .stream()
+                .map(detalleGastoComun -> detalleGastoComun.getMonto())
+                .reduce(0D, (subtotal,element)->subtotal + element);
+        gastoComun.setMontoTotal(total);
+        gastoComun.setEstado(EstadoGastoComunEnum.CURRENT.nombre);
+        return gastoComunRepository.save(gastoComun);
     }
 
     @Override

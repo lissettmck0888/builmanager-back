@@ -6,10 +6,13 @@ import java.time.LocalDate;
 @Table(name = "detalle_deuda_unidad")
 @Entity
 public class DetalleDeudadUnidad {
-    @Id @Column(name = "iddetalledeuda")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "iddetalledeuda")
     private Integer idDetalleDeudaUnidad;
     @Column
     private Double monto;
+    @Column
+    private Double factorProrrateo;
     @Column
     private String estado;
     @Column
@@ -37,6 +40,14 @@ public class DetalleDeudadUnidad {
 
     public void setIdDetalleDeudaUnidad(Integer idDetalleDeudaUnidad) {
         this.idDetalleDeudaUnidad = idDetalleDeudaUnidad;
+    }
+
+    public Double getFactorProrrateo() {
+        return factorProrrateo;
+    }
+
+    public void setFactorProrrateo(Double factorProrrateo) {
+        this.factorProrrateo = factorProrrateo;
     }
 
     public Double getMonto() {

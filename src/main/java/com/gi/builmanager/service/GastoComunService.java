@@ -1,5 +1,6 @@
 package com.gi.builmanager.service;
 
+import com.gi.builmanager.dominio.DetalleDeudadUnidad;
 import com.gi.builmanager.dominio.GastoComun;
 import com.gi.builmanager.dominio.ItemGastoComun;
 import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
@@ -12,7 +13,8 @@ public interface GastoComunService {
     GastoComun actualizar(GastoComun gastoComun);
     GastoComun getGastoComunAbierto();
     List<GastoComun> getGastoComun();
-    GastoComun cerrarGastoComunPeriodo();
+    GastoComun cerrarGastoComun();
+    List<DetalleDeudadUnidad> prorratearGastosPeriodo();
 
     ItemGastoComun guardarItem(ItemGastoComun itemGastoComun);
     List<ItemGastoComun> getItems();

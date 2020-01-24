@@ -28,7 +28,11 @@ public class GastoComunController {
 
     @PostMapping("/cerrar")
     public GastoComunDto cerrarGastoComunPeriodo() {
-        return conversionService.convert(gastoComunService.cerrarGastoComunPeriodo(), GastoComunDto.class);
+        return conversionService.convert(gastoComunService.prorratearGastosPeriodo(), GastoComunDto.class);
+    }
+
+    public void prorratearGastoComunPeriodo() {
+        gastoComunService.prorratearGastosPeriodo();
     }
 
     @GetMapping("/abierto")
