@@ -2,6 +2,7 @@ package com.gi.builmanager.dominio;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "detalle_deuda_unidad")
 @Entity
@@ -27,6 +28,8 @@ public class DetalleDeudadUnidad {
     private  Unidad unidad;
     @ManyToOne @JoinColumn(name = "idgastocomun")
     private GastoComun gastoComun;
+    @OneToMany(mappedBy = "detalleDeudadUnidad")
+    private List<Abonos> listadosAbonos;
 
     public DetalleDeudadUnidad() {
     }
