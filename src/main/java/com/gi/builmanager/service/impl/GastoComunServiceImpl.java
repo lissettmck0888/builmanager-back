@@ -83,6 +83,8 @@ public class GastoComunServiceImpl implements GastoComunService {
             detalleDeudadUnidadList.add(detalleDeudaUnidadRepository.save(detalleDeudadUnidad));
         });
 
+        gastoComunActual.setEstado(EstadoGastoComunEnum.CLOSED.nombre);
+        gastoComunRepository.save(gastoComunActual);
         //todo borrar, solo para verificar factor prorrateo
         /*Double unidadFactor = 0D;
         for(Double factor: factorProrrateoMap.values()){
@@ -93,8 +95,8 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
-    public GastoComun cerrarGastoComun() {
-        GastoComun gastoComun = gastoComunRepository.findByEstado(EstadoGastoComunEnum.OPENED.nombre);
+    public GastoComun cerrarGastoComun(GastoComun gastoComun) {
+        //GastoComun gastoComun = gastoComunRepository.findByEstado(EstadoGastoComunEnum.OPENED.nombre);
         Double total = gastoComun.getListaDetalleGastoComun()
                 .stream()
                 .map(detalleGastoComun -> detalleGastoComun.getMonto())

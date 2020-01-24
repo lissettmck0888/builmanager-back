@@ -136,10 +136,10 @@ values ('Lissett', 'Muñoz','Cortez', '23475188-3', '1984-01-08', 'Ecuatoriana',
 insert into persona (nombres, apellido_paterno, apellido_materno, run, fecha_nacimiento, nacionalidad, telefono, correo)
 values ('Victor', 'Morales','Rosales', '15775152-2', '1984-03-29', 'Chilena', '765423658', 'vmorales@gmail.com');
 
-insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-10-10',1,'propietario',);
-insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-04-22',2,'propietario');
-insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-11-20',3,'propietario');
-insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-08-01',4,'propietario');
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-10-10',1,'propietario',35);
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-04-22',2,'propietario',50);
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-11-20',3,'propietario',42);
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-08-01',4,'propietario',50);
 
 insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(1,1, true);
 insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(1,27, false);

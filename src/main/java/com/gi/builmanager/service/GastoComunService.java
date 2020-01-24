@@ -13,7 +13,7 @@ public interface GastoComunService {
     GastoComun actualizar(GastoComun gastoComun);
     GastoComun getGastoComunAbierto();
     List<GastoComun> getGastoComun();
-    GastoComun cerrarGastoComun();
+    GastoComun cerrarGastoComun(GastoComun gastoComun);
     List<DetalleDeudadUnidad> prorratearGastosPeriodo();
 
     ItemGastoComun guardarItem(ItemGastoComun itemGastoComun);

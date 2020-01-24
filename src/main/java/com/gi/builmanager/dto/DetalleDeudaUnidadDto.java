@@ -6,6 +6,8 @@ public class DetalleDeudaUnidadDto {
 
     private Integer idDetalleDeudaUnidad;
     private Double monto;
+    private Double montoAnterior;
+    private Double montoTotal;
     private Double factorProrrateo;
     private String estado;
     private LocalDate fechaPago;
@@ -18,6 +20,22 @@ public class DetalleDeudaUnidadDto {
 
     public void setIdDetalleDeudaUnidad(Integer idDetalleDeudaUnidad) {
         this.idDetalleDeudaUnidad = idDetalleDeudaUnidad;
+    }
+
+    public Double getMontoAnterior() {
+        return montoAnterior;
+    }
+
+    public void setMontoAnterior(Double montoAnterior) {
+        this.montoAnterior = montoAnterior;
+    }
+
+    public Double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(Double montoTotal) {
+        this.montoTotal = montoTotal;
     }
 
     public Double getMonto() {

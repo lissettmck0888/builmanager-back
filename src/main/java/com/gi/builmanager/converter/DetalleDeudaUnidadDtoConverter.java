@@ -17,10 +17,12 @@ public class DetalleDeudaUnidadDtoConverter implements Converter<DetalleDeudadUn
         dto.setFechaPago(detalleDeudadUnidad.getFechaPago());
         dto.setGastoComun(gastoComunDtoConverter.convert(detalleDeudadUnidad.getGastoComun()));
         dto.setIdDetalleDeudaUnidad(detalleDeudadUnidad.getIdDetalleDeudaUnidad());
+        dto.setMontoAnterior(detalleDeudadUnidad.getMontoAnterior());
         dto.setMonto(detalleDeudadUnidad.getMonto());
+        dto.setMontoTotal(detalleDeudadUnidad.getTotal());
         dto.setUnidad(unidadDtoConverter.convert(detalleDeudadUnidad.getUnidad()));
         dto.setIdDetalleDeudaUnidad(detalleDeudadUnidad.getIdDetalleDeudaUnidad());
-        return null;
+        return dto;
     }
 
 

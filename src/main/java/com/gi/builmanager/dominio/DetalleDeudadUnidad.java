@@ -10,7 +10,11 @@ public class DetalleDeudadUnidad {
     @Column(name = "iddetalledeuda")
     private Integer idDetalleDeudaUnidad;
     @Column
+    private Double montoAnterior;
+    @Column
     private Double monto;
+    @Column
+    private Double total;
     @Column
     private Double factorProrrateo;
     @Column
@@ -48,6 +52,22 @@ public class DetalleDeudadUnidad {
 
     public void setFactorProrrateo(Double factorProrrateo) {
         this.factorProrrateo = factorProrrateo;
+    }
+
+    public Double getMontoAnterior() {
+        return montoAnterior;
+    }
+
+    public void setMontoAnterior(Double montoAnterior) {
+        this.montoAnterior = montoAnterior;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public Double getMonto() {
