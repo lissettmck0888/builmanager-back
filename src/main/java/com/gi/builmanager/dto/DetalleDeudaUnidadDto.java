@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class DetalleDeudaUnidadDto {
 
     private Integer idDetalleDeudaUnidad;
+    private String responsable;
     private Double monto;
     private Double montoAnterior;
     private Double montoTotal;
@@ -20,6 +21,14 @@ public class DetalleDeudaUnidadDto {
 
     public void setIdDetalleDeudaUnidad(Integer idDetalleDeudaUnidad) {
         this.idDetalleDeudaUnidad = idDetalleDeudaUnidad;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
     }
 
     public Double getMontoAnterior() {

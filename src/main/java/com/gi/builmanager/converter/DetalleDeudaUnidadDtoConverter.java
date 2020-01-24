@@ -12,6 +12,7 @@ public class DetalleDeudaUnidadDtoConverter implements Converter<DetalleDeudadUn
     @Override
     public DetalleDeudaUnidadDto convert(DetalleDeudadUnidad detalleDeudadUnidad) {
         DetalleDeudaUnidadDto dto = new DetalleDeudaUnidadDto();
+        dto.setResponsable(detalleDeudadUnidad.getResponsable());
         dto.setEstado(detalleDeudadUnidad.getEstado());
         dto.setFactorProrrateo(detalleDeudadUnidad.getFactorProrrateo());
         dto.setFechaPago(detalleDeudadUnidad.getFechaPago());

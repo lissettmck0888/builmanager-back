@@ -10,6 +10,8 @@ public class DetalleDeudadUnidad {
     @Column(name = "iddetalledeuda")
     private Integer idDetalleDeudaUnidad;
     @Column
+    private String responsable;
+    @Column
     private Double montoAnterior;
     @Column
     private Double monto;
@@ -36,6 +38,14 @@ public class DetalleDeudadUnidad {
         this.fechaPago = fechaPago;
         this.unidad = unidad;
         this.gastoComun = gastoComun;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
     }
 
     public Integer getIdDetalleDeudaUnidad() {

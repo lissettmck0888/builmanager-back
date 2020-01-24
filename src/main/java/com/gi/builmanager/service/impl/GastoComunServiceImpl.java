@@ -66,19 +66,28 @@ public class GastoComunServiceImpl implements GastoComunService {
 
         List<DetalleDeudadUnidad> detalleDeudadUnidadList = new ArrayList<>();
         List<Asignacion> asignaciones = asignacionRepository.findAll();
-        asignaciones.stream().forEach(asignacionView -> {
-            Double factorProrrateo = asignacionView.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
-            factorProrrateoMap.put(asignacionView, factorProrrateo) ;
+        asignaciones.stream().forEach(asignacion -> {
+            Double factorProrrateo = asignacion.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
+            factorProrrateoMap.put(asignacion, factorProrrateo) ;
 
             DetalleDeudadUnidad detalleDeudadUnidad = new DetalleDeudadUnidad();
+            detalleDeudadUnidad.setResponsable(
+                    String.format("%s %s %s",
+                            asignacion.getPersona().getNombres(),
+                            asignacion.getPersona().getApellidoPaterno(),
+                            asignacion.getPersona().getApellidoMaterno())
+            );
             detalleDeudadUnidad.setGastoComun(gastoComunActual);
-            Optional<AsignacionUnidad> opt = asignacionView.getAsignacionUnidads()
+            Optional<AsignacionUnidad> opt = asignacion.getAsignacionUnidads()
                     .stream().filter(asignacionUnidad -> asignacionUnidad.getUnidadCopropiedad()).findFirst();
             if(opt.isPresent()){
                 detalleDeudadUnidad.setUnidad(opt.get().getUnidad());
             }
             detalleDeudadUnidad.setFactorProrrateo(factorProrrateo);
             detalleDeudadUnidad.setMonto(gastoComunActual.getMontoTotal() * factorProrrateo);
+            // TODO RECUPERAR MONTO ANTERIOR
+            //detalleDeudadUnidad.setMontoAnterior();
+            detalleDeudadUnidad.setTotal(detalleDeudadUnidad.getMonto());
             detalleDeudadUnidad.setEstado("Pendiente");
             detalleDeudadUnidadList.add(detalleDeudaUnidadRepository.save(detalleDeudadUnidad));
         });
@@ -96,13 +105,17 @@ public class GastoComunServiceImpl implements GastoComunService {
 
     @Override
     public GastoComun cerrarGastoComun(GastoComun gastoComun) {
-        //GastoComun gastoComun = gastoComunRepository.findByEstado(EstadoGastoComunEnum.OPENED.nombre);
         Double total = gastoComun.getListaDetalleGastoComun()
                 .stream()
                 .map(detalleGastoComun -> detalleGastoComun.getMonto())
                 .reduce(0D, (subtotal,element)->subtotal + element);
         gastoComun.setMontoTotal(total);
         gastoComun.setEstado(EstadoGastoComunEnum.CURRENT.nombre);
+
+        GastoComun nuevoGastoComun = new GastoComun();
+        nuevoGastoComun.setEstado(EstadoGastoComunEnum.OPENED.nombre);
+        nuevoGastoComun.setPeriodo(gastoComun.getPeriodo().plusMonths(1));
+        gastoComunRepository.save(nuevoGastoComun);
         return gastoComunRepository.save(gastoComun);
     }
 
