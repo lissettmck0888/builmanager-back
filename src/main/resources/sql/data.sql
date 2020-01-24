@@ -136,15 +136,26 @@ values ('Lissett', 'Muñoz','Cortez', '23475188-3', '1984-01-08', 'Ecuatoriana',
 insert into persona (nombres, apellido_paterno, apellido_materno, run, fecha_nacimiento, nacionalidad, telefono, correo)
 values ('Victor', 'Morales','Rosales', '15775152-2', '1984-03-29', 'Chilena', '765423658', 'vmorales@gmail.com');
 
---insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion) values('habitado','2019-10-10',1,'arriendo');
---insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion) values('habitado','2019-04-22',2,'propietario');
---insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion) values('vacio','2019-11-20',1,'arriendo');
---insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion) values('vacio','2019-08-01',2,'propietario');
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-10-10',1,'propietario',);
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-04-22',2,'propietario');
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-11-20',3,'propietario');
+insert into asignacion(estado, fecha_asignacion,idpersona,tipo_asignacion,total_metros_cuadrados_prorrateables) values('habitado','2019-08-01',4,'propietario');
 
---insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(1,1, true);
---insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(2,2, true);
---insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(3,3, true);
---insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(4,4, true);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(1,1, true);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(1,27, false);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(1,53, false);
+
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(2,2, true);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(2,28, false);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(2,54, false);
+
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(3,3, true);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(3,29, false);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(3,55, false);
+
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(4,4, true);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(4,30, false);
+insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(4,56, false);
 
 insert into gasto_comun (periodo, estado) values('2020-01-01', 'Abierto');
 

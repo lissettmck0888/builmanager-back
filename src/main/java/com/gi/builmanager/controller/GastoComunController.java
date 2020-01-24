@@ -1,8 +1,10 @@
 package com.gi.builmanager.controller;
 
+import com.gi.builmanager.dominio.DetalleDeudadUnidad;
 import com.gi.builmanager.dominio.GastoComun;
 import com.gi.builmanager.dominio.ItemGastoComun;
 import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
+import com.gi.builmanager.dto.DetalleDeudaUnidadDto;
 import com.gi.builmanager.dto.GastoComunDto;
 import com.gi.builmanager.service.GastoComunService;
 import com.gi.builmanager.util.BuilManagerUtils;
@@ -28,11 +30,13 @@ public class GastoComunController {
 
     @PostMapping("/cerrar")
     public GastoComunDto cerrarGastoComunPeriodo() {
-        return conversionService.convert(gastoComunService.prorratearGastosPeriodo(), GastoComunDto.class);
+        return conversionService.convert(gastoComunService.cerrarGastoComun(), GastoComunDto.class);
     }
 
-    public void prorratearGastoComunPeriodo() {
-        gastoComunService.prorratearGastosPeriodo();
+    @PostMapping("/prorratear")
+    public List<DetalleDeudaUnidadDto> prorratearGastoComunPeriodo() {
+        return BuilManagerUtils.convertList(gastoComunService.prorratearGastosPeriodo(),
+                DetalleDeudadUnidad.class, DetalleDeudaUnidadDto.class, conversionService);
     }
 
     @GetMapping("/abierto")

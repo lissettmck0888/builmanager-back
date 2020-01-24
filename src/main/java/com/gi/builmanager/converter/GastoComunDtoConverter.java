@@ -12,6 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GastoComunDtoConverter implements Converter<GastoComun, GastoComunDto> {
+
+    private static GastoComunDtoConverter instance;
+
+    private GastoComunDtoConverter(){}
+
+    public static GastoComunDtoConverter getInstance() {
+        return instance == null ? instance = new GastoComunDtoConverter() : instance;
+    }
+
     @Override
     public GastoComunDto convert(GastoComun gastoComun) {
         GastoComunDto gastoComunDto = new GastoComunDto();

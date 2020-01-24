@@ -6,6 +6,14 @@ import org.springframework.core.convert.converter.Converter;
 
 public class UnidadDtoConverter implements Converter<Unidad, UnidadDto> {
 
+    private static UnidadDtoConverter instance;
+
+    private UnidadDtoConverter() {}
+
+    public static UnidadDtoConverter getInstance() {
+        return instance == null ? instance = new UnidadDtoConverter() : instance;
+    }
+
     @Override
     public UnidadDto convert(Unidad unidad) {
         UnidadDto dto = new UnidadDto();
