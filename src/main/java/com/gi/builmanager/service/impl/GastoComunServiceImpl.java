@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -55,7 +56,8 @@ public class GastoComunServiceImpl implements GastoComunService {
 
     @Override
     public List<DetalleDeudadUnidad> prorratearGastosPeriodo() {
-        GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre); // cerrarGastoComun();
+        GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
+
         Double totalM2Prorrateables = unidadRepository.totalMetrosCuadradosProrrateables();
         //Double totalM2ProrrateablesAsignados = unidadRepository.totalMetrosCuadradosProrrateablesAsignados();
         Double totalM2ProrrateablesNoAsignados = unidadRepository.totalMetrosCuadradosProrrateablesNoAsignados();
@@ -92,6 +94,8 @@ public class GastoComunServiceImpl implements GastoComunService {
             detalleDeudadUnidadList.add(detalleDeudaUnidadRepository.save(detalleDeudadUnidad));
         });
 
+
+        sumarDeudaPeriodoAnterior(detalleDeudadUnidadList, gastoComunActual.getPeriodo().minusMonths(1));
         gastoComunActual.setEstado(EstadoGastoComunEnum.CLOSED.nombre);
         gastoComunRepository.save(gastoComunActual);
         //todo borrar, solo para verificar factor prorrateo
@@ -103,12 +107,29 @@ public class GastoComunServiceImpl implements GastoComunService {
         return detalleDeudadUnidadList;
     }
 
+    private void sumarDeudaPeriodoAnterior(List<DetalleDeudadUnidad> periodoActual, LocalDate periodoAnterior) {
+        GastoComun gastoComunAnterior =
+                gastoComunRepository.findByEstadoAndPeriodo(EstadoGastoComunEnum.CLOSED.nombre, periodoAnterior);
+        if(gastoComunAnterior != null) {
+            List<DetalleDeudadUnidad> detalleDeudaAnterior =
+                    detalleDeudaUnidadRepository.findByGastoComun_Periodo(gastoComunAnterior.getPeriodo());
+            periodoActual.stream().forEach(detalle -> {
+                Optional<DetalleDeudadUnidad> opt = detalleDeudaAnterior.stream().filter(detalleAnterior ->
+                        detalleAnterior.getUnidad().getIdUnidad() == detalle.getUnidad().getIdUnidad()).findFirst();
+                if(opt.isPresent()){
+                    detalle.setMontoAnterior(opt.get().getTotal());
+                    detalle.setTotal(detalle.getTotal() + detalle.getMontoAnterior());
+                }
+            });
+        }
+    }
+
     @Override
     public GastoComun cerrarGastoComun(GastoComun gastoComun) {
         Double total = gastoComun.getListaDetalleGastoComun()
                 .stream()
-                .map(detalleGastoComun -> detalleGastoComun.getMonto())
-                .reduce(0D, (subtotal,element)->subtotal + element);
+                .map(DetalleGastoComun::getMonto)
+                .reduce(0D, Double::sum);
         gastoComun.setMontoTotal(total);
         gastoComun.setEstado(EstadoGastoComunEnum.CURRENT.nombre);
 
