@@ -6,11 +6,13 @@ import com.gi.builmanager.repositorio.*;
 import com.gi.builmanager.repositorio.projection.AsignacionView;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 import com.gi.builmanager.service.GastoComunService;
+import com.gi.builmanager.util.BuilManagerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -19,6 +21,7 @@ public class GastoComunServiceImpl implements GastoComunService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GastoComunServiceImpl.class);
 
+    private final DecimalFormat factorProrrateoFormat = new DecimalFormat("#.#####");
     @Autowired
     private GastoComunRepository gastoComunRepository;
     @Autowired
@@ -70,7 +73,7 @@ public class GastoComunServiceImpl implements GastoComunService {
         List<Asignacion> asignaciones = asignacionRepository.findAll();
         asignaciones.stream().forEach(asignacion -> {
             Double factorProrrateo = asignacion.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
-            factorProrrateoMap.put(asignacion, factorProrrateo) ;
+            //factorProrrateoMap.put(asignacion, BuilManagerUtils.round(factorProrrateo, 9)) ;
 
             DetalleDeudadUnidad detalleDeudadUnidad = new DetalleDeudadUnidad();
             detalleDeudadUnidad.setResponsable(
@@ -86,7 +89,7 @@ public class GastoComunServiceImpl implements GastoComunService {
                 detalleDeudadUnidad.setUnidad(opt.get().getUnidad());
             }
             detalleDeudadUnidad.setFactorProrrateo(factorProrrateo);
-            detalleDeudadUnidad.setMonto(gastoComunActual.getMontoTotal() * factorProrrateo);
+            detalleDeudadUnidad.setMonto(BuilManagerUtils.round(gastoComunActual.getMontoTotal() * factorProrrateo, 0));
             // TODO RECUPERAR MONTO ANTERIOR
             //detalleDeudadUnidad.setMontoAnterior();
             detalleDeudadUnidad.setTotal(detalleDeudadUnidad.getMonto());
@@ -94,10 +97,8 @@ public class GastoComunServiceImpl implements GastoComunService {
             detalleDeudadUnidadList.add(detalleDeudaUnidadRepository.save(detalleDeudadUnidad));
         });
 
-
         sumarDeudaPeriodoAnterior(detalleDeudadUnidadList, gastoComunActual.getPeriodo().minusMonths(1));
-        gastoComunActual.setEstado(EstadoGastoComunEnum.CLOSED.nombre);
-        gastoComunRepository.save(gastoComunActual);
+
         //todo borrar, solo para verificar factor prorrateo
         /*Double unidadFactor = 0D;
         for(Double factor: factorProrrateoMap.values()){
@@ -121,11 +122,19 @@ public class GastoComunServiceImpl implements GastoComunService {
                     detalle.setTotal(detalle.getTotal() + detalle.getMontoAnterior());
                 }
             });
+            detalleDeudaUnidadRepository.saveAll(periodoActual);
         }
     }
 
     @Override
     public GastoComun cerrarGastoComun(GastoComun gastoComun) {
+
+        GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
+        if(gastoComunActual != null){
+            gastoComunActual.setEstado(EstadoGastoComunEnum.CLOSED.nombre);
+            gastoComunRepository.save(gastoComunActual);
+        }
+
         Double total = gastoComun.getListaDetalleGastoComun()
                 .stream()
                 .map(DetalleGastoComun::getMonto)
@@ -153,6 +162,12 @@ public class GastoComunServiceImpl implements GastoComunService {
     @Override
     public List<PlantillaGastosOrdinarios> getPlantillaGastosOrdinarios() {
         return plantillaGastosOrdinariosRepository.findByActivoEqualsTrue();
+    }
+
+    @Override
+    public LocalDate getPeriodoActual() {
+        GastoComun gastoComun = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
+        return gastoComun != null ? gastoComun.getPeriodo() : null;
     }
 
 

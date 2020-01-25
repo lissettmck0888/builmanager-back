@@ -19,6 +19,14 @@ public class ItemGastoComun {
     public ItemGastoComun() {
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public ItemGastoComun(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;

@@ -6,8 +6,16 @@ import org.springframework.core.convert.converter.Converter;
 
 public class DetalleDeudaUnidadDtoConverter implements Converter<DetalleDeudadUnidad, DetalleDeudaUnidadDto> {
 
-    GastoComunDtoConverter gastoComunDtoConverter = GastoComunDtoConverter.getInstance();
-    UnidadDtoConverter unidadDtoConverter = UnidadDtoConverter.getInstance();
+    private static DetalleDeudaUnidadDtoConverter instance;
+
+    private GastoComunDtoConverter gastoComunDtoConverter = GastoComunDtoConverter.getInstance();
+    private UnidadDtoConverter unidadDtoConverter = UnidadDtoConverter.getInstance();
+
+    private DetalleDeudaUnidadDtoConverter() {}
+
+    public static DetalleDeudaUnidadDtoConverter getInstance() {
+        return instance == null ? instance = new DetalleDeudaUnidadDtoConverter() : instance;
+    }
 
     @Override
     public DetalleDeudaUnidadDto convert(DetalleDeudadUnidad detalleDeudadUnidad) {

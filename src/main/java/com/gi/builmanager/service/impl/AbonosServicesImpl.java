@@ -27,7 +27,7 @@ public class AbonosServicesImpl implements AbonosServices {
 
     @Override
     public List<Abono> obtenerPagosPorPeriodo(LocalDate periodo) {
-        return null;
+        return abonosRepository.findAllByDetalleDeudadUnidad_gastoComun_periodo(periodo);
     }
 
 }

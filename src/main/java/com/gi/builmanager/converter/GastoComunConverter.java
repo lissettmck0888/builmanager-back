@@ -13,6 +13,14 @@ import java.util.List;
 
 public class GastoComunConverter implements Converter<GastoComunDto, GastoComun> {
 
+    private static GastoComunConverter instance;
+
+    private GastoComunConverter() {}
+
+    public static GastoComunConverter getInstance() {
+        return instance == null ? instance = new GastoComunConverter() : instance;
+    }
+
     @Override
     public GastoComun convert(GastoComunDto gastoComunDto) {
         GastoComun gastoComun = new GastoComun();
@@ -42,6 +50,7 @@ public class GastoComunConverter implements Converter<GastoComunDto, GastoComun>
         item.setIdItemGastoComun(itemDto.getIdItemGastoComun());
         item.setNombre(itemDto.getNombre());
         item.setDescripcion(itemDto.getDescripcion());
+        item.setTipo(itemDto.getTipo());
         return item;
     }
 

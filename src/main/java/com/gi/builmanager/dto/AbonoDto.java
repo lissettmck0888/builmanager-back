@@ -1,21 +1,14 @@
-package com.gi.builmanager.dominio;
+package com.gi.builmanager.dto;
 
-import javax.persistence.*;
+
 import java.time.LocalDate;
 
-@Table (name = "abono")
-@Entity
-public class Abono {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+public class AbonoDto {
+
     private int id;
-    @Column
     private double montoAbono;
-    @Column
     private LocalDate fecha;
-    @ManyToOne
-    @JoinColumn(name = "iddetalledeuda")
-    private DetalleDeudadUnidad detalleDeudadUnidad;
+    private DetalleDeudaUnidadDto detalleDeudadUnidad;
 
     public int getId() {
         return id;
@@ -41,11 +34,11 @@ public class Abono {
         this.fecha = fecha;
     }
 
-    public DetalleDeudadUnidad getDetalleDeudadUnidad() {
+    public DetalleDeudaUnidadDto getDetalleDeudadUnidad() {
         return detalleDeudadUnidad;
     }
 
-    public void setDetalleDeudadUnidad(DetalleDeudadUnidad detalleDeudadUnidad) {
+    public void setDetalleDeudadUnidad(DetalleDeudaUnidadDto detalleDeudadUnidad) {
         this.detalleDeudadUnidad = detalleDeudadUnidad;
     }
 }

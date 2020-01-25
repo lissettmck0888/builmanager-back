@@ -6,6 +6,7 @@ import com.gi.builmanager.dominio.ItemGastoComun;
 import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface GastoComunService {
@@ -20,4 +21,6 @@ public interface GastoComunService {
     List<ItemGastoComun> getItems(String tipo);
 
     List<PlantillaGastosOrdinarios> getPlantillaGastosOrdinarios();
+
+    LocalDate getPeriodoActual();
 }

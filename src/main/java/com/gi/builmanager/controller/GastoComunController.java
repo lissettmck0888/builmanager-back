@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 @RestController
 @RequestMapping("/gasto-comun")
@@ -67,9 +68,14 @@ public class GastoComunController {
         return gastoComunService.getItems(tipo);
     }
 
-
     @GetMapping("/plantilla/")
     public List<PlantillaGastosOrdinarios> getPlantillaGastosOrdinarios(){
         return gastoComunService.getPlantillaGastosOrdinarios();
     }
+
+    @GetMapping("/periodo-actual/")
+    public LocalDate getPeriodoActual(){
+        return gastoComunService.getPeriodoActual();
+    }
+
 }
