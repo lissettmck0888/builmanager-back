@@ -62,9 +62,9 @@ public class GastoComunController {
         return conversionService.convert(updated, GastoComunDto.class);
     }
 
-    @GetMapping("/item/")
-    public List<ItemGastoComun> getAllItems(){
-        return gastoComunService.getItems();
+    @GetMapping("/item/{tipo}")
+    public List<ItemGastoComun> getAllItems(@PathVariable String tipo){
+        return gastoComunService.getItems(tipo);
     }
 
 

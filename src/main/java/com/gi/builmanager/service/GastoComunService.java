@@ -17,7 +17,7 @@ public interface GastoComunService {
     List<DetalleDeudadUnidad> prorratearGastosPeriodo();
 
     ItemGastoComun guardarItem(ItemGastoComun itemGastoComun);
-    List<ItemGastoComun> getItems();
+    List<ItemGastoComun> getItems(String tipo);
 
     List<PlantillaGastosOrdinarios> getPlantillaGastosOrdinarios();
 }

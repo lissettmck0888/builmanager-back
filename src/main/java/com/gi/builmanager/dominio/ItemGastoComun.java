@@ -13,6 +13,8 @@ public class ItemGastoComun {
     private String nombre;
     @Column
     private String descripcion;
+    @Column
+    private String tipo;
 
     public ItemGastoComun() {
     }

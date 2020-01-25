@@ -146,8 +146,8 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
-    public List<ItemGastoComun> getItems() {
-        return itemGastoComunRepository.findAll();
+    public List<ItemGastoComun> getItems(String tipo) {
+        return itemGastoComunRepository.findAllByTipo(tipo);
     }
 
     @Override
