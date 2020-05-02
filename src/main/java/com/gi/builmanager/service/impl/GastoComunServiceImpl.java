@@ -65,15 +65,12 @@ public class GastoComunServiceImpl implements GastoComunService {
         //Double totalM2ProrrateablesAsignados = unidadRepository.totalMetrosCuadradosProrrateablesAsignados();
         Double totalM2ProrrateablesNoAsignados = unidadRepository.totalMetrosCuadradosProrrateablesNoAsignados();
 
-        Asignacion asignacionCondominio = new Asignacion();//TODO crear fake asignacion para unidades sin propietario
-        Map<Asignacion, Double> factorProrrateoMap = new HashMap<>();
-        factorProrrateoMap.put(asignacionCondominio, totalM2ProrrateablesNoAsignados / totalM2Prorrateables);
+        //Asignacion asignacionCondominio = new Asignacion();//TODO crear fake asignacion para unidades sin propietario
 
         List<DetalleDeudadUnidad> detalleDeudadUnidadList = new ArrayList<>();
         List<Asignacion> asignaciones = asignacionRepository.findAll();
         asignaciones.stream().forEach(asignacion -> {
             Double factorProrrateo = asignacion.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
-            //factorProrrateoMap.put(asignacion, BuilManagerUtils.round(factorProrrateo, 9)) ;
 
             DetalleDeudadUnidad detalleDeudadUnidad = new DetalleDeudadUnidad();
             detalleDeudadUnidad.setResponsable(
@@ -90,20 +87,12 @@ public class GastoComunServiceImpl implements GastoComunService {
             }
             detalleDeudadUnidad.setFactorProrrateo(factorProrrateo);
             detalleDeudadUnidad.setMonto(BuilManagerUtils.round(gastoComunActual.getMontoTotal() * factorProrrateo, 0));
-            // TODO RECUPERAR MONTO ANTERIOR
-            //detalleDeudadUnidad.setMontoAnterior();
             detalleDeudadUnidad.setTotal(detalleDeudadUnidad.getMonto());
             detalleDeudadUnidad.setEstado("Pendiente");
             detalleDeudadUnidadList.add(detalleDeudaUnidadRepository.save(detalleDeudadUnidad));
         });
 
         sumarDeudaPeriodoAnterior(detalleDeudadUnidadList, gastoComunActual.getPeriodo().minusMonths(1));
-
-        //todo borrar, solo para verificar factor prorrateo
-        /*Double unidadFactor = 0D;
-        for(Double factor: factorProrrateoMap.values()){
-            unidadFactor += factor;
-        }*/
 
         return detalleDeudadUnidadList;
     }
@@ -114,7 +103,7 @@ public class GastoComunServiceImpl implements GastoComunService {
         if(gastoComunAnterior != null) {
             List<DetalleDeudadUnidad> detalleDeudaAnterior =
                     detalleDeudaUnidadRepository.findByGastoComun_Periodo(gastoComunAnterior.getPeriodo());
-            periodoActual.stream().forEach(detalle -> {
+            periodoActual.forEach(detalle -> {
                 Optional<DetalleDeudadUnidad> opt = detalleDeudaAnterior.stream().filter(detalleAnterior ->
                         detalleAnterior.getUnidad().getIdUnidad() == detalle.getUnidad().getIdUnidad()).findFirst();
                 if(opt.isPresent()){
