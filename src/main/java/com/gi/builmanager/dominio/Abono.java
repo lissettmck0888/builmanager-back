@@ -13,6 +13,8 @@ public class Abono {
     private double montoAbono;
     @Column
     private LocalDate fecha;
+    @Column
+    private String formaPago;
     @ManyToOne
     @JoinColumn(name = "iddetalledeuda")
     private DetalleDeudadUnidad detalleDeudadUnidad;

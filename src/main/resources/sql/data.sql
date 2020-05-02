@@ -124,9 +124,11 @@ insert into unidad (numero,piso,metros_cuadrados,sector,idtipounidad,afecto_pror
 
 insert into item_gasto_comun (nombre,descripcion,tipo) values ('Conserje 1','','ordinario');
 insert into item_gasto_comun (nombre,descripcion,tipo) values ('Conserje 2','','ordinario');
-insert into item_gasto_comun (nombre,descripcion,tipo) values ('Mantenimiento Porton','','extraordinario');
+insert into item_gasto_comun (nombre,descripcion,tipo) values ('Mantención Porton','','extraordinario');
 insert into item_gasto_comun (nombre,descripcion,tipo) values ('Luz areas comunes','','extraordinario');
-insert into item_gasto_comun (nombre,descripcion,tipo) values ('Mantenimiento ascensor','','extraordinario');
+insert into item_gasto_comun (nombre,descripcion,tipo) values ('Mantención ascensor','','extraordinario');
+insert into item_gasto_comun (nombre,descripcion,tipo) values ('Mantención piscina','','extraordinario');
+insert into item_gasto_comun (nombre,descripcion,tipo) values ('Mantención iluminación','','extraordinario');
 
 insert into persona(apellido_materno,apellido_paterno,correo,direccion,fecha_nacimiento,nacionalidad,nombres,run,telefono)
 values('Lora','Torres','lora@gmail.com','estado 34','1980-12-31','Chilena','Angel Alfonso','23767623','232323');

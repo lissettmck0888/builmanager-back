@@ -1,9 +1,11 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost;databaseName=BuildManager
-    username: sa
-    password: sa
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:postgresql://142.93.74.100:5432/postgres?currentSchema=buildman
+    username: postgres
+    password: Doncella18
+  driver-class-name: org.postgresql.Driver
   jpa:
+    hibernate:
+      ddl-auto: update
     show-sql: true
-    hibernate-dialect: org.hibernate.dialect.SQLServer2012Dialect
+    hibernate-dialect: org.hibernate.dialect.PostgreSQL10Dialect

@@ -47,10 +47,10 @@ public interface UnidadRepository extends JpaRepository<Unidad,Integer> {
     Double totalMetrosCuadradosProrrateablesAsignados();
 
     @Query(value = "select\n" +
-            "sum(m2)\n" +
+            "sum(r.m2)\n" +
             "from (\n" +
             "select 0 id_asignacion, 'vacio' estado, 0 metros2, u.metros_cuadrados m2 from unidad u left join asignacion_unidad au on u.idunidad=au.id_unidad where au.id_asignacion is null and u.afecto_prorrateo=true\n" +
-            ") group by id_asignacion", nativeQuery = true)
+            ") as r group by id_asignacion", nativeQuery = true)
     Double totalMetrosCuadradosProrrateablesNoAsignados();
 
     @Query(value = "select sum(u.metrosCuadrados) from Unidad u where u.afectoProrrateo=true")
