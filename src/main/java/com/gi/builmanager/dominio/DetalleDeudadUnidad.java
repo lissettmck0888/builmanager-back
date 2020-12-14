@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Table(name = "detalle_deuda_unidad")
-@Entity
+//@Table(name = "detalle_deuda_unidad")
+//@Entity
 public class DetalleDeudadUnidad {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /*@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iddetalledeuda")
     private Integer idDetalleDeudaUnidad;
     @Column
@@ -121,5 +121,5 @@ public class DetalleDeudadUnidad {
 
     public void setGastoComun(GastoComun gastoComun) {
         this.gastoComun = gastoComun;
-    }
+    }*/
 }

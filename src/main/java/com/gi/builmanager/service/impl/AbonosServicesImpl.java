@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-@Service
+//@Service
 public class AbonosServicesImpl implements AbonosServices {
 
-    @Autowired
+    //@Autowired
     private AbonosRepository abonosRepository;
 
     @Override
     public Abono registrarPagos(Abono abono) {
-        return abonosRepository.save(abono);
+        return null;//abonosRepository.save(abono);
     }
 
     @Override

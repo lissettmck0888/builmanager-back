@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
-@Repository
-public interface DetalleDeudaUnidadRepository extends JpaRepository<DetalleDeudadUnidad,Integer> {
+//@Repository
+public interface DetalleDeudaUnidadRepository /*extends JpaRepository<DetalleDeudadUnidad,Integer> */{
 
     List<DetalleDeudaUnidadView> findByUnidad_IdUnidad(int idUnidad);
     List<DetalleDeudadUnidad> findByGastoComun_Periodo(LocalDate periodo);

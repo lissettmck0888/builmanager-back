@@ -3,10 +3,10 @@ package com.gi.builmanager.dominio;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Table (name = "abono")
-@Entity
+//@Table (name = "abono")
+//@Entity
 public class Abono {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+/* @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column
@@ -49,5 +49,5 @@ public class Abono {
 
     public void setDetalleDeudadUnidad(DetalleDeudadUnidad detalleDeudadUnidad) {
         this.detalleDeudadUnidad = detalleDeudadUnidad;
-    }
+    }*/
 }

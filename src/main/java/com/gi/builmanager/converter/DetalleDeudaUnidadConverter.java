@@ -19,7 +19,7 @@ public class DetalleDeudaUnidadConverter implements Converter<DetalleDeudaUnidad
     @Override
     public DetalleDeudadUnidad convert(DetalleDeudaUnidadDto dto) {
         DetalleDeudadUnidad detalle = new DetalleDeudadUnidad();
-        detalle.setTotal(dto.getMontoTotal());
+        /*detalle.setTotal(dto.getMontoTotal());
         detalle.setMontoAnterior(dto.getMontoAnterior());
         detalle.setMonto(dto.getMonto());
         detalle.setResponsable(dto.getResponsable());
@@ -28,7 +28,7 @@ public class DetalleDeudaUnidadConverter implements Converter<DetalleDeudaUnidad
         detalle.setUnidad(detalle.getUnidad());
         detalle.setGastoComun(gastoComunConverter.convert(dto.getGastoComun()));
         detalle.setFechaPago(dto.getFechaPago());
-        detalle.setIdDetalleDeudaUnidad(dto.getIdDetalleDeudaUnidad());
+        detalle.setIdDetalleDeudaUnidad(dto.getIdDetalleDeudaUnidad());*/
         return detalle;
     }
 }

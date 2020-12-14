@@ -27,6 +27,8 @@ public class Unidad {
     private Boolean afectoProrrateo;
     @Column(name = "es_unidad_copropiedad")
     private Boolean esUnidadCopropiedad;
+    @Column
+    private Double factorProrrateo;
 
 
     @OneToMany(mappedBy = "unidad", cascade = CascadeType.ALL)
@@ -35,12 +37,13 @@ public class Unidad {
     public Unidad() {
     }
 
-    public Unidad(String descripcion, Integer piso, String numero, String sector, Double metrosCuadrados) {
+    public Unidad(String descripcion, Integer piso, String numero, String sector, Double metrosCuadrados, Double factorProrrateo) {
         this.descripcion = descripcion;
         this.piso = piso;
         this.numero = numero;
         this.sector = sector;
         this.metrosCuadrados = metrosCuadrados;
+        this.factorProrrateo = factorProrrateo;
     }
 
     public Integer getIdUnidad() {
@@ -121,5 +124,13 @@ public class Unidad {
 
     public void setEsUnidadCopropiedad(Boolean esUnidadCopropiedad) {
         this.esUnidadCopropiedad = esUnidadCopropiedad;
+    }
+
+    public Double getFactorProrrateo() {
+        return factorProrrateo;
+    }
+
+    public void setFactorProrrateo(Double factorProrrateo) {
+        this.factorProrrateo = factorProrrateo;
     }
 }

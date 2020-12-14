@@ -8,6 +8,8 @@ import com.gi.builmanager.util.BuilManagerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ public class DetalleDeudaController {
     private DetalleDeudaUnidadService detalleDeudaUnidadService;
 
     @GetMapping(value = "/unidad/{idUnidad}")
+    //@PreAuthorize(value = "")
+    //@PostAuthorize()
     public List<DetalleDeudaUnidadView> getDetalleByUnidad(@PathVariable int idUnidad) {
         return detalleDeudaUnidadService.getByUnidad(idUnidad);
     }

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-@Service
+//@Service
 public class DetalleDeudaUnidadServiceImpl implements DetalleDeudaUnidadService {
 
-    @Autowired
+    //@Autowired
     private DetalleDeudaUnidadRepository repository;
 
     @Override
