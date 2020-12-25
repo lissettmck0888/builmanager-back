@@ -2,6 +2,7 @@ package com.gi.builmanager.service.impl;
 
 import com.gi.builmanager.constants.EstadoGastoComunEnum;
 import com.gi.builmanager.dominio.*;
+import com.gi.builmanager.dto.DetalleDeudaUnidadDto;
 import com.gi.builmanager.repositorio.*;
 import com.gi.builmanager.service.GastoComunService;
 import com.gi.builmanager.util.BuilManagerUtils;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class GastoComunServiceImpl implements GastoComunService {
@@ -32,6 +35,8 @@ public class GastoComunServiceImpl implements GastoComunService {
     private AsignacionRepository asignacionRepository;
     @Autowired
     private MovimientoRepository movimientoRepository ;
+    @Autowired
+    private EstadoCuentaRepository estadoCuentaRepository;
 
     @Override
     public GastoComun actualizar(GastoComun gastoComun) {
@@ -56,7 +61,8 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
-    public List<Movimiento> prorratearGastosPeriodo() {
+    public List<DetalleDeudaUnidadDto> prorratearGastosPeriodo() {
+        Optional<GastoComun> optionalGastoComunCerrado = gastoComunRepository.findUltimoGastoComunCerrado(EstadoGastoComunEnum.CLOSED.nombre);
         GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
 
         Double totalM2Prorrateables = unidadRepository.totalMetrosCuadradosProrrateables();
@@ -65,54 +71,78 @@ public class GastoComunServiceImpl implements GastoComunService {
 
         //Asignacion asignacionCondominio = new Asignacion();//TODO crear fake asignacion para unidades sin propietario
 
+        GastoComun gastoComunCerrado = optionalGastoComunCerrado.orElse(null);
+        List<EstadoCuenta> estadosCuentaPeriodoAnterior = estadoCuentaRepository.findByGastoComun(gastoComunCerrado);
+        List<Movimiento>  abonosPeriodoAnterior = movimientoRepository.findByGastoComunAndTipo(gastoComunCerrado, "Abono");
+
+        List<DetalleDeudaUnidadDto> detalleDeudaUnidadDtoList = new ArrayList<>();
         List<Movimiento> movimientoList = new ArrayList<>();
-        List<Asignacion> asignaciones = asignacionRepository.findAll();
-        asignaciones.stream().forEach(asignacion -> {
+        List<EstadoCuenta> estadoCuentaList = new ArrayList<>();
+
+        asignacionRepository.findAll().forEach(asignacion -> {
             Double factorProrrateo = asignacion.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
 
-            Movimiento movimientoUnidad = new Movimiento();
-            /*movimientoUnidad.setResponsable(
-                    String.format("%s %s %s",
-                            asignacion.getPersona().getNombres(),
-                            asignacion.getPersona().getApellidoPaterno(),
-                            asignacion.getPersona().getApellidoMaterno())
-            );*/
-            movimientoUnidad.setGastoComun(gastoComunActual);
             Optional<AsignacionUnidad> opt = asignacion.getAsignacionUnidads()
                     .stream().filter(AsignacionUnidad::getUnidadCopropiedad).findFirst();
 
-            opt.ifPresent(asignacionUnidad -> movimientoUnidad.setUnidad(asignacionUnidad.getUnidad()));
+            Unidad unidad = null;
+            if (opt.isPresent()) {
+                unidad = opt.get().getUnidad();
+            }
 
-            //detalleDeudadUnidad.setFactorProrrateo(factorProrrateo);
-            movimientoUnidad.setMonto(BuilManagerUtils.round(gastoComunActual.getMontoTotal() * factorProrrateo, 0));
-            //detalleDeudadUnidad.setTotal(detalleDeudadUnidad.getMonto());
-            //detalleDeudadUnidad.setEstado("Pendiente");
-            movimientoList.add(movimientoRepository.save(movimientoUnidad));
+            Movimiento movimientoUnidad = Movimiento.builder()
+                    .gastoComun(gastoComunActual)
+                    .unidad(unidad)
+                    .fecha(LocalDateTime.now())
+                    .tipo("Cargo")
+                    .monto(BuilManagerUtils.round(gastoComunActual.getMontoTotal() * factorProrrateo, 0))
+            .build();
+            movimientoList.add(movimientoUnidad);
+
+            EstadoCuenta estadoCuenta = EstadoCuenta.builder()
+                    .gastoComun(gastoComunActual)
+                    .unidad(unidad)
+                    .factorProrrateo(factorProrrateo)
+                    .build();
+            estadoCuentaList.add(estadoCuenta);
+
+            this.calcularEstadoCuenta(estadoCuenta, movimientoUnidad, unidad, estadosCuentaPeriodoAnterior, abonosPeriodoAnterior);
+            detalleDeudaUnidadDtoList.add(DetalleDeudaUnidadDto.of(estadoCuenta));
         });
 
-        //sumarDeudaPeriodoAnterior(detalleDeudadUnidadList, gastoComunActual.getPeriodo().minusMonths(1));
+        movimientoRepository.saveAll(movimientoList);
+        estadoCuentaRepository.saveAll(estadoCuentaList);
 
-        return movimientoList;
+        return detalleDeudaUnidadDtoList;
 
     }
 
-    /*private void sumarDeudaPeriodoAnterior(List<DetalleDeudadUnidad> periodoActual, LocalDate periodoAnterior) {
-        GastoComun gastoComunAnterior =
-                gastoComunRepository.findByEstadoAndPeriodo(EstadoGastoComunEnum.CLOSED.nombre, periodoAnterior);
-        if(gastoComunAnterior != null) {
-            List<DetalleDeudadUnidad> detalleDeudaAnterior =
-                    detalleDeudaUnidadRepository.findByGastoComun_Periodo(gastoComunAnterior.getPeriodo());
-            periodoActual.forEach(detalle -> {
-                Optional<DetalleDeudadUnidad> opt = detalleDeudaAnterior.stream().filter(detalleAnterior ->
-                        detalleAnterior.getUnidad().getIdUnidad() == detalle.getUnidad().getIdUnidad()).findFirst();
-                if(opt.isPresent()){
-                    detalle.setMontoAnterior(opt.get().getTotal());
-                    detalle.setTotal(detalle.getTotal() + detalle.getMontoAnterior());
-                }
-            });
-            detalleDeudaUnidadRepository.saveAll(periodoActual);
-        }
-    }*/
+    private void calcularEstadoCuenta(EstadoCuenta estadoCuenta,
+                                      Movimiento movimientoUnidad,
+                                      Unidad unidad,
+                                      List<EstadoCuenta> estadosCuentaPeriodoAnterior,
+                                      List<Movimiento> abonosPeriodoAnterior) {
+
+        Optional<Double> optionalEstadoCuenta =
+                estadosCuentaPeriodoAnterior.stream()
+                        .filter(estCta -> estCta.getUnidad().getIdUnidad().equals(unidad.getIdUnidad()))
+                        .map(EstadoCuenta::getSaldo).reduce(Double::sum);
+
+        Optional<Double> optionalMovimientos =
+                abonosPeriodoAnterior.stream()
+                        .filter(movimiento -> movimiento.getUnidad().getIdUnidad().equals(unidad.getIdUnidad()))
+                        .map(Movimiento::getMonto).reduce(Double::sum);
+
+        Double deuda = 0D;
+        deuda += optionalEstadoCuenta.orElse(0D);
+        deuda -= optionalMovimientos.orElse(0D);
+        deuda += movimientoUnidad.getMonto();
+
+        estadoCuenta.setMontoAnterior(optionalEstadoCuenta.orElse(0D) - optionalMovimientos.orElse(0D));
+        estadoCuenta.setDeudaInicial(movimientoUnidad.getMonto());
+        estadoCuenta.setSaldo(deuda);
+
+    }
 
     @Override
     public GastoComun cerrarGastoComun(GastoComun gastoComun) {

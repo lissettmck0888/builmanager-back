@@ -25,7 +25,7 @@ public class DetalleDeudaController {
     @Autowired
     private ConversionService conversionService;
 
-    @Autowired
+    //@Autowired
     private DetalleDeudaUnidadService detalleDeudaUnidadService;
 
     @GetMapping(value = "/unidad/{idUnidad}")

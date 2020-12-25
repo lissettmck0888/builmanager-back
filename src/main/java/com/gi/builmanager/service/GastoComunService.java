@@ -1,6 +1,7 @@
 package com.gi.builmanager.service;
 
 import com.gi.builmanager.dominio.*;
+import com.gi.builmanager.dto.DetalleDeudaUnidadDto;
 import com.gi.builmanager.repositorio.projection.GastoComunView;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ public interface GastoComunService {
     GastoComun getGastoComunAbierto();
     List<GastoComun> getGastoComun();
     GastoComun cerrarGastoComun(GastoComun gastoComun);
-    List<Movimiento> prorratearGastosPeriodo();
+    List<DetalleDeudaUnidadDto> prorratearGastosPeriodo();
 
     ItemGastoComun guardarItem(ItemGastoComun itemGastoComun);
     List<ItemGastoComun> getItems(String tipo);

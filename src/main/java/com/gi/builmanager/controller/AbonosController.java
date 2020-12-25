@@ -20,7 +20,7 @@ public class AbonosController {
     @Autowired
     private ConversionService conversionService;
 
-    @Autowired
+    //@Autowired
     private AbonosServices abonosServices;
 
     @PostMapping("/")

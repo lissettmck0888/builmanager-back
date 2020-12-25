@@ -1,7 +1,19 @@
 package com.gi.builmanager.dto;
 
+import com.gi.builmanager.converter.GastoComunDtoConverter;
+import com.gi.builmanager.converter.UnidadDtoConverter;
+import com.gi.builmanager.dominio.EstadoCuenta;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DetalleDeudaUnidadDto {
 
     private Integer idDetalleDeudaUnidad;
@@ -15,83 +27,16 @@ public class DetalleDeudaUnidadDto {
     private UnidadDto unidad;
     private GastoComunDto gastoComun;
 
-    public Integer getIdDetalleDeudaUnidad() {
-        return idDetalleDeudaUnidad;
-    }
-
-    public void setIdDetalleDeudaUnidad(Integer idDetalleDeudaUnidad) {
-        this.idDetalleDeudaUnidad = idDetalleDeudaUnidad;
-    }
-
-    public String getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(String responsable) {
-        this.responsable = responsable;
-    }
-
-    public Double getMontoAnterior() {
-        return montoAnterior;
-    }
-
-    public void setMontoAnterior(Double montoAnterior) {
-        this.montoAnterior = montoAnterior;
-    }
-
-    public Double getMontoTotal() {
-        return montoTotal;
-    }
-
-    public void setMontoTotal(Double montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    public Double getMonto() {
-        return monto;
-    }
-
-    public void setMonto(Double monto) {
-        this.monto = monto;
-    }
-
-    public Double getFactorProrrateo() {
-        return factorProrrateo;
-    }
-
-    public void setFactorProrrateo(Double factorProrrateo) {
-        this.factorProrrateo = factorProrrateo;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public LocalDate getFechaPago() {
-        return fechaPago;
-    }
-
-    public void setFechaPago(LocalDate fechaPago) {
-        this.fechaPago = fechaPago;
-    }
-
-    public UnidadDto getUnidad() {
-        return unidad;
-    }
-
-    public void setUnidad(UnidadDto unidad) {
-        this.unidad = unidad;
-    }
-
-    public GastoComunDto getGastoComun() {
-        return gastoComun;
-    }
-
-    public void setGastoComun(GastoComunDto gastoComun) {
-        this.gastoComun = gastoComun;
+    public static DetalleDeudaUnidadDto of(EstadoCuenta estadoCuenta) {
+        return DetalleDeudaUnidadDto.builder()
+                .estado("")
+                .factorProrrateo(estadoCuenta.getFactorProrrateo())
+                .gastoComun(GastoComunDtoConverter.getInstance().convert(estadoCuenta.getGastoComun()))
+                .monto(estadoCuenta.getDeudaInicial())
+                .montoAnterior(estadoCuenta.getMontoAnterior())
+                .montoTotal(estadoCuenta.getSaldo())
+                .unidad(UnidadDtoConverter.getInstance().convert(estadoCuenta.getUnidad()))
+                //.responsable(estadoCuenta.getUnidad().get)
+            .build();
     }
 }

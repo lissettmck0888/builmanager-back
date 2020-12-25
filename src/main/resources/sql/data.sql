@@ -160,7 +160,7 @@ insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) value
 insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(4,30, false);
 insert into asignacion_unidad(id_asignacion,id_unidad, unidad_copropiedad) values(4,56, false);
 
-insert into gasto_comun (periodo, estado) values('2020-01-01', 'Abierto');
+insert into gasto_comun (periodo, estado) values('2020-12-01', 'Abierto');
 
 insert into plantilla_gastos_ordinarios (iditemgastocomun, monto, activo) values (1, 380000, true);
 insert into plantilla_gastos_ordinarios (iditemgastocomun, monto, activo) values (2, 400000, true);

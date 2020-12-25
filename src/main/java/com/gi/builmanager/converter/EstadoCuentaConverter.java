@@ -11,7 +11,7 @@ public class EstadoCuentaConverter implements Converter<EstadoCuenta, EstadoCuen
     public EstadoCuentaDto convert(EstadoCuenta estadoCuenta){
         EstadoCuentaDto estadoCuentaDto = new EstadoCuentaDto();
         estadoCuentaDto.setId(estadoCuenta.getId());
-        estadoCuentaDto.setPeriodo(estadoCuenta.getPeriodo());
+        estadoCuentaDto.setGastoComun(estadoCuenta.getGastoComun().getIdGastoComun());
         estadoCuentaDto.setSaldo(estadoCuenta.getSaldo());
         estadoCuentaDto.setUnidad(estadoCuenta.getUnidad());
         return estadoCuentaDto;
