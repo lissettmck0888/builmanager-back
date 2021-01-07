@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface GastoComunRepository extends JpaRepository<GastoComun,Integer> {
 
     GastoComun findByEstado(String estado);
-    @Query(value = "select * from gasto_comun g where g.estado = :estado order by idgastocomun desc limit 1", nativeQuery = true)
-    Optional<GastoComun> findUltimoGastoComunCerrado(@Param("estado") String estado);
+    @Query(value = "select * from gasto_comun g where g.estado = 'Cerrado' order by idgastocomun desc limit 1", nativeQuery = true)
+    Optional<GastoComun> findUltimoGastoComunCerrado();
     GastoComun findByEstadoAndPeriodo(String estado, LocalDate periodo);
 }

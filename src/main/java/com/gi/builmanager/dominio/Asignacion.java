@@ -1,12 +1,16 @@
 package com.gi.builmanager.dominio;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "asignacion")
 @Entity
+@Data
 public class Asignacion {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +24,8 @@ public class Asignacion {
     @Column
     private String estado;
     @Column
-    private LocalDate fechaAsignacion;
-
+    private LocalDateTime fechaAsignacion;
+    @Column
     private Double totalMetrosCuadradosProrrateables;
 
     @OneToMany(mappedBy = "asignacion", cascade = CascadeType.ALL)
@@ -34,11 +38,12 @@ public class Asignacion {
     public void setAsignacionUnidads(List<AsignacionUnidad> asignacionUnidads) {
         this.asignacionUnidads = asignacionUnidads;
     }
+/*
 
     public Asignacion() {
     }
 
-    public Asignacion(Integer idAsignacion, Persona persona,  String tipoAsignacion, String estado, LocalDate fechaAsignacion) {
+    public Asignacion(Integer idAsignacion, Persona persona,  String tipoAsignacion, String estado, LocalDateTime fechaAsignacion) {
         this.idAsignacion = idAsignacion;
         this.persona = persona;
 
@@ -46,52 +51,6 @@ public class Asignacion {
         this.estado = estado;
         this.fechaAsignacion = fechaAsignacion;
     }
+*/
 
-    public Integer getIdAsignacion() {
-        return idAsignacion;
-    }
-
-    public void setIdAsignacion(Integer idAsignacion) {
-        this.idAsignacion = idAsignacion;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public Double getTotalMetrosCuadradosProrrateables() {
-        return totalMetrosCuadradosProrrateables;
-    }
-
-    public void setTotalMetrosCuadradosProrrateables(Double totalMetrosCuadradosProrrateables) {
-        this.totalMetrosCuadradosProrrateables = totalMetrosCuadradosProrrateables;
-    }
-
-    public String getTipoAsignacion() {
-        return tipoAsignacion;
-    }
-
-    public void setTipoAsignacion(String tipoAsignacion) {
-        this.tipoAsignacion = tipoAsignacion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public LocalDate getFechaAsignacion() {
-        return fechaAsignacion;
-    }
-
-    public void setFechaAsignacion(LocalDate fechaAsignacion) {
-        this.fechaAsignacion = fechaAsignacion;
-    }
 }

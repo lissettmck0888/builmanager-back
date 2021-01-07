@@ -62,7 +62,7 @@ public class GastoComunServiceImpl implements GastoComunService {
 
     @Override
     public List<DetalleDeudaUnidadDto> prorratearGastosPeriodo() {
-        Optional<GastoComun> optionalGastoComunCerrado = gastoComunRepository.findUltimoGastoComunCerrado(EstadoGastoComunEnum.CLOSED.nombre);
+        Optional<GastoComun> optionalGastoComunCerrado = gastoComunRepository.findUltimoGastoComunCerrado();
         GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
 
         Double totalM2Prorrateables = unidadRepository.totalMetrosCuadradosProrrateables();
@@ -79,7 +79,9 @@ public class GastoComunServiceImpl implements GastoComunService {
         List<Movimiento> movimientoList = new ArrayList<>();
         List<EstadoCuenta> estadoCuentaList = new ArrayList<>();
 
-        asignacionRepository.findAll().forEach(asignacion -> {
+
+        List<Asignacion> asignacionList = asignacionRepository.findAll();
+        asignacionList.forEach(asignacion -> {
             Double factorProrrateo = asignacion.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
 
             Optional<AsignacionUnidad> opt = asignacion.getAsignacionUnidads()
@@ -145,26 +147,41 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
-    public GastoComun cerrarGastoComun(GastoComun gastoComun) {
+    public GastoComun cerrarGastoComun() {
 
-        GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
-        if(gastoComunActual != null){
-            gastoComunActual.setEstado(EstadoGastoComunEnum.CLOSED.nombre);
-            gastoComunRepository.save(gastoComunActual);
+        /*
+           obtener gasto comun abierto. Asignar los gastos ordinarios al gasto comun
+         */
+        GastoComun gcAbierto = gastoComunRepository.findByEstado("Abierto");
+        List<PlantillaGastosOrdinarios> gastosOrdinariosList =
+                plantillaGastosOrdinariosRepository.findByActivoEqualsTrue();
+        gastosOrdinariosList.forEach(gasto -> {
+            DetalleGastoComun detalleGastoComun = new DetalleGastoComun();
+            detalleGastoComun.setGastoComun(gcAbierto);
+            detalleGastoComun.setMonto(gasto.getMonto());
+            detalleGastoComun.setItemGastoComun(gasto.getItemGastoComun());
+            gcAbierto.getListaDetalleGastoComun().add(detalleGastoComun);
+        });
+
+        GastoComun gcActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
+
+        if(gcActual != null){
+            gcActual.setEstado(EstadoGastoComunEnum.CLOSED.nombre);
+            gastoComunRepository.save(gcActual);
         }
 
-        Double total = gastoComun.getListaDetalleGastoComun()
+        Double total = gcAbierto.getListaDetalleGastoComun()
                 .stream()
                 .map(DetalleGastoComun::getMonto)
                 .reduce(0D, Double::sum);
-        gastoComun.setMontoTotal(total);
-        gastoComun.setEstado(EstadoGastoComunEnum.CURRENT.nombre);
+        gcAbierto.setMontoTotal(total);
+        gcAbierto.setEstado(EstadoGastoComunEnum.CURRENT.nombre);
 
         GastoComun nuevoGastoComun = new GastoComun();
         nuevoGastoComun.setEstado(EstadoGastoComunEnum.OPENED.nombre);
-        nuevoGastoComun.setPeriodo(gastoComun.getPeriodo().plusMonths(1));
+        nuevoGastoComun.setPeriodo(gcAbierto.getPeriodo().plusMonths(1));
         gastoComunRepository.save(nuevoGastoComun);
-        return gastoComunRepository.save(gastoComun);
+        return gastoComunRepository.save(gcAbierto);
     }
 
     @Override

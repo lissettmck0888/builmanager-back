@@ -24,7 +24,8 @@ public class AsignacionController {
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Integer guardarAsignacion(@RequestBody AsignacionDto asignacionDto) {
-        return asignacionService.save(conversionService.convert(asignacionDto, Asignacion.class)) != null ? 1: 0;
+        asignacionService.save(conversionService.convert(asignacionDto, Asignacion.class));
+        return 1;
     }
 
     @GetMapping("/all")
