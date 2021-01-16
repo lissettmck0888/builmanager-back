@@ -1,7 +1,7 @@
 package com.gi.builmanager.security;
 
-import com.gi.builmanager.dominio.Usuario;
-import com.gi.builmanager.repositorio.UsuarioRepository;
+import com.gi.builmanager.security.authentication.repositorio.dominio.Usuario;
+import com.gi.builmanager.security.authentication.repositorio.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

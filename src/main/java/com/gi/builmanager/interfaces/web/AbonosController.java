@@ -1,9 +1,9 @@
 package com.gi.builmanager.interfaces.web;/*
 package com.gi.buildman.interfaces.web;
 
-import com.gi.builmanager.dominio.Abono;
-import com.gi.builmanager.dto.AbonoDto;
-import com.gi.builmanager.service.AbonosServices;
+import com.gi.builmanager.security.authentication.repositorio.dominio.Abono;
+import com.gi.builmanager.security.authentication.dto.AbonoDto;
+import com.gi.builmanager.security.authentication.service.AbonosServices;
 import com.gi.builmanager.util.BuilManagerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;

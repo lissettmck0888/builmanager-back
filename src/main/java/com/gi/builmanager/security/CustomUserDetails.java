@@ -1,6 +1,6 @@
 package com.gi.builmanager.security;
 
-import com.gi.builmanager.dominio.Usuario;
+import com.gi.builmanager.security.authentication.repositorio.dominio.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
