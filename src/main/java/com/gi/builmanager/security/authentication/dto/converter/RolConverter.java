@@ -1,7 +1,7 @@
 package com.gi.builmanager.security.authentication.dto.converter;
 
-import com.gi.builmanager.security.authentication.repositorio.dominio.Permiso;
-import com.gi.builmanager.security.authentication.repositorio.dominio.Rol;
+import com.gi.builmanager.security.authentication.repository.entity.Permiso;
+import com.gi.builmanager.security.authentication.repository.entity.Rol;
 import com.gi.builmanager.security.authentication.dto.PermisoDto;
 import com.gi.builmanager.security.authentication.dto.RolDDto;
 import org.springframework.core.convert.converter.Converter;

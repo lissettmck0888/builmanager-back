@@ -1,5 +1,5 @@
 package com.gi.builmanager.interfaces.web;/*
-package com.gi.buildman.interfaces.web;
+package com.gi.builmanager.interfaces.web;
 
 import com.gi.builmanager.security.authentication.repositorio.dominio.Abono;
 import com.gi.builmanager.security.authentication.dto.AbonoDto;

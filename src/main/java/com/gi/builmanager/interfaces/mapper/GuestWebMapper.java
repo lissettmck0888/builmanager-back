@@ -1,8 +1,8 @@
 package com.gi.builmanager.interfaces.mapper;
 
-import com.gi.buildman.domain.model.guest.Guest;
-import com.gi.buildman.domain.model.guest.GuestDetails;
-import com.gi.buildman.domain.model.guest.GuestId;
+import com.gi.builmanager.domain.model.guest.Guest;
+import com.gi.builmanager.domain.model.guest.GuestDetails;
+import com.gi.builmanager.domain.model.guest.GuestId;
 import com.gi.builmanager.interfaces.dto.GuestDto;
 import org.springframework.stereotype.Component;
 

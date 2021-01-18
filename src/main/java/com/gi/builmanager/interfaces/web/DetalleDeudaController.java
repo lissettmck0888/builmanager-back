@@ -1,6 +1,6 @@
 package com.gi.builmanager.interfaces.web;
 
-import com.gi.buildman.domain.model.billing.BillingRepository;
+import com.gi.builmanager.domain.model.billing.BillingRepository;
 import com.gi.builmanager.interfaces.dto.BillingDto;
 import com.gi.builmanager.interfaces.mapper.BillingWebMapper;
 import org.springframework.beans.factory.annotation.Autowired;

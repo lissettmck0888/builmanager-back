@@ -1,6 +1,6 @@
 package com.gi.builmanager.interfaces.web;
 
-import com.gi.buildman.domain.model.property.PropertyRepository;
+import com.gi.builmanager.domain.model.property.PropertyRepository;
 import com.gi.builmanager.interfaces.dto.PropertyDto;
 import com.gi.builmanager.interfaces.mapper.PropertyWebMapper;
 import org.springframework.beans.factory.annotation.Autowired;

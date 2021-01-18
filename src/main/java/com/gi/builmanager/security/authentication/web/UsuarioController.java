@@ -1,8 +1,8 @@
 package com.gi.builmanager.security.authentication.web;
 
-import com.gi.builmanager.security.authentication.repositorio.dominio.Usuario;
+import com.gi.builmanager.security.authentication.repository.entity.Usuario;
 import com.gi.builmanager.security.authentication.dto.UsuarioDto;
-import com.gi.builmanager.security.authentication.repositorio.projection.UsuarioView;
+import com.gi.builmanager.security.authentication.repository.projection.UsuarioView;
 import com.gi.builmanager.security.authentication.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

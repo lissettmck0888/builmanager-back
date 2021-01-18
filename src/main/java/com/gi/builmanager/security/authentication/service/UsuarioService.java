@@ -1,8 +1,8 @@
 package com.gi.builmanager.security.authentication.service;
 
-import com.gi.builmanager.security.authentication.repositorio.dominio.Usuario;
+import com.gi.builmanager.security.authentication.repository.entity.Usuario;
 import com.gi.builmanager.security.authentication.dto.UsuarioDto;
-import com.gi.builmanager.security.authentication.repositorio.projection.UsuarioView;
+import com.gi.builmanager.security.authentication.repository.projection.UsuarioView;
 
 import java.util.List;
 

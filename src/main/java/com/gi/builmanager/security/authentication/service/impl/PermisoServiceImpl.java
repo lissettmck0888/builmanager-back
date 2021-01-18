@@ -1,7 +1,7 @@
 package com.gi.builmanager.security.authentication.service.impl;
 
-import com.gi.builmanager.security.authentication.repositorio.PermisoRepository;
-import com.gi.builmanager.security.authentication.repositorio.projection.PermisoView;
+import com.gi.builmanager.security.authentication.repository.PermisoRepository;
+import com.gi.builmanager.security.authentication.repository.projection.PermisoView;
 import com.gi.builmanager.security.authentication.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

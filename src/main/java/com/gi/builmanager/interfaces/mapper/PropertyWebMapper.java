@@ -1,6 +1,6 @@
 package com.gi.builmanager.interfaces.mapper;
 
-import com.gi.buildman.domain.model.property.Property;
+import com.gi.builmanager.domain.model.property.Property;
 import com.gi.builmanager.interfaces.dto.PropertyDto;
 import org.springframework.stereotype.Component;
 

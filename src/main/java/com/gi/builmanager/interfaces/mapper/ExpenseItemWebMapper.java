@@ -1,8 +1,8 @@
 package com.gi.builmanager.interfaces.mapper;
 
-import com.gi.buildman.domain.model.expenseconfig.ExpenseItem;
-import com.gi.buildman.domain.model.expenseconfig.ExpenseItemDetails;
-import com.gi.buildman.domain.model.expenseconfig.ExpenseItemId;
+import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
+import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemDetails;
+import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemId;
 import com.gi.builmanager.interfaces.dto.ExpenseItemDto;
 import org.springframework.stereotype.Component;
 

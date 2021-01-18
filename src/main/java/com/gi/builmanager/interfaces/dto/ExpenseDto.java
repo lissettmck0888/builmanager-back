@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -14,5 +15,8 @@ import java.util.List;
 public class ExpenseDto {
 
     private Integer id;
+    public String state;
+    private Double totalAmount;
+    private LocalDate period;
     private List<ExpenseItemValueDto> expenseItemList;
 }

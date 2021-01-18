@@ -1,6 +1,6 @@
 package com.gi.builmanager.security.authentication.service;
 
-import com.gi.builmanager.security.authentication.repositorio.projection.PermisoView;
+import com.gi.builmanager.security.authentication.repository.projection.PermisoView;
 
 import java.util.List;
 

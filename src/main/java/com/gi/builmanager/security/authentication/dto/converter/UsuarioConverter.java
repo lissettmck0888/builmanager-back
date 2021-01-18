@@ -1,6 +1,6 @@
 package com.gi.builmanager.security.authentication.dto.converter;
 
-import com.gi.builmanager.security.authentication.repositorio.dominio.Usuario;
+import com.gi.builmanager.security.authentication.repository.entity.Usuario;
 import com.gi.builmanager.security.authentication.dto.UsuarioDto;
 import org.springframework.core.convert.converter.Converter;
 

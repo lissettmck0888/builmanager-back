@@ -1,7 +1,7 @@
 package com.gi.builmanager.security.authentication.web;
 
 import com.gi.builmanager.security.authentication.dto.RolDDto;
-import com.gi.builmanager.security.authentication.repositorio.projection.RolView;
+import com.gi.builmanager.security.authentication.repository.projection.RolView;
 import com.gi.builmanager.security.authentication.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

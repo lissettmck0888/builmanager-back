@@ -1,7 +1,7 @@
 package com.gi.builmanager.interfaces.web;
 
-import com.gi.buildman.application.AssignmentService;
-import com.gi.buildman.domain.model.assignment.AssignmentRepository;
+import com.gi.builmanager.application.AssignmentService;
+import com.gi.builmanager.domain.model.assignment.AssignmentRepository;
 import com.gi.builmanager.interfaces.dto.AssignmentDto;
 import com.gi.builmanager.interfaces.mapper.AssignmentWebMapper;
 import org.springframework.beans.factory.annotation.Autowired;

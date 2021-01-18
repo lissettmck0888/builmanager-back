@@ -1,8 +1,8 @@
 package com.gi.builmanager.interfaces.mapper;
 
-import com.gi.buildman.domain.model.assignment.Assignment;
-import com.gi.buildman.domain.model.assignment.AssignmentDetails;
-import com.gi.buildman.domain.model.assignment.Property;
+import com.gi.builmanager.domain.model.assignment.Assignment;
+import com.gi.builmanager.domain.model.assignment.AssignmentDetails;
+import com.gi.builmanager.domain.model.assignment.Property;
 import com.gi.builmanager.interfaces.dto.AssignmentDto;
 import com.gi.builmanager.interfaces.dto.AssignmentPropertyDto;
 import com.gi.builmanager.interfaces.dto.PropertyDto;

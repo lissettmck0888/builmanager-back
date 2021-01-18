@@ -1,8 +1,8 @@
 package com.gi.builmanager.security.authentication.service;
 
-import com.gi.builmanager.security.authentication.repositorio.dominio.Rol;
+import com.gi.builmanager.security.authentication.repository.entity.Rol;
 import com.gi.builmanager.security.authentication.dto.RolDDto;
-import com.gi.builmanager.security.authentication.repositorio.projection.RolView;
+import com.gi.builmanager.security.authentication.repository.projection.RolView;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.gi.builmanager.interfaces.web;
 
-import com.gi.buildman.application.GuestService;
-import com.gi.buildman.domain.model.guest.GuestRepository;
+import com.gi.builmanager.application.GuestService;
+import com.gi.builmanager.domain.model.guest.GuestRepository;
 import com.gi.builmanager.interfaces.dto.GuestDto;
 import com.gi.builmanager.interfaces.mapper.GuestWebMapper;
 import org.springframework.beans.factory.annotation.Autowired;

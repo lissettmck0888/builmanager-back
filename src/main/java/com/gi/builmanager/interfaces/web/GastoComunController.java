@@ -1,10 +1,10 @@
 package com.gi.builmanager.interfaces.web;
 
-import com.gi.buildman.application.ExpenseService;
-import com.gi.buildman.domain.model.billing.BillingRepository;
-import com.gi.buildman.domain.model.expense.ExpenseItem;
-import com.gi.buildman.domain.model.expense.ExpenseRepository;
-import com.gi.buildman.domain.model.expenseconfig.ExpenseItemRepository;
+import com.gi.builmanager.application.ExpenseService;
+import com.gi.builmanager.domain.model.billing.BillingRepository;
+import com.gi.builmanager.domain.model.expense.ExpenseRepository;
+import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemRepository;
+import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
 import com.gi.builmanager.interfaces.dto.BillingDto;
 import com.gi.builmanager.interfaces.dto.ExpenseDto;
 import com.gi.builmanager.interfaces.dto.ExpenseItemDto;
@@ -68,17 +68,14 @@ public class GastoComunController {
 
     @PostMapping("/")
     public ExpenseDto updateExpense(@RequestBody ExpenseDto expenseDto){
-        List<ExpenseItem> expenseItemList = expenseDto.getExpenseItemList().stream()
-                .map(expenseItemDto -> expenseItemValueWebMapper.toModel(expenseItemDto))
-                .collect(Collectors.toList());
-        expenseService.updateExpense(expenseDto.getId(), expenseItemList);
+        expenseService.updateExpense(expenseWebMapper.fromDto(expenseDto));
         return expenseWebMapper.toDto(expenseRepository.retrieveOpenedExpense());
     }
 
     @GetMapping("/item/{tipo}")
     public List<ExpenseItemDto> getAllItems(@PathVariable String tipo){
 
-        List<com.gi.buildman.domain.model.expenseconfig.ExpenseItem> expenseItems = expenseItemRepository.allExtraordinary();
+        List<ExpenseItem> expenseItems = expenseItemRepository.allExtraordinary();
         return expenseItems.stream()
                 .map(expenseItem -> expenseItemWebMapper.toDto(expenseItem))
                 .collect(Collectors.toList());

@@ -1,6 +1,6 @@
 package com.gi.builmanager.security.authentication.web;
 
-import com.gi.builmanager.security.authentication.repositorio.projection.PermisoView;
+import com.gi.builmanager.security.authentication.repository.projection.PermisoView;
 import com.gi.builmanager.security.authentication.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

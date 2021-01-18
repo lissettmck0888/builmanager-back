@@ -20,11 +20,11 @@
 
 	<dependencies>
 
-		<dependency>
-			<groupId>com.gi.buildman</groupId>
+		<!--<dependency>
+			<groupId>com.gi.builmanager</groupId>
 			<artifactId>buildman-api</artifactId>
 			<version>1.0.0</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
