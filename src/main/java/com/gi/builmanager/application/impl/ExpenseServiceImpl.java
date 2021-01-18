@@ -93,7 +93,6 @@ public class ExpenseServiceImpl implements ExpenseService {
         List<Billing> closedPeriodPropertyBillingList = billingRepository.getBillingByPeriod(closedPeriod);
         List<Transaction> closedPeriodPropertyPaymentsList = transactionRepository.retrieveClosedPeriodPaymentsList();
 
-
         Map<Object, Double> billingByPropertyMapper = billingByPropertyMapper(closedPeriodPropertyBillingList);
         Map<Object, Double> paymentsByPropertyMapper = paymentsByPropertyMapper(closedPeriodPropertyPaymentsList);
 
@@ -106,8 +105,7 @@ public class ExpenseServiceImpl implements ExpenseService {
             Double billingTotal = getOrDefault(billingByPropertyMapper, mainProperty.getId(), 0.0);
             Double paymentsTotal = getOrDefault(paymentsByPropertyMapper, mainProperty.getId(), 0.0);
 
-            Billing billing = Billing.from(currentExpense, mainProperty,
-                    assignment.getDetails().getGuestFullName(), apportionFactor, billingTotal, paymentsTotal);
+            Billing billing = Billing.from(currentExpense, mainProperty, apportionFactor, billingTotal, paymentsTotal);
 
             //FIXME: PERSIST BILLING
             billingRepository.save(billing);

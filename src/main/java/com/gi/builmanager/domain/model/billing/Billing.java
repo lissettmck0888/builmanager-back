@@ -26,7 +26,7 @@ public class Billing extends AggregateRoot<Billing> {
 
     private Billing() {}
 
-    public static Billing from(Expense currentExpense, Property property, String guestFullName, Double apportionFactor,
+    public static Billing from(Expense currentExpense, Property property, Double apportionFactor,
                                Double lastPeriodBillingAmount, Double lastPeriodTotalPayments) {
 
         Billing billing = new Billing();
