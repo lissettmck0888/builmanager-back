@@ -1,3 +1,4 @@
+/*
 package com.gi.builmanager.service.impl;
 
 import com.gi.builmanager.dominio.DetalleDeudadUnidad;
@@ -26,3 +27,4 @@ public class DetalleDeudaUnidadServiceImpl implements DetalleDeudaUnidadService 
         return repository.findByGastoComun_Periodo(periodo);
     }
 }
+*/

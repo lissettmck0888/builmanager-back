@@ -1,3 +1,4 @@
+/*
 package com.gi.builmanager.dto;
 
 
@@ -8,7 +9,7 @@ public class AbonoDto {
     private int id;
     private double montoAbono;
     private LocalDate fecha;
-    private DetalleDeudaUnidadDto detalleDeudadUnidad;
+    //private DetalleDeudaUnidadDto detalleDeudadUnidad;
 
     public int getId() {
         return id;
@@ -42,3 +43,4 @@ public class AbonoDto {
         this.detalleDeudadUnidad = detalleDeudadUnidad;
     }
 }
+*/

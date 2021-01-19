@@ -1,9 +1,10 @@
 package com.gi.builmanager.controller;
 
-import com.gi.builmanager.dominio.*;
-import com.gi.builmanager.dto.DetalleDeudaUnidadDto;
+import com.gi.builmanager.dominio.GastoComun;
+import com.gi.builmanager.dominio.ItemGastoComun;
+import com.gi.builmanager.dominio.PlantillaGastosOrdinarios;
+import com.gi.builmanager.dto.EstadoCuentaDto;
 import com.gi.builmanager.dto.GastoComunDto;
-import com.gi.builmanager.dto.MovimientoDto;
 import com.gi.builmanager.service.GastoComunService;
 import com.gi.builmanager.util.BuilManagerUtils;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class GastoComunController {
     }
 
     @PostMapping("/prorratear")
-    public List<DetalleDeudaUnidadDto> prorratearGastoComunPeriodo() {
+    public List<EstadoCuentaDto> prorratearGastoComunPeriodo() {
         return gastoComunService.prorratearGastosPeriodo();
     }
 

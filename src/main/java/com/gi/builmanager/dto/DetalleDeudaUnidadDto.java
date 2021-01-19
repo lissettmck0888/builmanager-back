@@ -1,3 +1,4 @@
+/*
 package com.gi.builmanager.dto;
 
 import com.gi.builmanager.converter.GastoComunDtoConverter;
@@ -40,3 +41,4 @@ public class DetalleDeudaUnidadDto {
             .build();
     }
 }
+*/

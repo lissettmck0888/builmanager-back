@@ -2,7 +2,7 @@ package com.gi.builmanager.service.impl;
 
 import com.gi.builmanager.constants.EstadoGastoComunEnum;
 import com.gi.builmanager.dominio.*;
-import com.gi.builmanager.dto.DetalleDeudaUnidadDto;
+import com.gi.builmanager.dto.EstadoCuentaDto;
 import com.gi.builmanager.repositorio.*;
 import com.gi.builmanager.service.GastoComunService;
 import com.gi.builmanager.util.BuilManagerUtils;
@@ -14,8 +14,9 @@ import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GastoComunServiceImpl implements GastoComunService {
@@ -61,7 +62,7 @@ public class GastoComunServiceImpl implements GastoComunService {
     }
 
     @Override
-    public List<DetalleDeudaUnidadDto> prorratearGastosPeriodo() {
+    public List<EstadoCuentaDto> prorratearGastosPeriodo() {
         Optional<GastoComun> optionalGastoComunCerrado = gastoComunRepository.findUltimoGastoComunCerrado(EstadoGastoComunEnum.CLOSED.nombre);
         GastoComun gastoComunActual = gastoComunRepository.findByEstado(EstadoGastoComunEnum.CURRENT.nombre);
 
@@ -75,7 +76,7 @@ public class GastoComunServiceImpl implements GastoComunService {
         List<EstadoCuenta> estadosCuentaPeriodoAnterior = estadoCuentaRepository.findByGastoComun(gastoComunCerrado);
         List<Movimiento>  abonosPeriodoAnterior = movimientoRepository.findByGastoComunAndTipo(gastoComunCerrado, "Abono");
 
-        List<DetalleDeudaUnidadDto> detalleDeudaUnidadDtoList = new ArrayList<>();
+        List<EstadoCuentaDto> estadoCuentaDtoList = new ArrayList<>();
         List<Movimiento> movimientoList = new ArrayList<>();
         List<EstadoCuenta> estadoCuentaList = new ArrayList<>();
 
@@ -107,13 +108,13 @@ public class GastoComunServiceImpl implements GastoComunService {
             estadoCuentaList.add(estadoCuenta);
 
             this.calcularEstadoCuenta(estadoCuenta, movimientoUnidad, unidad, estadosCuentaPeriodoAnterior, abonosPeriodoAnterior);
-            detalleDeudaUnidadDtoList.add(DetalleDeudaUnidadDto.of(estadoCuenta));
+            estadoCuentaDtoList.add(EstadoCuentaDto.of(estadoCuenta));
         });
 
         movimientoRepository.saveAll(movimientoList);
         estadoCuentaRepository.saveAll(estadoCuentaList);
 
-        return detalleDeudaUnidadDtoList;
+        return estadoCuentaDtoList;
 
     }
 

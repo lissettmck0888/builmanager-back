@@ -1,3 +1,4 @@
+/*
 package com.gi.builmanager.service;
 
 import com.gi.builmanager.dominio.DetalleDeudadUnidad;
@@ -11,3 +12,4 @@ public interface DetalleDeudaUnidadService {
     List<DetalleDeudaUnidadView> getByUnidad(int idUnidad);
     List<DetalleDeudadUnidad> getByPeriodo(LocalDate periodo);
 }
+*/

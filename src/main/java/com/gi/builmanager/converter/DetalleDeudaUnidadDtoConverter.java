@@ -1,3 +1,4 @@
+/*
 package com.gi.builmanager.converter;
 
 import com.gi.builmanager.dominio.DetalleDeudadUnidad;
@@ -20,7 +21,8 @@ public class DetalleDeudaUnidadDtoConverter implements Converter<DetalleDeudadUn
     @Override
     public DetalleDeudaUnidadDto convert(DetalleDeudadUnidad detalleDeudadUnidad) {
         DetalleDeudaUnidadDto dto = new DetalleDeudaUnidadDto();
-        /*dto.setResponsable(detalleDeudadUnidad.getResponsable());
+        */
+/*dto.setResponsable(detalleDeudadUnidad.getResponsable());
         dto.setEstado(detalleDeudadUnidad.getEstado());
         dto.setFactorProrrateo(detalleDeudadUnidad.getFactorProrrateo());
         dto.setFechaPago(detalleDeudadUnidad.getFechaPago());
@@ -30,9 +32,11 @@ public class DetalleDeudaUnidadDtoConverter implements Converter<DetalleDeudadUn
         dto.setMonto(detalleDeudadUnidad.getMonto());
         dto.setMontoTotal(detalleDeudadUnidad.getTotal());
         dto.setUnidad(unidadDtoConverter.convert(detalleDeudadUnidad.getUnidad()));
-        dto.setIdDetalleDeudaUnidad(detalleDeudadUnidad.getIdDetalleDeudaUnidad());*/
+        dto.setIdDetalleDeudaUnidad(detalleDeudadUnidad.getIdDetalleDeudaUnidad());*//*
+
         return dto;
     }
 
 
 }
+*/

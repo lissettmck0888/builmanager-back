@@ -15,4 +15,5 @@ public interface GastoComunRepository extends JpaRepository<GastoComun,Integer> 
     @Query(value = "select * from gasto_comun g where g.estado = :estado order by idgastocomun desc limit 1", nativeQuery = true)
     Optional<GastoComun> findUltimoGastoComunCerrado(@Param("estado") String estado);
     GastoComun findByEstadoAndPeriodo(String estado, LocalDate periodo);
+    GastoComun findByPeriodo(LocalDate periodo);
 }

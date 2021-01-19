@@ -16,9 +16,9 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addConverter(new UsuarioConverter());
         registry.addConverter(new AsignacionConverter());
         registry.addConverter(UnidadDtoConverter.getInstance());
-        registry.addConverter(DetalleDeudaUnidadDtoConverter.getInstance());
+        /*registry.addConverter(DetalleDeudaUnidadDtoConverter.getInstance());
         registry.addConverter(new AbonoDtoConverter());
-        registry.addConverter(new AbonoConverter());
+        registry.addConverter(new AbonoConverter());*/
         registry.addConverter(new MovimientoDtoConverter());
     }
 }

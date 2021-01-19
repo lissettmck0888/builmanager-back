@@ -1,3 +1,4 @@
+/*
 package com.gi.builmanager.converter;
 
 import com.gi.builmanager.dominio.Abono;
@@ -11,10 +12,13 @@ public class AbonoDtoConverter implements Converter<Abono, AbonoDto> {
     @Override
     public AbonoDto convert(Abono abono) {
         AbonoDto dto = new AbonoDto();
-       /* dto.setDetalleDeudadUnidad(detalleDeudaUnidadDtoConverter.convert(abono.getDetalleDeudadUnidad()));
+       */
+/* dto.setDetalleDeudadUnidad(detalleDeudaUnidadDtoConverter.convert(abono.getDetalleDeudadUnidad()));
         dto.setFecha(abono.getFecha());
         dto.setId(abono.getId());
-        dto.setMontoAbono(abono.getMontoAbono());*/
+        dto.setMontoAbono(abono.getMontoAbono());*//*
+
         return dto;
     }
 }
+*/
