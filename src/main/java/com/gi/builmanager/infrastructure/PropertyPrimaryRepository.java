@@ -1,9 +1,13 @@
 package com.gi.builmanager.infrastructure;
 
+import com.gi.builmanager.domain.model.guest.Guest;
 import com.gi.builmanager.domain.model.property.Property;
 import com.gi.builmanager.domain.model.property.PropertyRepository;
+import com.gi.builmanager.infrastructure.hibernate.entity.Persona;
+import com.gi.builmanager.infrastructure.hibernate.entity.Unidad;
 import com.gi.builmanager.infrastructure.hibernate.repository.UnidadRepository;
 import com.gi.builmanager.infrastructure.mapper.PropertyMapper;
+import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,7 +50,12 @@ public class PropertyPrimaryRepository implements PropertyRepository {
     }
 
     @Override
-    public Integer save(Property aggregate) {
+    public Integer save(Property aggregate, RepositoryMapper.RepositoryHelper<Property, Unidad> repositoryHelper) {
+        return null;
+    }
+
+    @Override
+    public Integer saveAll(List<Property> aggregate, RepositoryMapper.RepositoryHelper<Property, Unidad> repositoryHelper) {
         return null;
     }
 }

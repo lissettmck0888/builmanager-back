@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 public class TransactionId implements ValueObject<TransactionId> {
 
-    private Long id;
+    private Integer id;
 
     @Override
     public boolean sameValueAs(TransactionId another) {

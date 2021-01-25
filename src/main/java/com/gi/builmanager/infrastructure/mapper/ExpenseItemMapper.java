@@ -25,7 +25,7 @@ public class ExpenseItemMapper implements RepositoryMapper<ExpenseItem, ItemGast
     }
 
     @Override
-    public ItemGastoComun toRepository(ExpenseItem expenseItem) {
+    public ItemGastoComun toRepository(ExpenseItem expenseItem, RepositoryHelper<ExpenseItem, ItemGastoComun> repositoryHelper) {
         return ItemGastoComun.builder()
                 .descripcion(expenseItem.getDetails().getDescription())
                 .idItemGastoComun(Objects.nonNull(expenseItem.getId()) ? expenseItem.getId().getId() : null)

@@ -7,6 +7,7 @@ import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.PlantillaGastosOrdinariosRepository;
 import com.gi.builmanager.infrastructure.mapper.ExpenseMapper;
+import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -61,10 +62,15 @@ public class ExpensePrimaryRepository implements ExpenseRepository {
     }
 
     @Override
-    public Integer save(Expense aggregate) {
-        GastoComun gastoComun = expenseMapper.toRepository(aggregate);
+    public Integer save(Expense aggregate, RepositoryMapper.RepositoryHelper<Expense, GastoComun> repositoryHelper) {
+        GastoComun gastoComun = expenseMapper.toRepository(aggregate, repositoryHelper);
         gastoComunRepository.save(gastoComun);
         return 1;
+    }
+
+    @Override
+    public Integer saveAll(List<Expense> aggregate, RepositoryMapper.RepositoryHelper<Expense, GastoComun> repositoryHelper) {
+        return null;
     }
 
 }

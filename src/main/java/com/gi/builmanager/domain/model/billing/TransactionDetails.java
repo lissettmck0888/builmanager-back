@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class TransactionDetails implements ValueObject<TransactionDetails> {
 
     private Integer propertyId;
+    private Integer expenseId;
     private LocalDateTime date;
     private Double amount;
     private String type;

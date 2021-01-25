@@ -1,12 +1,15 @@
 package com.gi.builmanager.infrastructure;
 
+import com.gi.builmanager.domain.model.assignment.Assignment;
 import com.gi.builmanager.domain.model.billing.Billing;
 import com.gi.builmanager.domain.model.billing.BillingRepository;
+import com.gi.builmanager.infrastructure.hibernate.entity.Asignacion;
 import com.gi.builmanager.infrastructure.hibernate.entity.EstadoCuenta;
 import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.EstadoCuentaRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
 import com.gi.builmanager.infrastructure.mapper.BillingMapper;
+import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,8 +54,17 @@ public class BillingPrimaryRepository implements BillingRepository {
     }
 
     @Override
-    public Integer save(Billing aggregate) {
-        estadoCuentaRepository.save(billingMapper.toRepository(aggregate));
+    public Integer save(Billing aggregate, RepositoryMapper.RepositoryHelper<Billing, EstadoCuenta> repositoryHelper) {
+        estadoCuentaRepository.save(billingMapper.toRepository(aggregate, repositoryHelper));
+        return 1;
+    }
+
+    @Override
+    public Integer saveAll(List<Billing> aggregate, RepositoryMapper.RepositoryHelper<Billing, EstadoCuenta> repositoryHelper) {
+        estadoCuentaRepository.saveAll(aggregate.stream()
+                .map(billing -> billingMapper.toRepository(billing, repositoryHelper))
+                .collect(Collectors.toList())
+        );
         return 1;
     }
 }

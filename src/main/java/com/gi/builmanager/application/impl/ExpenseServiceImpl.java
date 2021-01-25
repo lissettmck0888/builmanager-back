@@ -13,18 +13,22 @@ import com.gi.builmanager.domain.model.expense.ExpenseRepository;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemDetails;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemRepository;
+import com.gi.builmanager.infrastructure.mapper.BillingRepositoryManager;
+import com.gi.builmanager.infrastructure.mapper.TransactionRepositoryManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(ExpenseServiceImpl.class);
 
     @Autowired
     private ExpenseRepository expenseRepository;
@@ -37,10 +41,15 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private TransactionRepositoryManager transactionRepositoryManager;
+    @Autowired
+    private BillingRepositoryManager billingRepositoryManager;
+
     @Override
     public void updateExpense(Expense expense) {
         checkIfOrdinaryExpensesExist(expense.getDetails().getExpenseItemValues());
-        expenseRepository.save(expense);
+        expenseRepository.save(expense, null);
     }
 
     private void checkIfOrdinaryExpensesExist(List<ExpenseItemValue> expenseItemList) {
@@ -58,7 +67,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                                 .description(expenseItem.getDescription())
                                 .type(expenseItem.getType())
                                 .build())
-                        .build());
+                        .build(), null);
             }
         });
     }
@@ -69,19 +78,22 @@ public class ExpenseServiceImpl implements ExpenseService {
         Expense currentExpense = expenseRepository.retrieveCurrentExpense();
         if (Objects.nonNull(currentExpense)){
             currentExpense.closeExpense();
-            expenseRepository.save(currentExpense);
+            expenseRepository.save(currentExpense, null);
         }
 
         Expense openedExpense = expenseRepository.retrieveOpenedExpense();
         openedExpense.terminateExpensePeriod(expenseRepository.retrieveOrdinaryExpenses());
 
-        expenseRepository.save(openedExpense);
-        expenseRepository.save(Expense.newExpense(openedExpense.getDetails().getPeriod()));
+        expenseRepository.save(openedExpense, null);
+        expenseRepository.save(Expense.newExpense(openedExpense.getDetails().getPeriod()), null);
 
     }
 
+    @Transactional
     @Override
     public void generateDebt() {
+
+        Long start = System.currentTimeMillis();
 
         Expense closedExpense = expenseRepository.retrieveLastClosedExpense();
         LocalDate closedPeriod = Objects.nonNull(closedExpense) ? closedExpense.getDetails().getPeriod() : LocalDate.now();
@@ -89,27 +101,40 @@ public class ExpenseServiceImpl implements ExpenseService {
         Expense currentExpense = expenseRepository.retrieveCurrentExpense();
         Double totalSquareMeters = assignmentRepository.usedSquareMetersTotal();
 
-
         List<Billing> closedPeriodPropertyBillingList = billingRepository.getBillingByPeriod(closedPeriod);
         List<Transaction> closedPeriodPropertyPaymentsList = transactionRepository.retrieveClosedPeriodPaymentsList();
 
         Map<Object, Double> billingByPropertyMapper = billingByPropertyMapper(closedPeriodPropertyBillingList);
         Map<Object, Double> paymentsByPropertyMapper = paymentsByPropertyMapper(closedPeriodPropertyPaymentsList);
 
+        List<Billing> billingList = new ArrayList<>();
+        List<Transaction> transactionList = new ArrayList<>();
+
         assignmentRepository.activeAssignments().forEach(assignment -> {
 
             Property mainProperty = assignment.mainProperty();
-
             Double apportionFactor = assignment.getDetails().getTotalSquareMeters() / totalSquareMeters;
-
             Double billingTotal = getOrDefault(billingByPropertyMapper, mainProperty.getId(), 0.0);
             Double paymentsTotal = getOrDefault(paymentsByPropertyMapper, mainProperty.getId(), 0.0);
 
             Billing billing = Billing.from(currentExpense, mainProperty, apportionFactor, billingTotal, paymentsTotal);
 
-            //FIXME: PERSIST BILLING
-            billingRepository.save(billing);
+            billingList.add(billing);
+            transactionList.addAll(billing.getDetails().getTransactionList());
         });
+
+        Long end = System.currentTimeMillis();
+        LOGGER.info("millis: " + (end - start));
+
+        start = System.currentTimeMillis();
+
+        billingRepository.saveAll(billingList, null);
+        transactionRepository.saveAll(transactionList, null);
+
+
+        end = System.currentTimeMillis();
+        LOGGER.info("millis after saving: " + (end - start));
+
     }
 
     private Map<Object, Double> billingByPropertyMapper(List<Billing> billingList) {

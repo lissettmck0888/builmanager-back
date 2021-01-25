@@ -2,7 +2,6 @@ package com.gi.builmanager.domain.model.billing;
 
 import com.gi.builmanager.domain.model.assignment.Property;
 import com.gi.builmanager.domain.model.expense.Expense;
-import com.gi.builmanager.domain.model.guest.Guest;
 import com.gi.builmanager.domain.shared.AggregateRoot;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,10 +31,8 @@ public class Billing extends AggregateRoot<Billing> {
         Billing billing = new Billing();
 
         List<Transaction> transactionList = new ArrayList<>();
-        Transaction periodTransaction = Transaction.builder().build();
-        generatePeriodTransactionDetails(periodTransaction, currentExpense, apportionFactor);
+        Transaction periodTransaction = generatePeriodTransaction(property, currentExpense, apportionFactor);
         transactionList.add(periodTransaction);
-
 
         //FIXME podrian ser multiples transacciones (cuenta del mes, multas, intereses, etc)
         Double balance = lastPeriodBillingAmount + periodTransaction.getDetails().getAmount() - lastPeriodTotalPayments;
@@ -43,7 +40,7 @@ public class Billing extends AggregateRoot<Billing> {
         BillingDetails details = BillingDetails.builder()
                 .mainPropertyId(property.getId())
                 .mainPropertyIdentifier(property.getNumber())
-                .guestFullName(guestFullName)
+                //.guestFullName(guestFullName)
                 .expenseId(currentExpense.getId().getId())
                 .apportionFactor(apportionFactor)
                 .period(LocalDate.now())
@@ -58,14 +55,16 @@ public class Billing extends AggregateRoot<Billing> {
         return billing;
     }
 
-    private static void generatePeriodTransactionDetails(Transaction transaction, Expense currentExpense, Double apportionFactor) {
-        transaction.setDetails(
-                TransactionDetails.builder()
+    private static Transaction generatePeriodTransaction(Property property, Expense currentExpense, Double apportionFactor) {
+        return Transaction.builder()
+                .details(TransactionDetails.builder()
+                        .propertyId(property.getId())
+                        .expenseId(currentExpense.getId().getId())
                         .date(LocalDateTime.now())
                         .type("Cargo")
                         .amount(round(currentExpense.getDetails().getTotalAmount() * apportionFactor, 0))
-                .build()
-        );
+                        .build())
+                .build();
     }
 
     private static void generateExtraPeriodCharges() {
