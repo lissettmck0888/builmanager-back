@@ -28,7 +28,7 @@ public class GuestMapper implements RepositoryMapper<Guest, Persona> {
     }
 
     @Override
-    public Persona toRepository(Guest guest, RepositoryHelper<Guest, Persona> repositoryHelper) {
+    public Persona toRepository(Guest guest) {
         return Persona.builder()
                 .apellidoMaterno(guest.getDetails().getLastNameM())
                 .apellidoPaterno(guest.getDetails().getLastNameP())

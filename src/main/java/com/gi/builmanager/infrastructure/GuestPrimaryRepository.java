@@ -1,13 +1,10 @@
 package com.gi.builmanager.infrastructure;
 
-import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
 import com.gi.builmanager.domain.model.guest.Guest;
 import com.gi.builmanager.domain.model.guest.GuestRepository;
-import com.gi.builmanager.infrastructure.hibernate.entity.ItemGastoComun;
 import com.gi.builmanager.infrastructure.hibernate.entity.Persona;
 import com.gi.builmanager.infrastructure.hibernate.repository.PersonaRepository;
 import com.gi.builmanager.infrastructure.mapper.GuestMapper;
-import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +27,7 @@ public class GuestPrimaryRepository implements GuestRepository {
     }
 
     @Override
-    public Integer save(Guest guest, RepositoryMapper.RepositoryHelper<Guest, Persona> repositoryHelper) {
+    public Integer save(Guest guest) {
 
         Persona persona = new Persona();
         persona.setIdPersona(Objects.nonNull(guest.getId()) ? guest.getId().getId() : null);
@@ -48,7 +45,7 @@ public class GuestPrimaryRepository implements GuestRepository {
     }
 
     @Override
-    public Integer saveAll(List<Guest> aggregate, RepositoryMapper.RepositoryHelper<Guest, Persona> repositoryHelper) {
+    public Integer saveAll(List<Guest> aggregate) {
         return null;
     }
 

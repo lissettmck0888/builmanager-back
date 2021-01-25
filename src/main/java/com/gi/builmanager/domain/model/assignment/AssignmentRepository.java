@@ -5,7 +5,7 @@ import com.gi.builmanager.infrastructure.hibernate.entity.Asignacion;
 
 import java.util.List;
 
-public interface AssignmentRepository extends BaseRepository<Assignment, Asignacion> {
+public interface AssignmentRepository extends BaseRepository<Assignment> {
 
 
     List<Assignment> activeAssignments();

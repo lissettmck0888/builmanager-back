@@ -6,7 +6,7 @@ import com.gi.builmanager.infrastructure.hibernate.entity.EstadoCuenta;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface BillingRepository extends BaseRepository<Billing, EstadoCuenta> {
+public interface BillingRepository extends BaseRepository<Billing> {
 
     List<Billing> retrieveCurrentPeriodBilling();
     /*List<Billing> retrieveOpenedExpense();

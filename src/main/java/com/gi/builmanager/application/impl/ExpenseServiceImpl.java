@@ -13,8 +13,6 @@ import com.gi.builmanager.domain.model.expense.ExpenseRepository;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemDetails;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemRepository;
-import com.gi.builmanager.infrastructure.mapper.BillingRepositoryManager;
-import com.gi.builmanager.infrastructure.mapper.TransactionRepositoryManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,15 +39,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    @Autowired
-    private TransactionRepositoryManager transactionRepositoryManager;
-    @Autowired
-    private BillingRepositoryManager billingRepositoryManager;
-
     @Override
     public void updateExpense(Expense expense) {
         checkIfOrdinaryExpensesExist(expense.getDetails().getExpenseItemValues());
-        expenseRepository.save(expense, null);
+        expenseRepository.save(expense);
     }
 
     private void checkIfOrdinaryExpensesExist(List<ExpenseItemValue> expenseItemList) {
@@ -67,7 +60,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                                 .description(expenseItem.getDescription())
                                 .type(expenseItem.getType())
                                 .build())
-                        .build(), null);
+                        .build());
             }
         });
     }
@@ -78,14 +71,14 @@ public class ExpenseServiceImpl implements ExpenseService {
         Expense currentExpense = expenseRepository.retrieveCurrentExpense();
         if (Objects.nonNull(currentExpense)){
             currentExpense.closeExpense();
-            expenseRepository.save(currentExpense, null);
+            expenseRepository.save(currentExpense);
         }
 
         Expense openedExpense = expenseRepository.retrieveOpenedExpense();
         openedExpense.terminateExpensePeriod(expenseRepository.retrieveOrdinaryExpenses());
 
-        expenseRepository.save(openedExpense, null);
-        expenseRepository.save(Expense.newExpense(openedExpense.getDetails().getPeriod()), null);
+        expenseRepository.save(openedExpense);
+        expenseRepository.save(Expense.newExpense(openedExpense.getDetails().getPeriod()));
 
     }
 
@@ -128,8 +121,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         start = System.currentTimeMillis();
 
-        billingRepository.saveAll(billingList, null);
-        transactionRepository.saveAll(transactionList, null);
+        billingRepository.saveAll(billingList);
+        transactionRepository.saveAll(transactionList);
 
 
         end = System.currentTimeMillis();

@@ -2,13 +2,14 @@ package com.gi.builmanager.infrastructure;
 
 import com.gi.builmanager.domain.model.assignment.Assignment;
 import com.gi.builmanager.domain.model.assignment.AssignmentRepository;
-import com.gi.builmanager.domain.model.expense.Expense;
-import com.gi.builmanager.infrastructure.hibernate.entity.*;
+import com.gi.builmanager.infrastructure.hibernate.entity.Asignacion;
+import com.gi.builmanager.infrastructure.hibernate.entity.AsignacionUnidad;
+import com.gi.builmanager.infrastructure.hibernate.entity.Persona;
+import com.gi.builmanager.infrastructure.hibernate.entity.Unidad;
 import com.gi.builmanager.infrastructure.hibernate.repository.AsignacionRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.PersonaRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.UnidadRepository;
 import com.gi.builmanager.infrastructure.mapper.AssignmentMapper;
-import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +36,7 @@ public class AssignmentPrimaryRepository implements AssignmentRepository {
     }
 
     @Override
-    public Integer save(Assignment newAssignment, RepositoryMapper.RepositoryHelper<Assignment, Asignacion> repositoryHelper) {
+    public Integer save(Assignment newAssignment) {
 
         List<Asignacion> asignacionViewList = asignacionRepository.findAll();
         /*List<Unidad> unidadList = asignacionViewList.stream()
@@ -73,7 +74,7 @@ public class AssignmentPrimaryRepository implements AssignmentRepository {
     }
 
     @Override
-    public Integer saveAll(List<Assignment> aggregate, RepositoryMapper.RepositoryHelper<Assignment, Asignacion> repositoryHelper) {
+    public Integer saveAll(List<Assignment> aggregate) {
         return null;
     }
 

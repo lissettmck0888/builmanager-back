@@ -5,7 +5,7 @@ import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 
 import java.util.List;
 
-public interface ExpenseRepository extends BaseRepository<Expense, GastoComun> {
+public interface ExpenseRepository extends BaseRepository<Expense> {
 
     Expense retrieveCurrentExpense();
     Expense retrieveOpenedExpense();

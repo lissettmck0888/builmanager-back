@@ -35,7 +35,7 @@ public class TransactionMapper implements RepositoryMapper<Transaction, Movimien
     }
 
     @Override
-    public Movimiento toRepository(Transaction transaction, RepositoryHelper<Transaction, Movimiento> repositoryHelper) {
+    public Movimiento toRepository(Transaction transaction) {
         Movimiento movimiento = Movimiento.builder()
                 .gastoComun(gastoComunRepository.findById(transaction.getDetails().getExpenseId()).orElseThrow(IllegalArgumentException::new))
                 .unidad(unidadRepository.findById(transaction.getDetails().getPropertyId()).orElseThrow(IllegalArgumentException::new))

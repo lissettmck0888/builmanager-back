@@ -53,7 +53,7 @@ public class ExpenseMapper implements RepositoryMapper<Expense, GastoComun> {
     }
 
     @Override
-    public GastoComun toRepository(Expense expense, RepositoryHelper<Expense, GastoComun> repositoryHelper) {
+    public GastoComun toRepository(Expense expense) {
 
         GastoComun retrieved = null;
         try {

@@ -27,7 +27,7 @@ public class PropertyMapper implements RepositoryMapper<Property, Unidad> {
     }
 
     @Override
-    public Unidad toRepository(Property property, RepositoryHelper<Property, Unidad> repositoryHelper) {
+    public Unidad toRepository(Property property) {
         return null;
     }
 }

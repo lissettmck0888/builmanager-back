@@ -43,7 +43,7 @@ public class AssignmentMapper implements RepositoryMapper<Assignment, Asignacion
     }
 
     @Override
-    public AsignacionView toRepository(Assignment assignment, RepositoryHelper<Assignment, AsignacionView> repositoryHelper) {
+    public AsignacionView toRepository(Assignment assignment) {
         return null;
     }
 

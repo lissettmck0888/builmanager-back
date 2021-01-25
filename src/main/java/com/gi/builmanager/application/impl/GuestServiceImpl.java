@@ -14,6 +14,6 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public Integer createOrUpdateGuest(Guest guest) {
-        return guestRepository.save(guest, null);
+        return guestRepository.save(guest);
     }
 }

@@ -14,6 +14,6 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public void newAssignment(Assignment assignment) {
-        assignmentRepository.save(assignment, null);
+        assignmentRepository.save(assignment);
     }
 }

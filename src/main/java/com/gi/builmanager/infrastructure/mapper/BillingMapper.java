@@ -37,7 +37,7 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
     }
 
     @Override
-    public EstadoCuenta toRepository(Billing billing, RepositoryHelper<Billing, EstadoCuenta> repositoryHelper) {
+    public EstadoCuenta toRepository(Billing billing) {
         EstadoCuenta estadoCuenta = EstadoCuenta.builder()
                 .factorProrrateo(billing.getDetails().getApportionFactor())
                 .saldo(billing.getDetails().getBalance())
@@ -47,7 +47,6 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
                 .deudaInicial(billing.getDetails().getPeriodDebt())
                 .montoAnterior(billing.getDetails().getPreviousPeriodDebt())
                 .build();
-        //repositoryHelper.fillEntity(billing, estadoCuenta);
         return estadoCuenta;
     }
 }

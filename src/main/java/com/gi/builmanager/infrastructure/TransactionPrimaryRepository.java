@@ -2,13 +2,9 @@ package com.gi.builmanager.infrastructure;
 
 import com.gi.builmanager.domain.model.billing.Transaction;
 import com.gi.builmanager.domain.model.billing.TransactionRepository;
-import com.gi.builmanager.domain.model.property.Property;
 import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
-import com.gi.builmanager.infrastructure.hibernate.entity.Movimiento;
-import com.gi.builmanager.infrastructure.hibernate.entity.Unidad;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.MovimientoRepository;
-import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import com.gi.builmanager.infrastructure.mapper.TransactionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,15 +41,15 @@ public class TransactionPrimaryRepository implements TransactionRepository {
     }
 
     @Override
-    public Integer save(Transaction transaction, RepositoryMapper.RepositoryHelper<Transaction, Movimiento> repositoryHelper) {
-        movimientoRepository.save(transactionMapper.toRepository(transaction, repositoryHelper));
+    public Integer save(Transaction transaction) {
+        movimientoRepository.save(transactionMapper.toRepository(transaction));
         return 1;
     }
 
     @Override
-    public Integer saveAll(List<Transaction> transactionList, RepositoryMapper.RepositoryHelper<Transaction, Movimiento> repositoryHelper) {
+    public Integer saveAll(List<Transaction> transactionList) {
         movimientoRepository.saveAll(transactionList.stream()
-                .map(transaction -> transactionMapper.toRepository(transaction, repositoryHelper))
+                .map(transaction -> transactionMapper.toRepository(transaction))
                 .collect(Collectors.toList())
         );
         return 1;

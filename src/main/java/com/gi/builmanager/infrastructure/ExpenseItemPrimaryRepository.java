@@ -1,13 +1,9 @@
 package com.gi.builmanager.infrastructure;
 
-import com.gi.builmanager.domain.model.billing.Billing;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemRepository;
-import com.gi.builmanager.infrastructure.hibernate.entity.EstadoCuenta;
-import com.gi.builmanager.infrastructure.hibernate.entity.ItemGastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.ItemGastoComunRepository;
 import com.gi.builmanager.infrastructure.mapper.ExpenseItemMapper;
-import com.gi.builmanager.infrastructure.mapper.RepositoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,13 +25,13 @@ public class ExpenseItemPrimaryRepository implements ExpenseItemRepository {
     }
 
     @Override
-    public Integer save(ExpenseItem expenseItem, RepositoryMapper.RepositoryHelper<ExpenseItem, ItemGastoComun> repositoryHelper) {
-        itemGastoComunRepository.save(expenseItemMapper.toRepository(expenseItem, repositoryHelper));
+    public Integer save(ExpenseItem expenseItem) {
+        itemGastoComunRepository.save(expenseItemMapper.toRepository(expenseItem));
         return 1;
     }
 
     @Override
-    public Integer saveAll(List<ExpenseItem> aggregate, RepositoryMapper.RepositoryHelper<ExpenseItem, ItemGastoComun> repositoryHelper) {
+    public Integer saveAll(List<ExpenseItem> aggregate) {
         return null;
     }
 
