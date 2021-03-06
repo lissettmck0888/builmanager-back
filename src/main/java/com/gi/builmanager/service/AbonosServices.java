@@ -1,14 +1,15 @@
 package com.gi.builmanager.service;
 
 import com.gi.builmanager.dominio.Abono;
+import com.gi.builmanager.dominio.Movimiento;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface AbonosServices {
-     Abono registrarPagos(Abono abono);
-     List<Abono> obtenerPagosPorUnidad(Integer idUnidad);
-     List<Abono> obtenerPagosPorPeriodo(LocalDate periodo);
+     Movimiento registrarAbono(Double monto, Integer idUnidad, Integer idGastoComun);
+     /*List<Movimiento> obtenerPagosPorUnidad(Integer idUnidad);
+     List<Movimiento> obtenerPagosPorPeriodo(LocalDate periodo);*/
 
 
 }

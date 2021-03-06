@@ -26,11 +26,13 @@ public class Persona {
     private String correo;
     @Column(name = "direccion")
     private String direccion;
+    @Column(name = "activo")
+    private boolean estado;
 
     public Persona() {
     }
 
-    public Persona(String nombres, String apellidoPaterno, String apellidoMaterno, String run, LocalDate fechaNacimiento, String nacionalidad, String telefono, String correo, String direccion) {
+    public Persona(String nombres, String apellidoPaterno, String apellidoMaterno, String run, LocalDate fechaNacimiento, String nacionalidad, String telefono, String correo, String direccion, boolean estado) {
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -40,6 +42,7 @@ public class Persona {
         this.telefono = telefono;
         this.correo = correo;
         this.direccion = direccion;
+        this.estado = estado;
     }
 
     public String getNombres() {
@@ -121,4 +124,8 @@ public class Persona {
     public void setIdPersona(Integer idPersona) {
         this.idPersona = idPersona;
     }
+
+    public boolean getEstado() { return estado; }
+
+    public void setEstado(boolean estado) { this.estado = estado; }
 }

@@ -31,4 +31,10 @@ public class PersonaController {
     public Persona agregarPersona(@RequestBody Persona persona) {
         return personaService.agregar(persona);
     }
+
+    @DeleteMapping(path = {"/{id}"})
+    public boolean eliminarPersona(@PathVariable("id") int id){
+        return personaService.eliminar(id);
+
+    }
 }

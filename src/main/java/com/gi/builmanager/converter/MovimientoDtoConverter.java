@@ -8,7 +8,7 @@ public class MovimientoDtoConverter implements Converter<Movimiento, MovimientoD
     @Override
     public MovimientoDto convert(Movimiento movimiento) {
         MovimientoDto movimientoDto = new MovimientoDto();
-        movimientoDto.setIdGastoComun(movimiento.getId());
+        movimientoDto.setIdGastoComun(movimiento.getGastoComun().getIdGastoComun());
         movimientoDto.setId(movimiento.getId());
         movimientoDto.setFecha(movimiento.getFecha().toString());
         movimientoDto.setMonto(movimiento.getMonto());

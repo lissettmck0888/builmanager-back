@@ -9,4 +9,5 @@ public interface PersonaService {
     List<Persona> getByFilter(String filter);
     List<Persona> getAll();
     Persona agregar(Persona persona);
+    boolean eliminar(Integer id);
 }

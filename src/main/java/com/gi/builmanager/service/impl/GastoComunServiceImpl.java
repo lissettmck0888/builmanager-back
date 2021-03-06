@@ -154,6 +154,14 @@ public class GastoComunServiceImpl implements GastoComunService {
             gastoComunRepository.save(gastoComunActual);
         }
 
+        this.getPlantillaGastosOrdinarios().forEach(plantillaGastosOrdinarios -> {
+            DetalleGastoComun detalleGastoComun = new DetalleGastoComun();
+            detalleGastoComun.setItemGastoComun(plantillaGastosOrdinarios.getItemGastoComun());
+            detalleGastoComun.setGastoComun(gastoComun);
+            detalleGastoComun.setMonto(plantillaGastosOrdinarios.getMonto());
+            gastoComun.getListaDetalleGastoComun().add(detalleGastoComun);
+        });
+
         Double total = gastoComun.getListaDetalleGastoComun()
                 .stream()
                 .map(DetalleGastoComun::getMonto)

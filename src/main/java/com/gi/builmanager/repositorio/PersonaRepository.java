@@ -19,4 +19,9 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
             "or lower(p.apellido_materno) like lower(concat('%',:filter,'%'))",
             nativeQuery = true)
     List<Persona> findByFilter(@Param("filter") String filter);
+
+    @Query(
+            value = "select * from persona p where p.activo=true",
+            nativeQuery = true)
+    List<Persona> findAllActive();
 }
