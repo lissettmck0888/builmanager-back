@@ -1,4 +1,4 @@
-package com.gi.builmanager.infrastructure.mapper;
+package com.gi.builmanager.infrastructure.hibernate.mapper;
 
 public interface RepositoryMapper<DOMAIN, TYPE> {
 

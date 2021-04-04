@@ -1,4 +1,4 @@
-package com.gi.builmanager.infrastructure.mapper;
+package com.gi.builmanager.infrastructure.hibernate.mapper;
 
 import com.gi.builmanager.domain.model.billing.Transaction;
 import com.gi.builmanager.domain.model.billing.TransactionDetails;

@@ -3,7 +3,7 @@ package com.gi.builmanager.infrastructure;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.ItemGastoComunRepository;
-import com.gi.builmanager.infrastructure.mapper.ExpenseItemMapper;
+import com.gi.builmanager.infrastructure.hibernate.mapper.ExpenseItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -4,7 +4,7 @@ import com.gi.builmanager.domain.model.guest.Guest;
 import com.gi.builmanager.domain.model.guest.GuestRepository;
 import com.gi.builmanager.infrastructure.hibernate.entity.Persona;
 import com.gi.builmanager.infrastructure.hibernate.repository.PersonaRepository;
-import com.gi.builmanager.infrastructure.mapper.GuestMapper;
+import com.gi.builmanager.infrastructure.hibernate.mapper.GuestMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

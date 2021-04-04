@@ -6,7 +6,7 @@ import com.gi.builmanager.domain.model.expense.ExpenseRepository;
 import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.PlantillaGastosOrdinariosRepository;
-import com.gi.builmanager.infrastructure.mapper.ExpenseMapper;
+import com.gi.builmanager.infrastructure.hibernate.mapper.ExpenseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

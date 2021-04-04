@@ -6,7 +6,7 @@ import com.gi.builmanager.infrastructure.hibernate.entity.EstadoCuenta;
 import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.EstadoCuentaRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
-import com.gi.builmanager.infrastructure.mapper.BillingMapper;
+import com.gi.builmanager.infrastructure.hibernate.mapper.BillingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

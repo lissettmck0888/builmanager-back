@@ -1,4 +1,4 @@
-package com.gi.builmanager.infrastructure.mapper;
+package com.gi.builmanager.infrastructure.hibernate.mapper;
 
 import com.gi.builmanager.domain.model.guest.Guest;
 import com.gi.builmanager.domain.model.guest.GuestDetails;

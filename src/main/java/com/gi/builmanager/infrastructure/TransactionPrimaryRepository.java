@@ -5,7 +5,7 @@ import com.gi.builmanager.domain.model.billing.TransactionRepository;
 import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.MovimientoRepository;
-import com.gi.builmanager.infrastructure.mapper.TransactionMapper;
+import com.gi.builmanager.infrastructure.hibernate.mapper.TransactionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

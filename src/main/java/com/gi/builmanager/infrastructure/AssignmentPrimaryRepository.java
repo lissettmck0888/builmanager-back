@@ -9,7 +9,7 @@ import com.gi.builmanager.infrastructure.hibernate.entity.Unidad;
 import com.gi.builmanager.infrastructure.hibernate.repository.AsignacionRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.PersonaRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.UnidadRepository;
-import com.gi.builmanager.infrastructure.mapper.AssignmentMapper;
+import com.gi.builmanager.infrastructure.hibernate.mapper.AssignmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
