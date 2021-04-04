@@ -22,6 +22,7 @@ public class BillingDto {
     public String state;
     public LocalDateTime paymentDate;
     public String unidad;
+    public Integer idUnidad;
     /*public gastoComun: GastoComun;*/
 
 

@@ -5,14 +5,8 @@ import com.gi.builmanager.domain.model.billing.BillingRepository;
 import com.gi.builmanager.domain.model.expense.ExpenseRepository;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItemRepository;
 import com.gi.builmanager.domain.model.expenseconfig.ExpenseItem;
-import com.gi.builmanager.interfaces.dto.BillingDto;
-import com.gi.builmanager.interfaces.dto.ExpenseDto;
-import com.gi.builmanager.interfaces.dto.ExpenseItemDto;
-import com.gi.builmanager.interfaces.dto.ExpenseItemValueDto;
-import com.gi.builmanager.interfaces.mapper.BillingWebMapper;
-import com.gi.builmanager.interfaces.mapper.ExpenseItemValueWebMapper;
-import com.gi.builmanager.interfaces.mapper.ExpenseItemWebMapper;
-import com.gi.builmanager.interfaces.mapper.ExpenseWebMapper;
+import com.gi.builmanager.interfaces.dto.*;
+import com.gi.builmanager.interfaces.mapper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +31,8 @@ public class GastoComunController {
     private ExpenseItemWebMapper expenseItemWebMapper;
     @Autowired
     private ExpenseItemValueWebMapper expenseItemValueWebMapper;
+    @Autowired
+    private ExpensePeriodWebMapper expensePeriodWebMapper;
 
     @Autowired
     private ExpenseService expenseService;
@@ -89,8 +85,8 @@ public class GastoComunController {
     }
 
     @GetMapping("/periodo-actual/")
-    public LocalDate getPeriodoActual(){
-        return expenseRepository.retrieveCurrentExpense().getDetails().getPeriod();
+    public ExpensePeriodDto getPeriodoActual(){
+        return expensePeriodWebMapper.toDto(expenseRepository.retrieveCurrentExpense());
     }
 
 }
