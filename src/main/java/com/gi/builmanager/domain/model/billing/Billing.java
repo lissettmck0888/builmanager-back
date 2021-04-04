@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -65,6 +66,12 @@ public class Billing extends AggregateRoot<Billing> {
                         .amount(round(currentExpense.getDetails().getTotalAmount() * apportionFactor, 0))
                         .build())
                 .build();
+    }
+
+    public static BillingDetails afterPayment(BillingDetails billingDetails, Transaction transaction) {
+        billingDetails.setPayment((Objects.nonNull(billingDetails.getPayment())? billingDetails.getPayment():0)  + transaction.getDetails().getAmount());
+        billingDetails.setBalance(billingDetails.getPeriodDebt() + billingDetails.getPreviousPeriodDebt() - billingDetails.getPayment());
+        return billingDetails;
     }
 
     private static void generateExtraPeriodCharges() {

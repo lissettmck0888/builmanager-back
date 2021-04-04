@@ -9,6 +9,8 @@ import com.gi.builmanager.infrastructure.hibernate.repository.UnidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
 
@@ -31,6 +33,7 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
                         .previousPeriodDebt(estadoCuenta.getMontoAnterior())
                         .mainPropertyId(estadoCuenta.getUnidad().getIdUnidad())
                         .mainPropertyIdentifier(estadoCuenta.getUnidad().getNumero())
+                        .expenseId(estadoCuenta.getGastoComun().getIdGastoComun())
                         //.guestFullName(estadoCuenta.get)
                         .build())
                 .build();
@@ -39,6 +42,7 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
     @Override
     public EstadoCuenta toRepository(Billing billing) {
         EstadoCuenta estadoCuenta = EstadoCuenta.builder()
+                .id(Objects.nonNull(billing.getId())?billing.getId().getId():null)
                 .factorProrrateo(billing.getDetails().getApportionFactor())
                 .saldo(billing.getDetails().getBalance())
                 .abonos(billing.getDetails().getPayment())

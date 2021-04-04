@@ -30,16 +30,22 @@ public class BillingPrimaryRepository implements BillingRepository {
     public List<Billing> retrieveCurrentPeriodBilling() {
         GastoComun gastoComun = gastoComunRepository.findByEstado("Actual");
 
-        List<EstadoCuenta> byGastoComun = estadoCuentaRepository.findByGastoComun(gastoComun);
+        List<EstadoCuenta> byGastoComun = estadoCuentaRepository.findByGastoComunOrderById(gastoComun);
         return byGastoComun.stream()
                 .map(estadoCuenta -> billingMapper.fromRepositoryType(estadoCuenta))
                 .collect(Collectors.toList());
     }
 
     @Override
+    public Billing retrieveCurrentPropertyPeriodBilling(Integer propertyId) {
+        GastoComun gastoComun = gastoComunRepository.findByEstado("Actual");
+        return billingMapper.fromRepositoryType(estadoCuentaRepository.findByGastoComunAndUnidad_idUnidad(gastoComun, propertyId));
+    }
+
+    @Override
     public List<Billing> getBillingByPeriod(LocalDate period) {
         GastoComun gastoComun = gastoComunRepository.findByPeriodo(period);
-        return estadoCuentaRepository.findByGastoComun(gastoComun).stream()
+        return estadoCuentaRepository.findByGastoComunOrderById(gastoComun).stream()
                 .map(estadoCuenta -> billingMapper.fromRepositoryType(estadoCuenta))
                 .collect(Collectors.toList());
     }

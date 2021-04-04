@@ -9,6 +9,7 @@ import java.util.List;
 public interface BillingRepository extends BaseRepository<Billing> {
 
     List<Billing> retrieveCurrentPeriodBilling();
+    Billing retrieveCurrentPropertyPeriodBilling(Integer propertyId);
     /*List<Billing> retrieveOpenedExpense();
     List<Billing> retrieveLastClosedExpense();*/
     List<Billing> getBillingByPeriod(LocalDate period);
