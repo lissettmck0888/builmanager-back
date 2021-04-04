@@ -1,6 +1,8 @@
 package com.gi.builmanager.service.impl;
 
+import com.gi.builmanager.dominio.EstadoCuenta;
 import com.gi.builmanager.dominio.Movimiento;
+import com.gi.builmanager.repositorio.EstadoCuentaRepository;
 import com.gi.builmanager.repositorio.GastoComunRepository;
 import com.gi.builmanager.repositorio.MovimientoRepository;
 import com.gi.builmanager.repositorio.UnidadRepository;
@@ -21,6 +23,8 @@ public class AbonosServicesImpl implements AbonosServices {
     private GastoComunRepository gastoComunRepository;
     @Autowired
     private MovimientoRepository movimientoRepository;
+    @Autowired
+    private EstadoCuentaRepository estadoCuentaRepository;
 
     @Override
     public Movimiento registrarAbono(Double monto, Integer idUnidad, Integer idGastoComun) {
@@ -31,7 +35,17 @@ public class AbonosServicesImpl implements AbonosServices {
                 .monto(monto)
                 .tipo("Abono")
                 .build();
-        return movimientoRepository.save(abono);
+        Movimiento movimientoGuardado =  movimientoRepository.save(abono);
+        actualizarEstadoCuenta(movimientoGuardado);
+        return movimientoGuardado;
+    }
+
+    private void actualizarEstadoCuenta(Movimiento movimiento){
+        EstadoCuenta estadoCuenta = estadoCuentaRepository.findByGastoComunAndUnidad(movimiento.getGastoComun(), movimiento.getUnidad());
+        Double abonoTemporal = estadoCuenta.getAbonos() != null ? estadoCuenta.getAbonos() : 0;
+        estadoCuenta.setAbonos(abonoTemporal + movimiento.getMonto());
+        estadoCuenta.setSaldo(estadoCuenta.getDeudaInicial() + estadoCuenta.getMontoAnterior() - estadoCuenta.getAbonos());
+        estadoCuentaRepository.save(estadoCuenta);
     }
 
     /*@Override

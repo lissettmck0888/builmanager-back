@@ -2,6 +2,7 @@ package com.gi.builmanager.repositorio;
 
 import com.gi.builmanager.dominio.EstadoCuenta;
 import com.gi.builmanager.dominio.GastoComun;
+import com.gi.builmanager.dominio.Unidad;
 import com.gi.builmanager.repositorio.projection.EstadoCuentaView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,5 @@ public interface EstadoCuentaRepository extends JpaRepository<EstadoCuenta, Inte
 
     List<EstadoCuenta> findByGastoComun(GastoComun gastoComun);
     List<EstadoCuentaView> findByUnidad_idUnidad(Integer idUnidad);
+    EstadoCuenta findByGastoComunAndUnidad(GastoComun gastoComun, Unidad unidad);
 }
