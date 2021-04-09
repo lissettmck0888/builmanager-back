@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gi.builmanager.infrastructure.mybatis.AssignmentSqlMapper">
+    <resultMap id="assignmentResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.AssignmentType">
+        <id column="id_asignacion" property="id" javaType="Integer"/>
+        <result column="idpersona" property="guestId" javaType="Integer"/>
+        <result column="nombre" property="guestFullName" javaType="String"/>
+        <result column="tipo_asignacion" property="type" javaType="String"/>
+        <result column="estado" property="state" javaType="String"/>
+        <result column="total_metros_cuadrados_prorrateables" property="totalSquareMeters" javaType="Double"/>
+        <result column="fecha_asignacion" property="startDate" javaType="java.time.LocalDateTime"/>
+        <collection property="properties" column="id_asignacion" select="unidades"/>
+    </resultMap>
+    <resultMap id="propertyResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.PropertyType">
+        <id column="idunidad" property="id" javaType="Integer"/>
+        <result column="descripcion" property="description" javaType="String"/>
+        <result column="nombre" property="type" javaType="String"/>
+        <result column="piso" property="floor" javaType="Integer"/>
+        <result column="numero" property="number" javaType="String"/>
+        <result column="sector" property="sector" javaType="String"/>
+        <result column="metros_cuadrados" property="squareMeters" javaType="Double"/>
+        <result column="afecto_prorrateo" property="apportionmentMark" javaType="Boolean"/>
+        <result column="es_unidad_copropiedad" property="mainProperty" javaType="Boolean"/>
+    </resultMap>
+
+    <select id="activeAssignments" resultMap="assignmentResultMap">
+        select
+            a.*,
+            concat(p.nombres, ' ', p.apellido_paterno, ' ', p.apellido_materno) nombre,
+            array_agg(au.id_unidad) ids
+        from
+            buildman.asignacion a
+            join buildman.asignacion_unidad au on a.id_asignacion = au.id_asignacion
+            join buildman.persona p on a.idpersona = p.idpersona
+        group by
+            a.id_asignacion,
+            p.nombres ,
+            p.apellido_paterno ,
+            p.apellido_materno
+    </select>
+    <select id="unidades" resultMap="propertyResultMap" parameterType="java.lang.Integer">
+        select
+            u.*,
+            tu.nombre
+        from
+            asignacion_unidad au
+            join unidad u on u.idunidad = au.id_unidad
+            join tipo_unidad tu on u.idtipounidad = tu.idtipounidad
+        where
+            au.id_asignacion = #{id_asignacion}
+    </select>
+</mapper>

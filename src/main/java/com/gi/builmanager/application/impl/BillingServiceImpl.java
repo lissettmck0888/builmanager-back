@@ -1,11 +1,16 @@
 package com.gi.builmanager.application.impl;
 
 import com.gi.builmanager.application.BillingService;
-import com.gi.builmanager.domain.model.billing.*;
+import com.gi.builmanager.domain.model.billing.Billing;
+import com.gi.builmanager.domain.model.billing.BillingRepository;
+import com.gi.builmanager.domain.model.billing.Transaction;
+import com.gi.builmanager.domain.model.billing.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import static com.gi.builmanager.domain.model.billing.Billing.afterPayment;
 
 @Service
 public class BillingServiceImpl implements BillingService {
@@ -25,7 +30,7 @@ public class BillingServiceImpl implements BillingService {
 
     private void updatePropertyBilling(Transaction transaction) {
         Billing billing = billingRepository.retrieveCurrentPropertyPeriodBilling(transaction.getDetails().getPropertyId());
-        billing.setDetails(Billing.afterPayment(billing.getDetails(), transaction));
+        billing.setDetails(afterPayment(billing.getDetails(), transaction));
         billingRepository.save(billing);
     }
 }

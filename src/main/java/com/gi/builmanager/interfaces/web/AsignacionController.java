@@ -2,6 +2,7 @@ package com.gi.builmanager.interfaces.web;
 
 import com.gi.builmanager.application.AssignmentService;
 import com.gi.builmanager.domain.model.assignment.AssignmentRepository;
+import com.gi.builmanager.infrastructure.mybatis.type.AssignmentType;
 import com.gi.builmanager.interfaces.dto.AssignmentDto;
 import com.gi.builmanager.interfaces.mapper.AssignmentWebMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,10 @@ public class AsignacionController {
                 .map(assignment -> assignmentWebMapper.toDto(assignment))
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/all/v2")
+    public List<AssignmentType> getAsignacionesV2() {
+        return assignmentRepository.activeAssignmentsMybatis();
+    }
+
 }

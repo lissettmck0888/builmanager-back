@@ -16,23 +16,19 @@ public class AssignmentWebMapper {
 
     public AssignmentDto toDto(Assignment assignment) {
 
-        List<AssignmentPropertyDto> propertyDtoList = assignment.getDetails().getProperties().stream()
-                .map(property -> AssignmentPropertyDto.builder()
-                        .mainProperty(property.getMainProperty())
-                        .propertyDto(PropertyDto.builder()
-                                .id(property.getId())
-                                .type(property.getType())
-                                //.apportionFactor(property.get)
-                                .description(property.getDescription())
-                                .floor(property.getFloor())
-                                .number(property.getNumber())
-                                .sector(property.getSector())
-                                .requiresApportion(property.getApportionmentMark())
-                                .squareMeters(property.getSquareMeters())
-                                .mainProperty(property.getMainProperty())
-                                .build()
-                        )
-                        .build())
+        List<PropertyDto> propertyDtoList = assignment.getDetails().getProperties().stream()
+                .map(property -> PropertyDto.builder()
+                            .id(property.getId())
+                            .type(property.getType())
+                            //.apportionFactor(property.get)
+                            .description(property.getDescription())
+                            .floor(property.getFloor())
+                            .number(property.getNumber())
+                            .sector(property.getSector())
+                            .requiresApportion(property.getApportionmentMark())
+                            .squareMeters(property.getSquareMeters())
+                            .mainProperty(property.getMainProperty())
+                            .build())
                 .collect(Collectors.toList());
 
         return AssignmentDto.builder()
@@ -40,19 +36,19 @@ public class AssignmentWebMapper {
                 .assignmentType(assignment.getDetails().getType())
                 .guestId(assignment.getDetails().getGuestId())
                 .guestFullName(assignment.getDetails().getGuestFullName())
-                .assignmentPropertyList(propertyDtoList)
+                .properties(propertyDtoList)
                 .build();
     }
 
     public Assignment fromDto(AssignmentDto assignmentDto) {
-        List<Property> properties = assignmentDto.getAssignmentPropertyList().stream().map(asignacionUnidadDto -> Property.builder()
-                .id(asignacionUnidadDto.getPropertyDto().getId())
-                .mainProperty(asignacionUnidadDto.getMainProperty())
+        List<Property> properties = assignmentDto.getProperties().stream().map(property -> Property.builder()
+                .id(property.getId())
+                .mainProperty(property.getMainProperty())
                 .build()).collect(Collectors.toList());
 
-        Double totalSquareMeters = assignmentDto.getAssignmentPropertyList().stream()
-                .filter(asignacionUnidadDto -> asignacionUnidadDto.getPropertyDto().getRequiresApportion())
-                .map(asig -> asig.getPropertyDto().getSquareMeters()).reduce(Double::sum)
+        Double totalSquareMeters = assignmentDto.getProperties().stream()
+                .filter(property -> property.getRequiresApportion())
+                .map(asig -> asig.getSquareMeters()).reduce(Double::sum)
                 .orElse(0D);
 
         return Assignment.builder()

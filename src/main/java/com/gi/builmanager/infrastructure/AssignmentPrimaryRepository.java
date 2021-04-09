@@ -10,6 +10,8 @@ import com.gi.builmanager.infrastructure.hibernate.repository.AsignacionReposito
 import com.gi.builmanager.infrastructure.hibernate.repository.PersonaRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.UnidadRepository;
 import com.gi.builmanager.infrastructure.hibernate.mapper.AssignmentMapper;
+import com.gi.builmanager.infrastructure.mybatis.AssignmentSqlMapper;
+import com.gi.builmanager.infrastructure.mybatis.type.AssignmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,9 @@ public class AssignmentPrimaryRepository implements AssignmentRepository {
 
     @Autowired
     private AsignacionRepository asignacionRepository;
+    @Autowired
+    private AssignmentSqlMapper assignmentSqlMapper;
+
     @Autowired
     private PersonaRepository personaRepository;
     @Autowired
@@ -80,9 +85,18 @@ public class AssignmentPrimaryRepository implements AssignmentRepository {
 
     @Override
     public List<Assignment> activeAssignments() {
-        return asignacionRepository.findAllProjectedBy().stream()
+        /*return asignacionRepository.findAllProjectedBy().stream()
                 .map(asignacionView -> assignmentMapper.fromRepositoryType(asignacionView))
+                .collect(Collectors.toList());*/
+        AssignmentType.DomainMapper domainMapper = new AssignmentType.DomainMapper();
+        return assignmentSqlMapper.activeAssignments().stream()
+                .map(domainMapper::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AssignmentType> activeAssignmentsMybatis() {
+        return assignmentSqlMapper.activeAssignments();
     }
 
     @Override
