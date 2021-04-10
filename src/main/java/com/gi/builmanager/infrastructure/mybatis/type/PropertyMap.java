@@ -3,7 +3,7 @@ package com.gi.builmanager.infrastructure.mybatis.type;
 import lombok.Data;
 
 @Data
-public class PropertyType {
+public class PropertyMap {
 
     private Integer id;
     private String type;

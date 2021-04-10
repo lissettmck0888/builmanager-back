@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gi.builmanager.infrastructure.mybatis.BillingSqlMapper">
+    <!--
+    numero	responsable	id	abonos	deuda_inicial	factor	monto_anterior	saldo	gasto_comun	id_unidad	periodo
+    -->
+    <resultMap id="billingResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.BillingMap">
+        <id column="id" property="id" javaType="Integer"/>
+        <result column="responsable" property="guestFullName" javaType="String"/>
+        <result column="numero" property="mainPropertyIdentifier" javaType="String"/>
+        <result column="abonos" property="payment" javaType="Double"/>
+        <result column="deuda_inicial" property="periodDebt" javaType="Double"/>
+        <result column="factor" property="apportionFactor" javaType="Double"/>
+        <result column="monto_anterior" property="previousPeriodDebt" javaType="Double"/>
+        <result column="saldo" property="balance" javaType="Double"/>
+        <result column="gasto_comun" property="expenseId" javaType="Integer"/>
+        <result column="id_unidad" property="mainPropertyId" javaType="Integer"/>
+        <result column="periodo" property="period" javaType="java.time.LocalDate"/>
+        <!--<collection property="transactions" column="{expenseId=gasto_comun, propertyId=id_unidad}" select="transactionsOfBilling"/>-->
+    </resultMap>
+    <resultMap id="transactionResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.TransactionMap">
+        <id column="id" property="id" javaType="Long"/>
+        <result column="id_unidad" property="propertyId" javaType="Integer"/>
+        <result column="id_gastocomun" property="expenseId" javaType="Integer"/>
+        <result column="fecha" property="date" javaType="java.time.LocalDateTime"/>
+        <result column="monto" property="amount" javaType="Double"/>
+        <result column="tipo" property="type" javaType="String"/>
+    </resultMap>
+
+    <select id="billingsByPeriod" resultMap="billingResultMap">
+        select
+            u.numero,
+            concat(p.nombres, ' ' , p.apellido_paterno, ' ', p.apellido_materno) responsable,
+            ec.*,
+            gc.periodo
+        from
+            estado_cuenta ec
+            join gasto_comun gc on ec.gasto_comun = gc.idgastocomun
+            join unidad u on ec.id_unidad = u.idunidad
+            join asignacion_unidad au on au.id_unidad = u.idunidad
+            join asignacion a on a.id_asignacion = au.id_asignacion
+            join persona p on a.idpersona = p.idpersona
+        where
+            gc.periodo = #{period}
+            order by
+            ec.id ;
+    </select>
+    <select id="transactionsOfBilling" resultMap="transactionResultMap">
+        select * from movimiento m where id_gastocomun = #{expenseId} and id_unidad = #{propertyId};
+    </select>
+</mapper>

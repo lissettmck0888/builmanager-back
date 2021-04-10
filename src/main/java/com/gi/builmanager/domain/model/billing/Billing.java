@@ -36,7 +36,7 @@ public class Billing extends AggregateRoot<Billing> {
         transactionList.add(periodTransaction);
 
         //FIXME podrian ser multiples transacciones (cuenta del mes, multas, intereses, etc)
-        Double balance = lastPeriodBillingAmount + periodTransaction.getDetails().getAmount() - lastPeriodTotalPayments;
+        Double balance = lastPeriodBillingAmount + periodTransaction.getDetails().getAmount();
 
         BillingDetails details = BillingDetails.builder()
                 .mainPropertyId(property.getId())
@@ -45,7 +45,7 @@ public class Billing extends AggregateRoot<Billing> {
                 .expenseId(currentExpense.getId().getId())
                 .apportionFactor(apportionFactor)
                 .period(LocalDate.now())
-                .previousPeriodDebt(lastPeriodBillingAmount - lastPeriodTotalPayments)
+                .previousPeriodDebt(lastPeriodBillingAmount)
                 .periodDebt(periodTransaction.getDetails().getAmount())//FIXME podrian ser multiples transacciones (cuenta del mes, multas, intereses, etc)
                 .balance(balance)
                 .transactionList(transactionList)

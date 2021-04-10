@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gi.builmanager.infrastructure.mybatis.AssignmentSqlMapper">
-    <resultMap id="assignmentResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.AssignmentType">
+    <resultMap id="assignmentResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.AssignmentMap">
         <id column="id_asignacion" property="id" javaType="Integer"/>
         <result column="idpersona" property="guestId" javaType="Integer"/>
         <result column="nombre" property="guestFullName" javaType="String"/>
@@ -14,7 +14,7 @@
         <result column="fecha_asignacion" property="startDate" javaType="java.time.LocalDateTime"/>
         <collection property="properties" column="id_asignacion" select="unidades"/>
     </resultMap>
-    <resultMap id="propertyResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.PropertyType">
+    <resultMap id="propertyResultMap" type="com.gi.builmanager.infrastructure.mybatis.type.PropertyMap">
         <id column="idunidad" property="id" javaType="Integer"/>
         <result column="descripcion" property="description" javaType="String"/>
         <result column="nombre" property="type" javaType="String"/>
@@ -50,6 +50,6 @@
             join unidad u on u.idunidad = au.id_unidad
             join tipo_unidad tu on u.idtipounidad = tu.idtipounidad
         where
-            au.id_asignacion = #{id_asignacion}
+            au.id_asignacion = #{0}
     </select>
 </mapper>

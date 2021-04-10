@@ -7,6 +7,8 @@ import com.gi.builmanager.infrastructure.hibernate.entity.GastoComun;
 import com.gi.builmanager.infrastructure.hibernate.repository.EstadoCuentaRepository;
 import com.gi.builmanager.infrastructure.hibernate.repository.GastoComunRepository;
 import com.gi.builmanager.infrastructure.hibernate.mapper.BillingMapper;
+import com.gi.builmanager.infrastructure.mybatis.BillingSqlMapper;
+import com.gi.builmanager.infrastructure.mybatis.type.BillingMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,8 @@ public class BillingPrimaryRepository implements BillingRepository {
     @Autowired
     private BillingMapper billingMapper;
 
+    @Autowired
+    private BillingSqlMapper billingSqlMapper;
     @Autowired
     private EstadoCuentaRepository estadoCuentaRepository;
     @Autowired
@@ -48,6 +52,11 @@ public class BillingPrimaryRepository implements BillingRepository {
         return estadoCuentaRepository.findByGastoComunOrderById(gastoComun).stream()
                 .map(estadoCuenta -> billingMapper.fromRepositoryType(estadoCuenta))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BillingMap> getBillingByPeriodV2(LocalDate period) {
+        return billingSqlMapper.billingsByPeriod(period);
     }
 
     @Override

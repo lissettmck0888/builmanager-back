@@ -1,6 +1,8 @@
 package com.gi.builmanager.interfaces.web;
 
 import com.gi.builmanager.domain.model.billing.BillingRepository;
+import com.gi.builmanager.infrastructure.mybatis.BillingSqlMapper;
+import com.gi.builmanager.infrastructure.mybatis.type.BillingMap;
 import com.gi.builmanager.interfaces.dto.BillingDto;
 import com.gi.builmanager.interfaces.mapper.BillingWebMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,10 @@ public class DetalleDeudaController {
         return billingRepository.getBillingByPeriod(period).stream()
                 .map(billing -> billingWebMapper.toDto(billing))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/periodo/{period}/v2")
+    public List<BillingMap> getDetalleByPeriodoV2(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate period) {
+        return billingRepository.getBillingByPeriodV2(period);
     }
 }

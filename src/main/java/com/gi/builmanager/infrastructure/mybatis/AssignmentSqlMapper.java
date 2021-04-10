@@ -1,6 +1,6 @@
 package com.gi.builmanager.infrastructure.mybatis;
 
-import com.gi.builmanager.infrastructure.mybatis.type.AssignmentType;
+import com.gi.builmanager.infrastructure.mybatis.type.AssignmentMap;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 public interface AssignmentSqlMapper {
 
-    List<AssignmentType> activeAssignments();
+    List<AssignmentMap> activeAssignments();
 
 }
