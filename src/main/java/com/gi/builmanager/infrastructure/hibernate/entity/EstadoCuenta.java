@@ -28,8 +28,10 @@ public class EstadoCuenta {
     private Double factorProrrateo;
     @Column(name = "monto_anterior")
     private Double montoAnterior;
-    @Column(name = "deuda_inicial")
-    private Double deudaInicial;//todo renombrar a deuda
+    @Column(name = "monto_inicial")
+    private Double montoInicial;
+    @Column(name = "total_periodo")
+    private Double totalPeriodo;
     @Column
     private Double abonos;
     @Column

@@ -17,6 +17,7 @@ public class BillingDto {
     public String responsable;
     public Double periodDebt;
     public Double previousPeriodDebt;
+    private Double periodTotalDebt;//deudaTotal
     public Double balance;
     public Double apportionFactor;
     public String state;

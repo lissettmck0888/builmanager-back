@@ -47,6 +47,7 @@ public class Billing extends AggregateRoot<Billing> {
                 .period(LocalDate.now())
                 .previousPeriodDebt(lastPeriodBillingAmount)
                 .periodDebt(periodTransaction.getDetails().getAmount())//FIXME podrian ser multiples transacciones (cuenta del mes, multas, intereses, etc)
+                .periodTotalDebt(balance)
                 .balance(balance)
                 .transactionList(transactionList)
            .build();

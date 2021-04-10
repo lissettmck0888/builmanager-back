@@ -16,6 +16,7 @@ public class BillingWebMapper {
                 .id(billing.getId().getId())
                 .periodDebt(billing.getDetails().getPeriodDebt())
                 .previousPeriodDebt(billing.getDetails().getPreviousPeriodDebt())
+                .periodTotalDebt(billing.getDetails().getPeriodTotalDebt())
                 .balance(billing.getDetails().getBalance())
                 .unidad(billing.getDetails().getMainPropertyIdentifier())
                 .idUnidad(billing.getDetails().getMainPropertyId())

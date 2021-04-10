@@ -12,9 +12,10 @@
         <result column="responsable" property="guestFullName" javaType="String"/>
         <result column="numero" property="mainPropertyIdentifier" javaType="String"/>
         <result column="abonos" property="payment" javaType="Double"/>
-        <result column="deuda_inicial" property="periodDebt" javaType="Double"/>
+        <result column="monto_inicial" property="periodDebt" javaType="Double"/>
         <result column="factor" property="apportionFactor" javaType="Double"/>
         <result column="monto_anterior" property="previousPeriodDebt" javaType="Double"/>
+        <result column="total_periodo" property="periodTotalDebt" javaType="Double"/>
         <result column="saldo" property="balance" javaType="Double"/>
         <result column="gasto_comun" property="expenseId" javaType="Integer"/>
         <result column="id_unidad" property="mainPropertyId" javaType="Integer"/>

@@ -29,8 +29,9 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
                         .balance(estadoCuenta.getSaldo())
                         .payment(estadoCuenta.getAbonos())
                         .period(estadoCuenta.getGastoComun().getPeriodo())
-                        .periodDebt(estadoCuenta.getDeudaInicial())
+                        .periodDebt(estadoCuenta.getMontoInicial())
                         .previousPeriodDebt(estadoCuenta.getMontoAnterior())
+                        .periodTotalDebt(estadoCuenta.getTotalPeriodo())
                         .mainPropertyId(estadoCuenta.getUnidad().getIdUnidad())
                         .mainPropertyIdentifier(estadoCuenta.getUnidad().getNumero())
                         .expenseId(estadoCuenta.getGastoComun().getIdGastoComun())
@@ -48,8 +49,9 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
                 .abonos(billing.getDetails().getPayment())
                 .gastoComun(gastoComunRepository.findById(billing.getDetails().getExpenseId()).orElseThrow(IllegalArgumentException::new))
                 .unidad(unidadRepository.findById(billing.getDetails().getMainPropertyId()).orElseThrow(IllegalArgumentException::new))
-                .deudaInicial(billing.getDetails().getPeriodDebt())
+                .montoInicial(billing.getDetails().getPeriodDebt())
                 .montoAnterior(billing.getDetails().getPreviousPeriodDebt())
+                .totalPeriodo(billing.getDetails().getPeriodTotalDebt())
                 .build();
         return estadoCuenta;
     }

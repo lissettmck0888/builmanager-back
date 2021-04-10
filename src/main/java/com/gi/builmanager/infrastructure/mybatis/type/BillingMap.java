@@ -19,6 +19,7 @@ public class BillingMap {
     private Double apportionFactor;//factor prorrateo
     private Double previousPeriodDebt;//deuda anterior
     private Double periodDebt;//deuda
+    private Double periodTotalDebt;//deudaTotal
     private Double payment;//abono
     private Double balance;//saldo
     private List<TransactionMap> transactions;
