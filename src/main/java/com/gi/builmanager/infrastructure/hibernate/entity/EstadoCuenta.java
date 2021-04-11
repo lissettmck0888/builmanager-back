@@ -15,7 +15,8 @@ import javax.persistence.*;
 @Builder
 public class EstadoCuenta {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "estadoCuenta_pk", sequenceName = "estado_cuenta_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estadoCuenta_pk")
     @Column
     private Integer id;
     @ManyToOne

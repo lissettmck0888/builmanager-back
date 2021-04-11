@@ -15,7 +15,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Movimiento {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @SequenceGenerator(name = "movimiento_pk", sequenceName = "movimiento_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movimiento_pk")
     @Column
     private Integer id;
     @ManyToOne
