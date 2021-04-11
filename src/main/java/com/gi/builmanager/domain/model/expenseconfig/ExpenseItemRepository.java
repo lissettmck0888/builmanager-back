@@ -1,10 +1,11 @@
 package com.gi.builmanager.domain.model.expenseconfig;
 
 import com.gi.builmanager.domain.shared.BaseRepository;
+import com.gi.builmanager.infrastructure.hibernate.entity.ItemGastoComun;
 
 import java.util.List;
 
-public interface ExpenseItemRepository extends BaseRepository<ExpenseItem> {
+public abstract class ExpenseItemRepository extends BaseRepository<ExpenseItem> {
 
-    List<ExpenseItem> allExtraordinary();
+    public abstract List<ExpenseItem> allExtraordinary();
 }

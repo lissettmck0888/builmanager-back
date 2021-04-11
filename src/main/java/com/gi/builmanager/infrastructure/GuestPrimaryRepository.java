@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public class GuestPrimaryRepository implements GuestRepository {
+public class GuestPrimaryRepository extends GuestRepository {
 
     @Autowired
     private GuestMapper guestMapper;

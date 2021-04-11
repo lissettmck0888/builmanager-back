@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class AssignmentPrimaryRepository implements AssignmentRepository {
+public class AssignmentPrimaryRepository extends AssignmentRepository {
 
     @Autowired
     private AssignmentMapper assignmentMapper;

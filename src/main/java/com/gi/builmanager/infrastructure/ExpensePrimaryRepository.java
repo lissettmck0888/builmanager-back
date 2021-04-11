@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class ExpensePrimaryRepository implements ExpenseRepository {
+public class ExpensePrimaryRepository extends ExpenseRepository {
 
     @Autowired
     private ExpenseMapper expenseMapper;

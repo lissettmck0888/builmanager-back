@@ -14,10 +14,10 @@ import java.util.Objects;
 @Component
 public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
 
-    @Autowired
+    /*@Autowired
     private GastoComunRepository gastoComunRepository;
     @Autowired
-    private UnidadRepository unidadRepository;
+    private UnidadRepository unidadRepository;*/
 
     @Override
     public Billing fromRepositoryType(EstadoCuenta estadoCuenta) {
@@ -47,8 +47,8 @@ public class BillingMapper implements RepositoryMapper<Billing, EstadoCuenta> {
                 .factorProrrateo(billing.getDetails().getApportionFactor())
                 .saldo(billing.getDetails().getBalance())
                 .abonos(billing.getDetails().getPayment())
-                .gastoComun(gastoComunRepository.findById(billing.getDetails().getExpenseId()).orElseThrow(IllegalArgumentException::new))
-                .unidad(unidadRepository.findById(billing.getDetails().getMainPropertyId()).orElseThrow(IllegalArgumentException::new))
+                /*.gastoComun(gastoComunRepository.findById(billing.getDetails().getExpenseId()).orElseThrow(IllegalArgumentException::new))
+                .unidad(unidadRepository.findById(billing.getDetails().getMainPropertyId()).orElseThrow(IllegalArgumentException::new))*/
                 .montoInicial(billing.getDetails().getPeriodDebt())
                 .montoAnterior(billing.getDetails().getPreviousPeriodDebt())
                 .totalPeriodo(billing.getDetails().getPeriodTotalDebt())

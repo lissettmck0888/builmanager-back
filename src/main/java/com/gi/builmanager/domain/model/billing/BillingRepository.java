@@ -7,12 +7,12 @@ import com.gi.builmanager.infrastructure.mybatis.type.BillingMap;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface BillingRepository extends BaseRepository<Billing> {
+public abstract class BillingRepository extends BaseRepository<Billing> {
 
-    List<Billing> retrieveCurrentPeriodBilling();
-    Billing retrieveCurrentPropertyPeriodBilling(Integer propertyId);
+    public abstract List<Billing> retrieveCurrentPeriodBilling();
+    public abstract Billing retrieveCurrentPropertyPeriodBilling(Integer propertyId);
     /*List<Billing> retrieveOpenedExpense();
     List<Billing> retrieveLastClosedExpense();*/
-    List<Billing> getBillingByPeriod(LocalDate period);
-    List<BillingMap> getBillingByPeriodV2(LocalDate period);
+    public abstract List<Billing> getBillingByPeriod(LocalDate period);
+    public abstract List<BillingMap> getBillingByPeriodV2(LocalDate period);
 }
