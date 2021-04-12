@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Component
 public class TransactionMapper implements RepositoryMapper<Transaction, Movimiento> {
 
-    /*@Autowired
+    @Autowired
     private GastoComunRepository gastoComunRepository;
     @Autowired
-    private UnidadRepository unidadRepository;*/
+    private UnidadRepository unidadRepository;
 
     @Override
     public Transaction fromRepositoryType(Movimiento movimiento) {
@@ -37,8 +37,8 @@ public class TransactionMapper implements RepositoryMapper<Transaction, Movimien
     @Override
     public Movimiento toRepository(Transaction transaction) {
         Movimiento movimiento = Movimiento.builder()
-                /*.gastoComun(gastoComunRepository.findById(transaction.getDetails().getExpenseId()).orElseThrow(IllegalArgumentException::new))
-                .unidad(unidadRepository.findById(transaction.getDetails().getPropertyId()).orElseThrow(IllegalArgumentException::new))*/
+                .gastoComun(gastoComunRepository.findById(transaction.getDetails().getExpenseId()).orElseThrow(IllegalArgumentException::new))
+                .unidad(unidadRepository.findById(transaction.getDetails().getPropertyId()).orElseThrow(IllegalArgumentException::new))
                 .fecha(LocalDateTime.now())
                 .monto(transaction.getDetails().getAmount())
                 .tipo(transaction.getDetails().getType())

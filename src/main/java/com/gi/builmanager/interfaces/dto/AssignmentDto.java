@@ -23,6 +23,7 @@ public class AssignmentDto implements Serializable {
     private String assignmentType;
     private String state;
     private LocalDateTime assignmentDate;
+    private Double totalSquareMeters;
     private List<PropertyDto> properties;
 
 

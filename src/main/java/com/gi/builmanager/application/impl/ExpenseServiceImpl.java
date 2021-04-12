@@ -68,6 +68,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void terminateOpenedExpense() {
 
+        LOGGER.info("<============= terminando periodo actual =============>");
         Expense currentExpense = expenseRepository.retrieveCurrentExpense();
         if (Objects.nonNull(currentExpense)){
             currentExpense.closeExpense();
@@ -86,31 +87,39 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void generateDebt() {
 
+        LOGGER.info("<============= generando nueva deuda =============>");
+
         Long start = System.currentTimeMillis();
 
+        LOGGER.info("recuperando ultimo gasto comun cerrado...");
         Expense closedExpense = expenseRepository.retrieveLastClosedExpense();
         LocalDate closedPeriod = Objects.nonNull(closedExpense) ? closedExpense.getDetails().getPeriod() : LocalDate.now();
 
+        LOGGER.info("recuperando gasto comun actual...");
         Expense currentExpense = expenseRepository.retrieveCurrentExpense();
+        LOGGER.info("recuperando metros cuadrados...");
         Double totalSquareMeters = assignmentRepository.usedSquareMetersTotal();
 
+        LOGGER.info("recuperando estados de cuenta periodo cerrado...");
         List<Billing> closedPeriodPropertyBillingList = billingRepository.getBillingByPeriod(closedPeriod);
-        List<Transaction> closedPeriodPropertyPaymentsList = transactionRepository.retrieveClosedPeriodPaymentsList();
+        //LOGGER.info("recuperando pagos periodo cerrado...");
+        //List<Transaction> closedPeriodPropertyPaymentsList = transactionRepository.retrieveClosedPeriodPaymentsList();
 
         Map<Object, Double> billingByPropertyMapper = billingByPropertyMapper(closedPeriodPropertyBillingList);
-        Map<Object, Double> paymentsByPropertyMapper = paymentsByPropertyMapper(closedPeriodPropertyPaymentsList);
+        //Map<Object, Double> paymentsByPropertyMapper = paymentsByPropertyMapper(closedPeriodPropertyPaymentsList);
 
         List<Billing> billingList = new ArrayList<>();
         List<Transaction> transactionList = new ArrayList<>();
 
+        LOGGER.info("recuperando asignaciones activas...");
         assignmentRepository.activeAssignments().forEach(assignment -> {
 
             Property mainProperty = assignment.mainProperty();
             Double apportionFactor = assignment.getDetails().getTotalSquareMeters() / totalSquareMeters;
             Double billingTotal = getOrDefault(billingByPropertyMapper, mainProperty.getId(), 0.0);
-            Double paymentsTotal = getOrDefault(paymentsByPropertyMapper, mainProperty.getId(), 0.0);
+            //Double paymentsTotal = getOrDefault(paymentsByPropertyMapper, mainProperty.getId(), 0.0);
 
-            Billing billing = Billing.from(currentExpense, mainProperty, apportionFactor, billingTotal, paymentsTotal);
+            Billing billing = Billing.from(currentExpense, mainProperty, apportionFactor, billingTotal/*, paymentsTotal*/);
 
             billingList.add(billing);
             transactionList.addAll(billing.getDetails().getTransactionList());

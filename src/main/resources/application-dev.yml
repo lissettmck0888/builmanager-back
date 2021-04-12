@@ -12,6 +12,7 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
         jdbc:
+          batch_size: 50
           lob:
             non_contextual_creation: false
     show-sql: true

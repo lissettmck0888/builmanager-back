@@ -13,7 +13,9 @@ import javax.persistence.*;
 @ToString(exclude = {"gastoComun"})
 public class DetalleGastoComun {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @SequenceGenerator(name = "detalleGasto_pk", sequenceName = "detalle_gasto_comun_iddetallegastocomun_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "detalleGasto_pk")
     @Column(name = "iddetallegastocomun")
     private Integer idDetalleGastoComun;
 

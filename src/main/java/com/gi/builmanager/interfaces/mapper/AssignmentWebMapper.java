@@ -36,6 +36,7 @@ public class AssignmentWebMapper {
                 .assignmentType(assignment.getDetails().getType())
                 .guestId(assignment.getDetails().getGuestId())
                 .guestFullName(assignment.getDetails().getGuestFullName())
+                .totalSquareMeters(assignment.getDetails().getTotalSquareMeters())
                 .properties(propertyDtoList)
                 .build();
     }

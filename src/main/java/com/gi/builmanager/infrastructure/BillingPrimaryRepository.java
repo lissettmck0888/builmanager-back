@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public class BillingPrimaryRepository extends BillingRepository implements InitializingBean {
+public class BillingPrimaryRepository extends BillingRepository /*implements InitializingBean*/ {
 
     @Autowired
     private BillingMapper billingMapper;
@@ -38,7 +38,7 @@ public class BillingPrimaryRepository extends BillingRepository implements Initi
     @Autowired
     private UnidadRepository unidadRepository;
 
-    @Override
+    /*@Override
     public void afterPropertiesSet() throws Exception {
         RepositoryHelper.SourceId<Integer> sourceIdGastoComun = domain -> ((Billing)domain).getDetails().getExpenseId();
         RepositoryHelper.SourceId<Integer> sourceIdUnidad = domain -> ((Billing)domain).getDetails().getMainPropertyId();
@@ -48,7 +48,7 @@ public class BillingPrimaryRepository extends BillingRepository implements Initi
 
         super.addHelper(GastoComun.class, new GastoComunEntityHelper(gastoComunRepository, sourceIdGastoComun, actionGastoComun));
         super.addHelper(Unidad.class, new UnidadEntityHelper(unidadRepository, sourceIdUnidad, actionUnidad));
-    }
+    }*/
 
     @Override
     public List<Billing> retrieveCurrentPeriodBilling() {
@@ -93,11 +93,11 @@ public class BillingPrimaryRepository extends BillingRepository implements Initi
 
     @Override
     public Integer saveAll(List<Billing> aggregate) {
-        super.startPersistence();
+        //super.startPersistence();
         estadoCuentaRepository.saveAll(aggregate.stream()
                 .map(billing -> {
                     EstadoCuenta estadoCuenta = billingMapper.toRepository(billing);
-                    super.fillData(estadoCuenta, billing);
+                    //super.fillData(estadoCuenta, billing);
                     return estadoCuenta;
                 })
                 .collect(Collectors.toList())

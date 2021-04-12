@@ -27,7 +27,7 @@ public class Billing extends AggregateRoot<Billing> {
     private Billing() {}
 
     public static Billing from(Expense currentExpense, Property property, Double apportionFactor,
-                               Double lastPeriodBillingAmount, Double lastPeriodTotalPayments) {
+                               Double lastPeriodBillingAmount/*, Double lastPeriodTotalPayments*/) {
 
         Billing billing = new Billing();
 

@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public class TransactionPrimaryRepository extends TransactionRepository implements InitializingBean {
+public class TransactionPrimaryRepository extends TransactionRepository /*implements InitializingBean*/ {
 
     @Autowired
     TransactionMapper transactionMapper;
@@ -35,7 +35,7 @@ public class TransactionPrimaryRepository extends TransactionRepository implemen
     @Autowired
     private UnidadRepository unidadRepository;
 
-    @Override
+    /*@Override
     public void afterPropertiesSet() throws Exception {
         RepositoryHelper.SourceId<Integer> sourceIdGastoComun = domain -> ((Transaction)domain).getDetails().getExpenseId();
         RepositoryHelper.SourceId<Integer> sourceIdUnidad = domain -> ((Transaction)domain).getDetails().getPropertyId();
@@ -45,7 +45,7 @@ public class TransactionPrimaryRepository extends TransactionRepository implemen
 
         super.addHelper(GastoComun.class, new GastoComunEntityHelper(gastoComunRepository, sourceIdGastoComun, actionGastoComun));
         super.addHelper(Unidad.class, new UnidadEntityHelper(unidadRepository, sourceIdUnidad, actionUnidad));
-    }
+    }*/
 
     @Override
     public List<Transaction> retrieveClosedPeriodPaymentsList() {
@@ -71,11 +71,11 @@ public class TransactionPrimaryRepository extends TransactionRepository implemen
 
     @Override
     public Integer saveAll(List<Transaction> transactionList) {
-        super.startPersistence();
+        //super.startPersistence();
         movimientoRepository.saveAll(transactionList.stream()
                 .map(transaction -> {
                     Movimiento movimiento = transactionMapper.toRepository(transaction);
-                    super.fillData(movimiento, transaction);
+                    //super.fillData(movimiento, transaction);
                     return movimiento;
                 })
                 .collect(Collectors.toList())
