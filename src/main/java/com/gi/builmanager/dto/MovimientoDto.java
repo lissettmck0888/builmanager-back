@@ -15,6 +15,6 @@ public class MovimientoDto {
     private Double monto;
     private String tipo;
     private Integer idGastoComun;
-    private Integer idUnidad;
+    private Integer idAsignacion;
 
 }

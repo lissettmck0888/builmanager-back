@@ -12,13 +12,14 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(GastoComunDtoConverter.getInstance());
         registry.addConverter(GastoComunConverter.getInstance());
-        registry.addConverter(new RolConverter());
-        registry.addConverter(new UsuarioConverter());
-        registry.addConverter(new AsignacionConverter());
+        registry.addConverter(AsignacionConverter.getInstance());
+        registry.addConverter(AsignacionDtoConverter.getInstance());
         registry.addConverter(UnidadDtoConverter.getInstance());
         /*registry.addConverter(DetalleDeudaUnidadDtoConverter.getInstance());
         registry.addConverter(new AbonoDtoConverter());
         registry.addConverter(new AbonoConverter());*/
-        registry.addConverter(new MovimientoDtoConverter());
+        registry.addConverter(MovimientoDtoConverter.getInstance());
+        registry.addConverter(new RolConverter());
+        registry.addConverter(new UsuarioConverter());
     }
 }

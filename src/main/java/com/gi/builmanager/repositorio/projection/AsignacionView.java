@@ -13,5 +13,5 @@ public interface AsignacionView {
     String getEstado();
     LocalDate getFechaAsignacion();
     Double getTotalMetrosCuadradosProrrateables();
-    List<AsignacionUnidadView> getAsignacionUnidads();
+    List<UnidadView> getUnidades();
 }

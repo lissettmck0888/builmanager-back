@@ -25,6 +25,8 @@ public class UnidadDtoConverter implements Converter<Unidad, UnidadDto> {
         dto.setNumero(unidad.getNumero());
         dto.setPiso(unidad.getPiso());
         dto.setSector(unidad.getSector());
+        dto.setEsUnidadCopropiedad(unidad.getEsUnidadCopropiedad());
+        dto.setFactorProrrateo(unidad.getFactorProrrateo());
 
         return dto;
     }

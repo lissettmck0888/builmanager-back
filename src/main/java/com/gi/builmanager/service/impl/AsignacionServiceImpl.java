@@ -17,10 +17,10 @@ public class AsignacionServiceImpl implements AsignacionService {
     @Override
     public Asignacion save(Asignacion asignacion) {
         asignacion.setTotalMetrosCuadradosProrrateables(0D);
-        asignacion.getAsignacionUnidads().stream().forEach(asignacionUnidad -> {
+        asignacion.getUnidades().forEach(unidad -> {
             asignacion.setTotalMetrosCuadradosProrrateables(
                     asignacion.getTotalMetrosCuadradosProrrateables() +
-                            (asignacionUnidad.getUnidad().getAfectoProrrateo() ? asignacionUnidad.getUnidad().getMetrosCuadrados() : 0));
+                            (unidad.getAfectoProrrateo() ? unidad.getMetrosCuadrados() : 0));
         });
         return asignacionRepository.save(asignacion);
     }

@@ -1,9 +1,16 @@
 package com.gi.builmanager.dominio;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "item_gasto_comun")
 @Entity
+@ToString
 public class ItemGastoComun {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,43 +23,4 @@ public class ItemGastoComun {
     @Column
     private String tipo;
 
-    public ItemGastoComun() {
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public ItemGastoComun(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Integer getIdItemGastoComun() {
-        return idItemGastoComun;
-    }
-
-    public void setIdItemGastoComun(Integer idItemGastoComun) {
-        this.idItemGastoComun = idItemGastoComun;
-    }
 }

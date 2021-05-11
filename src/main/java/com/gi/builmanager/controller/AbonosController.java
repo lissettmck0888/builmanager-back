@@ -23,7 +23,7 @@ public class AbonosController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public MovimientoDto registrarAbono(@RequestBody MovimientoDto movimientoDto) {
         Movimiento movimiento = abonosServices.registrarAbono(
-                movimientoDto.getMonto(),movimientoDto.getIdUnidad(),movimientoDto.getIdGastoComun());
+                movimientoDto.getMonto(),movimientoDto.getIdAsignacion(),movimientoDto.getIdGastoComun());
         return conversionService.convert(movimiento, MovimientoDto.class);
     }
 

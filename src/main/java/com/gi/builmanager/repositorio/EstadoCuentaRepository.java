@@ -1,5 +1,6 @@
 package com.gi.builmanager.repositorio;
 
+import com.gi.builmanager.dominio.Asignacion;
 import com.gi.builmanager.dominio.EstadoCuenta;
 import com.gi.builmanager.dominio.GastoComun;
 import com.gi.builmanager.dominio.Unidad;
@@ -13,6 +14,6 @@ import java.util.List;
 public interface EstadoCuentaRepository extends JpaRepository<EstadoCuenta, Integer> {
 
     List<EstadoCuenta> findByGastoComun(GastoComun gastoComun);
-    List<EstadoCuentaView> findByUnidad_idUnidad(Integer idUnidad);
-    EstadoCuenta findByGastoComunAndUnidad(GastoComun gastoComun, Unidad unidad);
+    List<EstadoCuentaView> findByAsignacion_idAsignacion(Integer idAsignacion);
+    EstadoCuenta findByGastoComunAndAsignacion(GastoComun gastoComun, Asignacion asignacion);
 }

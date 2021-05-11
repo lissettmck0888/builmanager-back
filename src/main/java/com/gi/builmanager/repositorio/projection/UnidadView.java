@@ -10,4 +10,6 @@ public interface UnidadView {
     String getSector();
     Double getMetrosCuadrados();
     Boolean getAfectoProrrateo();
+    Boolean getEsUnidadCopropiedad();
+    Double getFactorProrrateo();
 }

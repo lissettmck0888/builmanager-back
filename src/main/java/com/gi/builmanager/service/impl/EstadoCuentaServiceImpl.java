@@ -21,8 +21,8 @@ public class EstadoCuentaServiceImpl implements EstadoCuentaService {
     private GastoComunRepository gastoComunRepository;
 
     @Override
-    public List<EstadoCuentaView> getByUnidad(int idUnidad) {
-        return estadoCuentaRepository.findByUnidad_idUnidad(idUnidad);
+    public List<EstadoCuentaView> getByAsignacion(int ididAsignacion) {
+        return estadoCuentaRepository.findByAsignacion_idAsignacion(ididAsignacion);
     }
 
     @Override

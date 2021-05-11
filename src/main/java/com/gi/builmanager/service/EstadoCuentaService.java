@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EstadoCuentaService {
 
-    List<EstadoCuentaView> getByUnidad(int idUnidad);
+    List<EstadoCuentaView> getByAsignacion(int idAsignacion);
     List<EstadoCuenta> getByPeriodo(LocalDate periodo);
 
 }

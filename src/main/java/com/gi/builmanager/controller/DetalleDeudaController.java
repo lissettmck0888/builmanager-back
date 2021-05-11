@@ -33,7 +33,7 @@ public class DetalleDeudaController {
     //@PreAuthorize(value = "")
     //@PostAuthorize()
     public List<EstadoCuentaView> getDetalleByUnidad(@PathVariable int idUnidad) {
-        return estadoCuentaService.getByUnidad(idUnidad);
+        return estadoCuentaService.getByAsignacion(idUnidad);
     }
 
     @GetMapping(value = "/periodo/{periodo}")

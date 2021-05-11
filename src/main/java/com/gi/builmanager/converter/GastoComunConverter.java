@@ -36,7 +36,7 @@ public class GastoComunConverter implements Converter<GastoComunDto, GastoComun>
         List<DetalleGastoComun> lista = new ArrayList<>();
         for (DetalleGastoComunDto gc : listDto) {
             DetalleGastoComun detalle = new DetalleGastoComun();
-            detalle.setGastoComun(gastoComun);
+            //detalle.setGastoComun(gastoComun);
             detalle.setIdDetalleGastoComun(gc.getIdDetalleGastoComun());
             detalle.setMonto(gc.getMonto());
             detalle.setItemGastoComun(toItemGastoComun(gc.getItemGastoComun()));

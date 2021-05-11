@@ -15,21 +15,24 @@ import javax.persistence.*;
 @Builder
 public class EstadoCuenta {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "estadoCuenta_pk", sequenceName = "estado_cuenta_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estadoCuenta_pk")
     @Column
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "gasto_comun")
     private GastoComun gastoComun;
     @ManyToOne
-    @JoinColumn(name = "id_unidad")
-    private Unidad unidad;
+    @JoinColumn(name = "id_asignacion")
+    private Asignacion asignacion;
     @Column(name = "factor")
     private Double factorProrrateo;
     @Column(name = "monto_anterior")
     private Double montoAnterior;
-    @Column(name = "deuda_inicial")
-    private Double deudaInicial;//todo renombrar a deuda
+    @Column(name = "monto_inicial")
+    private Double montoInicial;
+    @Column(name = "total_periodo")
+    private Double totalPeriodo;
     @Column
     private Double abonos;
     @Column

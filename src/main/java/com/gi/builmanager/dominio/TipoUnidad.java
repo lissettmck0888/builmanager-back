@@ -1,7 +1,10 @@
 package com.gi.builmanager.dominio;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Table(name = "tipo_unidad")
 @Entity
 public class TipoUnidad {
@@ -11,27 +14,4 @@ public class TipoUnidad {
     @Column
     private String nombre;
 
-    public TipoUnidad() {
-    }
-
-    public TipoUnidad(Integer idTipoUnidad, String nombre) {
-        this.idTipoUnidad = idTipoUnidad;
-        this.nombre = nombre;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getIdTipoUnidad() {
-        return idTipoUnidad;
-    }
-
-    public void setIdTipoUnidad(Integer idTipoUnidad) {
-        this.idTipoUnidad = idTipoUnidad;
-    }
 }

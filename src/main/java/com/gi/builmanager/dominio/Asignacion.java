@@ -1,12 +1,15 @@
 package com.gi.builmanager.dominio;
 
+import lombok.Data;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "asignacion")
 @Entity
+@Data
 public class Asignacion {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,78 +23,24 @@ public class Asignacion {
     @Column
     private String estado;
     @Column
-    private LocalDate fechaAsignacion;
-
+    private LocalDateTime fechaAsignacion;
+    @Column
+    private LocalDateTime fechaFin;
+    @Column
     private Double totalMetrosCuadradosProrrateables;
+    @Column
+    private Boolean ocupado;
+    @ManyToOne
+    @JoinColumn(name = "parent")
+    private Asignacion parent;
 
-    @OneToMany(mappedBy = "asignacion", cascade = CascadeType.ALL)
-    private List<AsignacionUnidad> asignacionUnidads = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "asignacion_unidad",
+            joinColumns = {@JoinColumn(name = "id_asignacion")},
+            inverseJoinColumns = {@JoinColumn(name = "id_unidad")}
+    )
+    private List<Unidad> unidades;
 
-    public List<AsignacionUnidad> getAsignacionUnidads() {
-        return asignacionUnidads;
-    }
-
-    public void setAsignacionUnidads(List<AsignacionUnidad> asignacionUnidads) {
-        this.asignacionUnidads = asignacionUnidads;
-    }
-
-    public Asignacion() {
-    }
-
-    public Asignacion(Integer idAsignacion, Persona persona,  String tipoAsignacion, String estado, LocalDate fechaAsignacion) {
-        this.idAsignacion = idAsignacion;
-        this.persona = persona;
-
-        this.tipoAsignacion = tipoAsignacion;
-        this.estado = estado;
-        this.fechaAsignacion = fechaAsignacion;
-    }
-
-    public Integer getIdAsignacion() {
-        return idAsignacion;
-    }
-
-    public void setIdAsignacion(Integer idAsignacion) {
-        this.idAsignacion = idAsignacion;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public Double getTotalMetrosCuadradosProrrateables() {
-        return totalMetrosCuadradosProrrateables;
-    }
-
-    public void setTotalMetrosCuadradosProrrateables(Double totalMetrosCuadradosProrrateables) {
-        this.totalMetrosCuadradosProrrateables = totalMetrosCuadradosProrrateables;
-    }
-
-    public String getTipoAsignacion() {
-        return tipoAsignacion;
-    }
-
-    public void setTipoAsignacion(String tipoAsignacion) {
-        this.tipoAsignacion = tipoAsignacion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public LocalDate getFechaAsignacion() {
-        return fechaAsignacion;
-    }
-
-    public void setFechaAsignacion(LocalDate fechaAsignacion) {
-        this.fechaAsignacion = fechaAsignacion;
-    }
+    /*FIXME: BORRAR COLUMNA UNIDAD_COPROPIEDAD DE ASIGNACION_UNIDAD*/
 }

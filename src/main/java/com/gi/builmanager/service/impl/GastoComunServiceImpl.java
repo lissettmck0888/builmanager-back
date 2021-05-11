@@ -83,17 +83,17 @@ public class GastoComunServiceImpl implements GastoComunService {
         asignacionRepository.findAll().forEach(asignacion -> {
             Double factorProrrateo = asignacion.getTotalMetrosCuadradosProrrateables() / totalM2Prorrateables;
 
-            Optional<AsignacionUnidad> opt = asignacion.getAsignacionUnidads()
-                    .stream().filter(AsignacionUnidad::getUnidadCopropiedad).findFirst();
+            /*Optional<Unidad> opt = asignacion.getUnidades()
+                    .stream().filter(Unidad::getEsUnidadCopropiedad).findFirst();
 
             Unidad unidad = null;
             if (opt.isPresent()) {
-                unidad = opt.get().getUnidad();
-            }
+                unidad = opt.get();
+            }*/
 
             Movimiento movimientoUnidad = Movimiento.builder()
                     .gastoComun(gastoComunActual)
-                    .unidad(unidad)
+                    .asignacion(asignacion)
                     .fecha(LocalDateTime.now())
                     .tipo("Cargo")
                     .monto(BuilManagerUtils.round(gastoComunActual.getMontoTotal() * factorProrrateo, 0))
@@ -102,12 +102,12 @@ public class GastoComunServiceImpl implements GastoComunService {
 
             EstadoCuenta estadoCuenta = EstadoCuenta.builder()
                     .gastoComun(gastoComunActual)
-                    .unidad(unidad)
+                    .asignacion(asignacion)
                     .factorProrrateo(factorProrrateo)
                     .build();
             estadoCuentaList.add(estadoCuenta);
 
-            this.calcularEstadoCuenta(estadoCuenta, movimientoUnidad, unidad, estadosCuentaPeriodoAnterior, abonosPeriodoAnterior);
+            this.calcularEstadoCuenta(estadoCuenta, movimientoUnidad, asignacion, estadosCuentaPeriodoAnterior, abonosPeriodoAnterior);
             estadoCuentaDtoList.add(EstadoCuentaDto.of(estadoCuenta));
         });
 
@@ -120,18 +120,18 @@ public class GastoComunServiceImpl implements GastoComunService {
 
     private void calcularEstadoCuenta(EstadoCuenta estadoCuenta,
                                       Movimiento movimientoUnidad,
-                                      Unidad unidad,
+                                      Asignacion asignacion,
                                       List<EstadoCuenta> estadosCuentaPeriodoAnterior,
                                       List<Movimiento> abonosPeriodoAnterior) {
 
         Optional<Double> optionalEstadoCuenta =
                 estadosCuentaPeriodoAnterior.stream()
-                        .filter(estCta -> estCta.getUnidad().getIdUnidad().equals(unidad.getIdUnidad()))
+                        .filter(estCta -> estCta.getAsignacion().equals(asignacion))
                         .map(EstadoCuenta::getSaldo).reduce(Double::sum);
 
         Optional<Double> optionalMovimientos =
                 abonosPeriodoAnterior.stream()
-                        .filter(movimiento -> movimiento.getUnidad().getIdUnidad().equals(unidad.getIdUnidad()))
+                        .filter(movimiento -> movimiento.getAsignacion().equals(asignacion))
                         .map(Movimiento::getMonto).reduce(Double::sum);
 
         Double deuda = 0D;
@@ -140,7 +140,7 @@ public class GastoComunServiceImpl implements GastoComunService {
         deuda += movimientoUnidad.getMonto();
 
         estadoCuenta.setMontoAnterior(optionalEstadoCuenta.orElse(0D) - optionalMovimientos.orElse(0D));
-        estadoCuenta.setDeudaInicial(movimientoUnidad.getMonto());
+        estadoCuenta.setMontoInicial(movimientoUnidad.getMonto());
         estadoCuenta.setSaldo(deuda);
 
     }
@@ -157,7 +157,7 @@ public class GastoComunServiceImpl implements GastoComunService {
         this.getPlantillaGastosOrdinarios().forEach(plantillaGastosOrdinarios -> {
             DetalleGastoComun detalleGastoComun = new DetalleGastoComun();
             detalleGastoComun.setItemGastoComun(plantillaGastosOrdinarios.getItemGastoComun());
-            detalleGastoComun.setGastoComun(gastoComun);
+            //detalleGastoComun.setGastoComun(gastoComun);
             detalleGastoComun.setMonto(plantillaGastosOrdinarios.getMonto());
             gastoComun.getListaDetalleGastoComun().add(detalleGastoComun);
         });

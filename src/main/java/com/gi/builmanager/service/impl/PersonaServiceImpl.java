@@ -35,7 +35,7 @@ public class PersonaServiceImpl implements PersonaService {
     public boolean eliminar(Integer id) {
          Persona persona = personaRepository.findById(id).orElse(null);
          if(Objects.nonNull(persona)){
-             persona.setEstado(false);
+             //persona.set(false);
              personaRepository.save(persona);
              return true;
          }

@@ -1,7 +1,10 @@
 package com.gi.builmanager.dominio;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Table(name = "plantilla_gastos_ordinarios")
 @Entity
 public class PlantillaGastosOrdinarios {
@@ -15,35 +18,4 @@ public class PlantillaGastosOrdinarios {
     @Column
     private Boolean activo;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public ItemGastoComun getItemGastoComun() {
-        return itemGastoComun;
-    }
-
-    public void setItemGastoComun(ItemGastoComun itemGastoComun) {
-        this.itemGastoComun = itemGastoComun;
-    }
-
-    public Double getMonto() {
-        return monto;
-    }
-
-    public void setMonto(Double monto) {
-        this.monto = monto;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
 }
